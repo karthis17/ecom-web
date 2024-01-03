@@ -44,7 +44,15 @@
             >₹{{ data?.price }}</sub
           >
         </h3>
-        <button class="btn btn-success my-3">Add to cart</button>
+        <button class="btn btn-success my-3" (click)="add()">
+          Add to cart
+        </button>
+        <input
+          type="number"
+          [formControl]="qty"
+          style="width: 50px"
+          class="mx-3 fs-6"
+        />
         <p>Speed delivery</p>
       </div>
       <div>

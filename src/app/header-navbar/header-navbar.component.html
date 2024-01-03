@@ -21,10 +21,19 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Cart</a>
+          <button class="nav-link text-light" (click)="alt()">Cart</button>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#">User</a>
+        <li *ngIf="logState" class="nav-item">
+          <a class="nav-link text-light" href="#">{{ user.name }}</a>
+        </li>
+        <li *ngIf="!logState" class="nav-item">
+          <a class="nav-link text-light" routerLink="login">Login</a>
+        </li>
+        <li *ngIf="!logState" class="nav-item">
+          <a class="nav-link text-light" routerLink="register">Register</a>
+        </li>
+        <li *ngIf="logState" class="nav-item">
+          <button class="nav-link text-light" (click)="logout()">Logout</button>
         </li>
       </ul>
     </div>

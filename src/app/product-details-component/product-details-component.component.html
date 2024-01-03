@@ -1,0 +1,71 @@
+<div class="container" style="background-color: #fff">
+  <div class="row py-5">
+    <div
+      id="carouselExampleDark"
+      class="carousel carousel-dark slide col-lg-5 h-50 sticky-lg-top"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div
+          *ngFor="let img of data?.images; let i = index"
+          class="carousel-item {{ i === 0 ? 'active' : '' }} "
+          data-bs-interval="4000"
+        >
+          <img src="{{ img }}" class="d-block w-100" alt="..." />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="col-lg-6 mx-auto pe-5">
+      <h3>{{ data?.productName }}</h3>
+      <p>{{ data?.description }}</p>
+      <div class="my-5">
+        <span class="text-success fw-medium">Special Price </span>
+        <h3 class="fw-medium">
+          ₹{{ discount.discountPrice(data?.price, data!.discount) }}
+          <sub class="text-decoration-line-through text-secondary fw-light"
+            >₹{{ data?.price }}</sub
+          >
+        </h3>
+        <button class="btn btn-success my-3">Add to cart</button>
+        <p>Speed delivery</p>
+      </div>
+      <div>
+        <h5>Available offers</h5>
+        <ul>
+          <li>Bank Offer5% Cashback on Flipkart Axis Bank CardT&C</li>
+          <li>
+            Special PriceGet extra 17% off (price inclusive of
+            cashback/coupon)T&C
+          </li>
+          <li>
+            No cost EMI ₹1,109/month. Standard EMI also availableView Plans
+          </li>
+        </ul>
+      </div>
+      <div class="about my-5">
+        <h5>About</h5>
+        <ul>
+          <li *ngFor="let about of data?.about">{{ about }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

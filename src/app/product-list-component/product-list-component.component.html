@@ -1,0 +1,25 @@
+<div class="container my-5">
+  <div
+    routerLink="product/{{ product.id }}"
+    *ngFor="let product of data"
+    class="row my-2 p-0 mx-5 product-detail d-flex justify-content-center align-items-center"
+    style="background-color: #fff"
+  >
+    <div class="col-lg-4">
+      <img src="{{ product.thumbnail }}" alt="img" class="image" />
+    </div>
+    <div class="card-body col-lg-4 pe-5 position-relative">
+      <h5>{{ product.productName }}</h5>
+      <h3 class="fw-light text-secondary">
+        <span class="text-success fw-medium">Price: </span>
+        <span class="price pe-2">₹{{ product.price }}</span
+        >{{ discount.discountPrice(product.price, product.discount) }}
+      </h3>
+      <p>{{ product.description }}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <p>Speed delivery</p>
+        <button class="btn btn-outline-secondary me-2">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>

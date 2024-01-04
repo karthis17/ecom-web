@@ -44,15 +44,31 @@
             >₹{{ data?.price }}</sub
           >
         </h3>
-        <button class="btn btn-success my-3" (click)="add()">
-          Add to cart
-        </button>
-        <input
-          type="number"
-          [formControl]="qty"
-          style="width: 50px"
-          class="mx-3 fs-6"
-        />
+        <div class="d-flex algin-items-center">
+          <button
+            class="btn btn-success my-3 {{
+              qty.value
+                ? qty.value < 1
+                  ? 'disabled '
+                  : ''
+                : qty.value === 0
+                ? 'disabled'
+                : ''
+            }}"
+            (click)="add()"
+          >
+            Add to cart
+          </button>
+          <input
+            type="number"
+            [formControl]="qty"
+            style="width: 50px"
+            class="fs-6 form-control m-3 p-2"
+          />
+          <div *ngIf="success" class="alert alert-success" role="alert">
+            Successfully added to cart
+          </div>
+        </div>
         <p>Speed delivery</p>
       </div>
       <div>

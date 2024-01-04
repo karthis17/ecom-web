@@ -2,67 +2,7 @@
   <div class="row">
     <div class="col-lg-9 mx-auto">
       <h3 class="text-center my-5">Shopping Cart</h3>
-      <table class="table table-hover text-center">
-        <thead>
-          <th>S.NO</th>
-          <th>Product name</th>
-          <th class="text-start">quantity</th>
-          <th>Price</th>
-          <th>Total</th>
-          <th>Action</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of items; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ item.productName }}</td>
-            <td class="text-start d-flex align-items-center" id="qty-edit ">
-              <ng-container *ngIf="editModeIndex !== i; else editMode">
-                {{ item.quantity }}
-                <button
-                  *ngIf="!editModeIndex"
-                  (click)="enterEditMode(i)"
-                  class="btn text-success"
-                >
-                  <i class="bi bi-pencil-square"></i>
-                </button>
-              </ng-container>
-              <ng-template #editMode>
-                <input
-                  type="number"
-                  style="width: 50px"
-                  class="fs-6 form-control"
-                  [value]="item.quantity"
-                  [formControl]="getFormControl(i)"
-                />
-                <button
-                  (click)="editQty(i, item.id, item.price)"
-                  class="btn text-success h-100 fw-bold"
-                >
-                  <i class="bi bi-check-circle-fill"></i>
-                </button>
-              </ng-template>
-            </td>
-
-            <td>{{ item.price }}</td>
-            <td>{{ item.total }}</td>
-            <td>
-              <button (click)="remove(item.id ? item.id : 0)" class="btn">
-                <i class="bi bi-trash-fill text-danger fw-bold"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="d-flex my-4 justify-content-end align-items-center">
-        <h5 class="mx-4">Total Price :</h5>
-        <input
-          disabled
-          type="number"
-          class="form-control"
-          style="width: fit-content"
-          [value]="Total_price"
-        />
-      </div>
+      <app-cart-table></app-cart-table>
       <div class="d-flex justify-content-end">
         <button class="btn btn-primary">Place Order</button>
       </div>

@@ -32,4 +32,8 @@ export class CartService {
     })
     return false;
   }
+
+  placeOrder(user_id: any) {
+    return this.http.get(this.baseUrl + '/ordered/' + user_id);
+  }
 }

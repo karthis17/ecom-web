@@ -5,7 +5,7 @@ export class Product {
     images?: Array<string>;
     thumbnail?: string;
     description!: string;
-    quantity?: number;
+    quantity!: number;
     discount!: number;
     about?: Array<string>;
 }

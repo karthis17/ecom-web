@@ -18,7 +18,7 @@ import { ShoppingCart } from '../models/cart.model';
 })
 export class ProductDetailsComponentComponent {
 
-  data: Product | undefined;
+  data!: Product;
   user: any;
   discount = new Dsicount();
   qty = new FormControl(1);
@@ -56,7 +56,7 @@ export class ProductDetailsComponentComponent {
 
   add() {
     if (this.data?.productName && this.data?.price && this.qty.value && !this.checkItemInCartAndUpdateQty(this.data?.productName)) {
-      this.cart.addToCart({ productName: this.data?.productName, price: this.data?.price, quantity: this.qty.value, user_id: this.user.id }).subscribe(data => {
+      this.cart.addToCart({ productName: this.data?.productName, price: this.data?.price, quantity: this.qty.value, user_id: this.user.id, ordered: false }).subscribe(data => {
         console.log(data);
         this.getUserAddCArt();
       });

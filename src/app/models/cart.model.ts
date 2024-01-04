@@ -5,4 +5,5 @@ export class ShoppingCart {
     quantity!: number;
     user_id!: number;
     total?: number;
+    ordered!: boolean;
 }

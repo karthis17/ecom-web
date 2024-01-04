@@ -1,0 +1,122 @@
+<div class="container my-5 py-4" style="background-color: #fff">
+  <div class="row">
+    <div class="col-lg-9 mx-auto">
+      <h3 class="text-center my-5">Order deatils</h3>
+      <form [formGroup]="orderForm" class="row g-3" (ngSubmit)="submit()">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="inputEmail4"
+            formControlName="email"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="inputPhone" class="form-label">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputPhone"
+            formControlName="phoneNumber"
+            required
+          />
+        </div>
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label">Address </label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputAddress2"
+            placeholder="Apartment, studio, or floor"
+            formControlName="address"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputCity"
+            formControlName="city"
+            required
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">State</label>
+          <select id="inputState" class="form-select" formControlName="state">
+            <option selected>Choose...</option>
+            <option *ngFor="let state of indianStates">{{ state }}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Zip</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputZip"
+            formControlName="zip"
+            required
+          />
+        </div>
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label"
+            >Chosse Payment Option</label
+          >
+          <select
+            id="inputState"
+            class="form-select"
+            [value]=""
+            formControlName="paymentOption"
+          >
+            <option selected>Choose...</option>
+            <option selected>Cashb On Delivary</option>
+            <option selected>Credit card</option>
+            <option selected>debit card</option>
+            <option selected>UPI Payment</option>
+          </select>
+        </div>
+
+        <div
+          *ngIf="orderForm.get('paymentOption')?.value === 'Credit card'"
+          class="col-12"
+        >
+          <label for="inputCardNo" class="form-label">Enter Card No</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputCardNo"
+            placeholder="Enter card number"
+            formControlName="cardNo"
+            required
+          />
+        </div>
+        <div
+          *ngIf="orderForm.get('paymentOption')?.value === 'UPI Payment'"
+          class="col-12"
+        >
+          <label for="inputUPIID" class="form-label">Enter UPI ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputUPIID"
+            placeholder="Enter UPI ID"
+            formControlName="upiID"
+            required
+          />
+        </div>
+        <app-cart-table></app-cart-table>
+        <div class="col-12">
+          <button
+            type="submit"
+            class="btn btn-primary {{ orderForm.valid ? '' : 'disabled ' }}"
+          >
+            Place Order
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

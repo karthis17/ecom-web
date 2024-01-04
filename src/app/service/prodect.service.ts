@@ -24,5 +24,9 @@ export class ProdectService {
   }
 
 
+  changeQty(data: any) {
+    return this.http.post(this.baseUrl + '/qty-red', data, this._options)
+  }
+
 
 }

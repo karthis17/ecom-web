@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <h1 class="text-center my-4">Order History</h1>
+    <div *ngFor="let order of orders" class="col-lg-10 mx-auto cont">
+      <div class="pb-2 d-flex justify-content-between">
+        <code>{{ order.date }}</code>
+        <p>Delivery</p>
+      </div>
+      <div>
+        <h4>Contact deatils</h4>
+        Phone : {{ order.phone }} <br />
+        Address : {{ address(order.address) }} <br />
+      </div>
+      <div class="pt-3">
+        <app-cart-table [ordered]="true" [order_id]="order.id"></app-cart-table>
+      </div>
+    </div>
+  </div>
+</div>

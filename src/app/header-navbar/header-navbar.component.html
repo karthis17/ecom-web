@@ -33,6 +33,11 @@
         <li *ngIf="logState" class="nav-item">
           <button class="nav-link" (click)="logout()">Logout</button>
         </li>
+        <li *ngIf="logState" class="nav-item">
+          <button class="nav-link" routerLink="order-history/{{ user.id }}">
+            order history
+          </button>
+        </li>
       </ul>
     </div>
   </div>

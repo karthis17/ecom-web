@@ -36,6 +36,7 @@ export class HeaderNavbarComponent {
   logout() {
     this.auth.logout();
     this.logState = false;
+    this.user = null;
   }
   alt() {
     if (this.user) {

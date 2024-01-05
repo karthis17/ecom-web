@@ -36,4 +36,9 @@ export class CartService {
   placeOrder(user_id: any) {
     return this.http.get(this.baseUrl + '/ordered/' + user_id);
   }
+
+  getOrderedItems(order_id: number, user_id: number): Observable<ShoppingCart[]> {
+    return this.http.post<ShoppingCart[]>(this.baseUrl + '/get-ordered-items', { user_id: user_id, order_id: order_id }, this._options);
+  }
+
 }

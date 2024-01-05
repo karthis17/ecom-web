@@ -1,10 +1,11 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CartTableComponent } from '../cart-table/cart-table.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartService } from '../service/cart.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ProdectService } from '../service/prodect.service';
+import { OrderService } from '../service/order.service';
 
 @Component({
   selector: 'app-order-form',
@@ -14,7 +15,7 @@ import { ProdectService } from '../service/prodect.service';
   styleUrl: './order-form.component.css'
 })
 export class OrderFormComponent {
-
+  @ViewChild(CartTableComponent, { static: true }) cartTable!: CartTableComponent;
   indianStates = [
     'Andhra Pradesh',
     'Arunachal Pradesh',
@@ -48,7 +49,9 @@ export class OrderFormComponent {
 
   orderForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private cart: CartService, private route: ActivatedRoute, private product: ProdectService) { }
+  constructor(private formBuilder: FormBuilder, private cart: CartService, private route: ActivatedRoute, private product: ProdectService, private order: OrderService, private router: Router) { }
+
+
 
   ngOnInit(): void {
 
@@ -67,11 +70,17 @@ export class OrderFormComponent {
 
   submit() {
     // throw new Error('Method not implemented.');
+    this.cartTable.items.forEach(item => {
+      console.log(item);
+      this.product.changeQty({ quantity: item.quantity, name: item.productName }).subscribe(result => {
+        console.log(result);
+      })
+    });
     this.cart.placeOrder(this.route.snapshot.paramMap.get('id')).subscribe((response: any) => {
-      response.item.forEach((item: any) => {
-        this.product.changeQty({ quantity: item.quantity, name: item.name }).subscribe(res => {
-          console.log(res)
-        })
+      console.log(response);
+      this.order.addToOrder({ user_id: this.route.snapshot.paramMap.get('id'), phone: this.orderForm.get('phoneNumber')?.value, address: JSON.stringify([this.orderForm.get('address')?.value, this.orderForm.get('city')?.value, this.orderForm.get('state')?.value, this.orderForm.get('zip')?.value]), payment: this.orderForm.get('paymentOption')?.value }).subscribe((res) => {
+        console.log(res)
+        this.router.navigateByUrl('')
       })
     })
   }

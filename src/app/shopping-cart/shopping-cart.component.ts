@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { ProdectService } from '../service/prodect.service';
-import { AuthService } from '../service/auth.service';
-import { NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CartService } from '../service/cart.service';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ShoppingCart } from '../models/cart.model';
 import { CartTableComponent } from '../cart-table/cart-table.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -17,6 +11,12 @@ import { CartTableComponent } from '../cart-table/cart-table.component';
 })
 export class ShoppingCartComponent {
 
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
+  id = this.route.snapshot.paramMap.get('id');
+
+  next() {
+    this.router.navigateByUrl('place-order/' + this.id);
+  }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ShoppingCart } from '../models/cart.model';
 import { CartService } from '../service/cart.service';
@@ -14,21 +14,28 @@ import { NgFor, NgIf } from '@angular/common';
 })
 export class CartTableComponent {
 
+  @Input('ordered')
+  ordered: boolean = false;
+
+  @Input('order_id')
+  order_id: any = 0;
+
   constructor(private cart: CartService, private route: ActivatedRoute, private router: Router) { }
 
   items: Array<ShoppingCart> = [];
   editModeIndex: number | null = null;
   Total_price: number = 0;
+  id = this.route.snapshot.paramMap.get('id');
 
   formGroup: FormGroup = new FormGroup({});
 
 
   getCartItems() {
     this.Total_price = 0;
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.cart.getCart(Number.parseInt(id)).subscribe((cart) => {
-        this.items = cart.filter(item => item.ordered === false);
+    if (this.id) {
+      this.cart.getCart(Number.parseInt(this.id)).subscribe((cart) => {
+        console.log(cart);
+        this.items = cart;
 
         this.items.forEach((item: ShoppingCart, index: number) => {
           this.formGroup.addControl(`quantity${index}`, new FormControl(item.quantity, Validators.required));
@@ -45,8 +52,20 @@ export class CartTableComponent {
   ngOnInit() {
 
 
-    this.getCartItems();
+    if (!this.ordered && !this.order_id) this.getCartItems();
+    else this.getOrderedItems()
+  }
 
+
+  getOrderedItems() {
+    if (this.id) this.cart.getOrderedItems(this.order_id, Number.parseInt(this.id)).subscribe(item => {
+      this.items = item;
+
+      this.items.forEach((item: ShoppingCart, index: number) => {
+        this.formGroup.addControl(`quantity${index}`, new FormControl(item.quantity, Validators.required));
+        if (item.total) this.Total_price += item.total;
+      });
+    });
   }
 
   getFormControl(index: number): FormControl {

@@ -48,7 +48,7 @@
           <button
             class="btn btn-success my-3 {{
               qty.value
-                ? qty.value < 1
+                ? qty.value < 1 || data.quantity < qty.value
                   ? 'disabled '
                   : ''
                 : qty.value === 0
@@ -69,7 +69,8 @@
             Successfully added to cart
           </div>
         </div>
-        <p>Speed delivery</p>
+        <p *ngIf="data.quantity < 1" class="text-danger">Out of stock</p>
+        <p *ngIf="data.quantity > 1">Speed delivery</p>
       </div>
       <div>
         <h5>Available offers</h5>

@@ -28,5 +28,8 @@ export class ProdectService {
     return this.http.post(this.baseUrl + '/qty-red', data, this._options)
   }
 
+  filter(data: any): Observable<Product[]> {
+    return this.http.post<Product[]>(this.baseUrl + '/like', JSON.stringify(data), this._options);
+  }
 
 }

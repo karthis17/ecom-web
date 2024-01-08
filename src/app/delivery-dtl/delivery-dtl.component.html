@@ -1,0 +1,80 @@
+<div class="conatiner">
+  <div class="row g-3 my-3">
+    <div
+      *ngFor="let dtl of dtls"
+      class="col-lg-8 mx-auto rounded-3"
+      style="background-color: #fff"
+    >
+      <div class="px-5 py-3" (click)="set(dtl)">
+        <h4>{{ dtl.email }}</h4>
+        <p>{{ address(dtl.address) }}</p>
+      </div>
+    </div>
+    <div
+      class="col-lg-8 mx-auto my-2 p-4 rounded-3"
+      style="background-color: #fff"
+    >
+      <form [formGroup]="orderForm" class="row g-3" (ngSubmit)="submit()">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="inputEmail4"
+            formControlName="email"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="inputPhone" class="form-label">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputPhone"
+            formControlName="phoneNumber"
+            required
+          />
+        </div>
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label">Address </label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputAddress2"
+            placeholder="Apartment, studio, or floor"
+            formControlName="address"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputCity"
+            formControlName="city"
+            required
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="inputState1" class="form-label">State</label>
+          <select id="inputState1" class="form-select" formControlName="state">
+            <option selected>Choose...</option>
+            <option *ngFor="let state of indianStates">{{ state }}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Zip</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputZip"
+            formControlName="zip"
+            required
+          />
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

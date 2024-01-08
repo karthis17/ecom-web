@@ -6,6 +6,7 @@ import { RegisterComponent } from './userauth/register/register.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { DeliveryDtlComponent } from './delivery-dtl/delivery-dtl.component';
 
 export const routes: Routes = [
     { path: '', component: ProductListComponentComponent },
@@ -15,4 +16,5 @@ export const routes: Routes = [
     { path: 'cart/:id', component: ShoppingCartComponent },
     { path: 'place-order/:id', component: OrderFormComponent },
     { path: 'order-history/:id', component: OrderHistoryComponent },
+    { path: 'dtl/:id', component: DeliveryDtlComponent },
 ];

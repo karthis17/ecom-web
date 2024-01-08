@@ -21,22 +21,44 @@
         <li class="nav-item">
           <button class="nav-link" (click)="alt()">Cart</button>
         </li>
-        <li *ngIf="logState" class="nav-item">
-          <a class="nav-link" href="#">{{ user.name }}</a>
-        </li>
+
         <li *ngIf="!logState" class="nav-item">
           <a class="nav-link" routerLink="login">Login</a>
         </li>
         <li *ngIf="!logState" class="nav-item">
           <a class="nav-link" routerLink="register">Register</a>
         </li>
+
         <li *ngIf="logState" class="nav-item">
-          <button class="nav-link" (click)="logout()">Logout</button>
-        </li>
-        <li *ngIf="logState" class="nav-item">
-          <button class="nav-link" routerLink="order-history/{{ user.id }}">
-            order history
-          </button>
+          <div class="prfile">
+            <img
+              src="../../assets/profile.png"
+              alt=""
+              srcset=""
+              height="40"
+              width="45"
+            />
+            <ul class="profile-links">
+              <li>
+                <p class="text-center">{{ user.name }}</p>
+              </li>
+              <li>
+                <a class="nav-link" routerLink="order-history/{{ user.id }}">
+                  Order History
+                </a>
+              </li>
+              <li>
+                <a class="nav-link" routerLink="dtl/{{ user.id }}">
+                  Delivery Address
+                </a>
+              </li>
+              <li>
+                <button class="btn btn-danger w-100" (click)="logout()">
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
     </div>

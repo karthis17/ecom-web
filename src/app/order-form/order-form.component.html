@@ -2,14 +2,17 @@
   <div class="row">
     <div class="col-lg-9 mx-auto">
       <h3 class="text-center my-5">Order deatils</h3>
-      <div class="col-12 my-4">
-        <h5>Deliver Address</h5>
+      <h5>Deliver Address</h5>
+      <div *ngIf="deliveryAddress" class="col-12 my-4">
         Contact: {{ deliveryAddress.email }} {{ deliveryAddress.phone }}<br />
         Address:
         {{ address(deliveryAddress.address) }}<br />
         <a routerLink="/dtl/{{ deliveryAddress.user_id }}" class="btn btn-link"
           >Change address</a
         >
+      </div>
+      <div *ngIf="!deliveryAddress">
+        <a routerLink="/dtl/{{ user_id }}" class="btn btn-link">Add address</a>
       </div>
       <div class="col-12">
         <label for="inputState" class="form-label">Chosse Payment Option</label>

@@ -18,7 +18,7 @@ import { DeliverDetailsService } from '../service/deliver-details.service';
 export class OrderFormComponent {
   @ViewChild(CartTableComponent, { static: true }) cartTable!: CartTableComponent;
 
-
+  user_id = this.route.snapshot.paramMap.get('id');
   constructor(private dtlService: DeliverDetailsService, private cart: CartService, private route: ActivatedRoute, private product: ProdectService, private order: OrderService, private router: Router) { }
 
   paymentOption = new FormControl('', Validators.required);
@@ -42,9 +42,9 @@ export class OrderFormComponent {
         console.log(result);
       })
     });
-    this.cart.placeOrder(this.route.snapshot.paramMap.get('id')).subscribe((response: any) => {
+    this.cart.placeOrder(this.user_id).subscribe((response: any) => {
       console.log(response);
-      this.order.addToOrder({ user_id: this.route.snapshot.paramMap.get('id'), phone: this.deliveryAddress.phone, address: this.deliveryAddress.address, payment: this.paymentOption?.value }).subscribe((res) => {
+      this.order.addToOrder({ user_id: this.user_id, phone: this.deliveryAddress.phone, address: this.deliveryAddress.address, payment: this.paymentOption?.value }).subscribe((res) => {
         console.log(res)
         this.router.navigateByUrl('')
       })

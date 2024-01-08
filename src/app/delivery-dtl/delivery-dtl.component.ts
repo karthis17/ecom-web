@@ -96,6 +96,7 @@ export class DeliveryDtlComponent {
       this.dtlService.addDtl({ user_id: this.id, address: address, phone: this.orderForm.get('phoneNumber')?.value, email: this.orderForm.get('email')?.value }).subscribe(data => {
 
         this.getDtl();
+        this.setDefultdtl();
       })
     }
   }

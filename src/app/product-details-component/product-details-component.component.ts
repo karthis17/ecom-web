@@ -24,8 +24,15 @@ export class ProductDetailsComponentComponent {
   qty = new FormControl(1);
   cartItem!: Array<ShoppingCart>;
   success: boolean = false;
+  revive: string | undefined = '';
 
-  constructor(private productService: ProdectService, private router: ActivatedRoute, private auth: AuthService, private cart: CartService) { }
+  constructor(private productService: ProdectService, private router: ActivatedRoute, private auth: AuthService, private cart: CartService) {
+    this.router.queryParams.subscribe(params => {
+      const reviveValue = params['revive'];
+      console.log('Revive value:', reviveValue);
+      this.revive = reviveValue;
+    });
+  }
 
   getUserAddCArt() {
     this.auth.getUser().then((us) => {
@@ -39,7 +46,7 @@ export class ProductDetailsComponentComponent {
   ngOnInit() {
     const productId = this.router.snapshot.paramMap.get('id');
 
-
+    console.log(this.revive, "hi");
 
     if (typeof productId === 'string') {
       this.productService.getDataByID(this.router.snapshot.paramMap.get('id')).subscribe(res => {
@@ -55,8 +62,8 @@ export class ProductDetailsComponentComponent {
   }
 
   add() {
-    if (this.data?.productName && this.data?.price && this.qty.value && !this.checkItemInCartAndUpdateQty(this.data?.productName)) {
-      this.cart.addToCart({ productName: this.data?.productName, price: this.data?.price, quantity: this.qty.value, user_id: this.user.id, ordered: false }).subscribe(data => {
+    if (this.data?.id && this.data?.productName && this.data?.price && this.qty.value && !this.checkItemInCartAndUpdateQty(this.data?.productName)) {
+      this.cart.addToCart({ product_id: this.data?.id, productName: this.data?.productName, price: this.data?.price, quantity: this.qty.value, user_id: this.user.id, ordered: false }).subscribe(data => {
         console.log(data);
         this.getUserAddCArt();
       });

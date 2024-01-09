@@ -32,4 +32,16 @@ export class ProdectService {
     return this.http.post<Product[]>(this.baseUrl + '/like', JSON.stringify(data), this._options);
   }
 
+  remove(id: any) {
+    return this.http.delete(this.baseUrl + '/delete/' + id);
+  }
+
+  addProduct(data: any) {
+    return this.http.post(this.baseUrl + '/add', data, this._options);
+  }
+
+  editProduct(data: any) {
+    return this.http.put(this.baseUrl + '/update', data, this._options);
+  }
+
 }

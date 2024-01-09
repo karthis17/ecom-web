@@ -1,0 +1,10 @@
+.address:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.address {
+  cursor: pointer;
+  background-color: #fff;
+  transition: 0.3s ease-in-out all;
+}

@@ -8,31 +8,36 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { CartService } from '../service/cart.service';
 import { ShoppingCart } from '../models/cart.model';
+import { ReviewBoxComponent } from '../review/review-box/review-box.component';
+import { StarRatingComponent } from '../review/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-product-details-component',
   standalone: true,
-  imports: [NgFor, ReactiveFormsModule, NgIf],
+  imports: [NgFor, ReactiveFormsModule, NgIf, ReviewBoxComponent, StarRatingComponent],
   templateUrl: './product-details-component.component.html',
   styleUrl: './product-details-component.component.css'
 })
 export class ProductDetailsComponentComponent {
 
-  data!: Product;
+  data: Product = {
+    price: 0,
+    description: '',
+    quantity: 0,
+    discount: 0,
+    rating: 0,
+    category: ''
+  };
   user: any;
   discount = new Dsicount();
   qty = new FormControl(1);
   cartItem!: Array<ShoppingCart>;
   success: boolean = false;
-  revive: string | undefined = '';
+  productId !: string | null;
 
-  constructor(private productService: ProdectService, private router: ActivatedRoute, private auth: AuthService, private cart: CartService) {
-    this.router.queryParams.subscribe(params => {
-      const reviveValue = params['revive'];
-      console.log('Revive value:', reviveValue);
-      this.revive = reviveValue;
-    });
-  }
+  isNewReview: boolean = false;
+
+  constructor(private productService: ProdectService, private router: ActivatedRoute, private auth: AuthService, private cart: CartService) { }
 
   getUserAddCArt() {
     this.auth.getUser().then((us) => {
@@ -44,16 +49,20 @@ export class ProductDetailsComponentComponent {
   }
 
   ngOnInit() {
-    const productId = this.router.snapshot.paramMap.get('id');
+    this.productId = this.router.snapshot.paramMap.get('id');
 
-    console.log(this.revive, "hi");
+    this.router.queryParams.subscribe(params => {
+      this.isNewReview = params['review'];
+      console.log(params['review'], "hi");
+    });
 
-    if (typeof productId === 'string') {
+    if (typeof this.productId === 'string') {
       this.productService.getDataByID(this.router.snapshot.paramMap.get('id')).subscribe(res => {
         res.images = JSON.parse(typeof res.images === 'string' ? res.images : "[]");
         res.about = JSON.parse(typeof res.about === 'string' ? res.about : "[]");
 
         this.data = res;
+        console.log(this.data);
 
       })
       this.getUserAddCArt();

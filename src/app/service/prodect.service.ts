@@ -44,4 +44,8 @@ export class ProdectService {
     return this.http.put(this.baseUrl + '/update', data, this._options);
   }
 
+  updateRating(data: any) {
+    return this.http.post(this.baseUrl + '/update-rating', data, this._options);
+  }
+
 }

@@ -1,9 +1,10 @@
-<div class="container-fluid my-5">
+<div class="container-fluid my-5 px-5">
   <div class="row py-5">
     <div class="col-lg-2">
-      <div class="card p-4">
+      <div class="card p-4 sticky-lg-top">
         <p>Filter</p>
         <form [formGroup]="form">
+          <label for="" class="form-label">Price</label>
           <select
             class="form-select my-1"
             aria-label="Default select example "
@@ -14,6 +15,7 @@
             <option>50000 - 70000</option>
             <option>70000 - 100000</option>
           </select>
+          <label for="" class="form-label">Spec</label>
           <select
             class="form-select my-1"
             aria-label="Default select example"
@@ -24,7 +26,19 @@
             <option>512GB SSD and 16GB RAM</option>
             <option>1TB and 8Gb RAM</option>
           </select>
-          <button class="btn btn-primary" (click)="getData()">Search</button>
+          <label for="" class="form-label">Category</label>
+          <select
+            class="form-select my-1"
+            aria-label="Default select example"
+            formControlName="category"
+          >
+            <option disabled>Chosse category</option>
+            <option>PC & Laptops</option>
+            <option>upcoming..</option>
+          </select>
+          <button class="btn btn-primary mt-2" (click)="getData()">
+            Search
+          </button>
         </form>
       </div>
     </div>
@@ -32,7 +46,7 @@
       <div
         routerLink="product/{{ product.id }}"
         *ngFor="let product of data"
-        class="row my-2 p-0 mx-3 product-detail d-flex justify-content-center align-items-center"
+        class="row my-2 product-detail d-flex justify-content-center align-items-center mx-5 px-5"
         style="background-color: #fff"
       >
         <div class="col-lg-4 p-sm-3">
@@ -40,11 +54,19 @@
         </div>
         <div class="card-body col-lg-6 pe-lg-5 p-3 position-relative">
           <h5>{{ product.productName }}</h5>
+          <p>
+            <span class="text-success fw-medium">Category </span
+            >{{ product.category }}
+          </p>
           <h3 class="fw-light text-secondary">
             <span class="text-success fw-medium">Price: </span>
             <span class="price pe-2">₹{{ product.price }}</span
             >{{ discount.discountPrice(product.price, product.discount) }}
           </h3>
+          <app-star-rating
+            [readonly]="true"
+            [rating]="product.rating ? product.rating : 0"
+          ></app-star-rating>
           <p>{{ product.description }}</p>
           <div class="d-flex justify-content-between align-items-center">
             <p>Speed delivery</p>

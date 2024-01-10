@@ -6,5 +6,5 @@ export class ShoppingCart {
     user_id!: number;
     total?: number;
     ordered!: boolean | number;
-    product_id!: number;
+    product_id!: string;
 }

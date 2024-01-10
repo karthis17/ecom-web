@@ -3,11 +3,12 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { HeaderNavbarComponent } from './header-navbar/header-navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { ReviewBoxComponent } from './review/review-box/review-box.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderNavbarComponent, FooterComponent, NgIf],
+  imports: [CommonModule, RouterOutlet, HeaderNavbarComponent, FooterComponent, NgIf, ReviewBoxComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

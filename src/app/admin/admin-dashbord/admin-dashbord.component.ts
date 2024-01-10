@@ -23,14 +23,9 @@ export class AdminDashbordComponent {
         this.adminService.nav();
       }
     }).catch(() => {
-      const navigationExtras: NavigationExtras = {
-        queryParams: {
-          isAdmin: true
-        }
-      };
-
-      this.router.navigate(['/admin', 'login'], navigationExtras);
-
+      this.adminService.nav();
     });
   }
+
+
 }

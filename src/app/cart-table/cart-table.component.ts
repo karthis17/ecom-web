@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ShoppingCart } from '../models/cart.model';
 import { CartService } from '../service/cart.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({
@@ -99,5 +99,14 @@ export class CartTableComponent {
     this.editModeIndex = index;
   }
 
+  nav(product_id: string) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        review: true
+      }
+    };
+
+    this.router.navigate([`/product/${product_id}`], navigationExtras)
+  }
 
 }

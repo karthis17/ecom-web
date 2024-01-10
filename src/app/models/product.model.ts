@@ -1,5 +1,5 @@
 export class Product {
-    id?: number;
+    id?: string;
     productName?: string;
     price!: number;
     images?: Array<string>;
@@ -8,4 +8,6 @@ export class Product {
     quantity!: number;
     discount!: number;
     about?: Array<string>;
+    rating!: number | null;
+    category!: string;
 }

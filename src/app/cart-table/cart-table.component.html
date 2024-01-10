@@ -41,6 +41,11 @@
 
       <td>{{ item.price }}</td>
       <td>{{ item.total }}</td>
+      <td *ngIf="ordered">
+        <button class="btn btn-success" (click)="nav(item.product_id)">
+          Write Review
+        </button>
+      </td>
       <td *ngIf="!ordered">
         <button (click)="remove(item.id ? item.id : 0)" class="btn">
           <i class="bi bi-trash-fill text-danger fw-bold"></i>

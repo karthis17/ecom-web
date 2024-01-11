@@ -51,6 +51,22 @@
       />
     </div>
     <div class="col-12">
+      <label for="sle" class="form-label">Select Category</label>
+      <select
+        type="number"
+        id="sle"
+        class="form-select"
+        name="category"
+        [(ngModel)]="data.category"
+      >
+        <option>PC & Laptops</option>
+        <option>Mobiles</option>
+        <option>Headphones & Speakers</option>
+        <option>Cameras</option>
+        <option>TVs & Appliances</option>
+      </select>
+    </div>
+    <div class="col-12">
       <label for="thumbnail" class="form-label">Thumbnail Link</label>
       <input
         type="text"

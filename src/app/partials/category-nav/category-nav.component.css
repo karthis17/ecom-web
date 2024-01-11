@@ -1,0 +1,10 @@
+.nav-link {
+  color: #bbb;
+  /* font-weight: 500; */
+}
+
+.nav-link:hover,
+.active {
+  color: #fff;
+  text-shadow: 0px 0px 2px #fff;
+}

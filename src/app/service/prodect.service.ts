@@ -19,6 +19,10 @@ export class ProdectService {
     return this.http.get<Product[]>(this.baseUrl + '/products/')
   }
 
+  fectDataCategoryWis<product>(category: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseUrl + '/products-cate/' + category)
+  }
+
   getDataByID<product>(id: string | null): Observable<Product> {
     return this.http.get<Product>(this.baseUrl + '/id/' + id);
   }

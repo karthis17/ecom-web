@@ -35,6 +35,7 @@ export class ProductAddOREditFormComponent implements OnInit {
         thumbnail: '',
         quantity: 0,
         discount: 0,
+        category: '',
       };
       this.addAboutInput()
       this.addImageLink()

@@ -30,13 +30,13 @@ ul {
 }
 
 .profile-links li {
-  margin: 10px 0;
+  margin: 5px 0;
 }
 .profile-links li a {
   text-align: center;
   color: black;
   font-weight: 500;
-  margin: 20 0px;
+  margin: 10px 0px;
   border-radius: 5px;
   transition: padding ease-in-out 0.2s background-color ease-in 0.3s;
 }
@@ -45,4 +45,8 @@ ul {
   background-color: #555;
   color: #fff;
   padding-left: 5px;
+}
+
+.z {
+  z-index: 10000;
 }

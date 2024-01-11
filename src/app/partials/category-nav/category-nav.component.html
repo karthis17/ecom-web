@@ -1,0 +1,48 @@
+<nav class="mx-lg-5 px-lg-5">
+  <ul class="navbar nav">
+    <li class="nav-item">
+      <button
+        class="nav-link {{ activeButton === 'PC & Laptops' ? 'active' : '' }}"
+        (click)="categoryNavigation('PC & Laptops')"
+      >
+        PC & Laptops
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        class="nav-link {{ activeButton === 'Mobiles' ? 'active' : '' }} "
+        (click)="categoryNavigation('Mobiles')"
+      >
+        Mobiles
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        class="nav-link {{
+          activeButton === 'Headphones & Speakers' ? 'active' : ''
+        }}"
+        (click)="categoryNavigation('Headphones & Speakers')"
+      >
+        Headphones & Speakers
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        class="nav-link {{ activeButton === 'Cameras' ? 'active' : '' }}"
+        (click)="categoryNavigation('Cameras')"
+      >
+        Cameras
+      </button>
+    </li>
+    <li class="nav-item">
+      <button
+        class="nav-link {{
+          activeButton === 'TVs & Appliances' ? 'active' : ''
+        }}"
+        (click)="categoryNavigation('TVs & Appliances')"
+      >
+        TVs & Appliances
+      </button>
+    </li>
+  </ul>
+</nav>

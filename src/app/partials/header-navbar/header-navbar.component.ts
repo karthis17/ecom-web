@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';

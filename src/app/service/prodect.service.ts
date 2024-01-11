@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../models/product.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,8 +14,15 @@ export class ProdectService {
   baseUrl: string = 'http://localhost:3000/api/product';
   _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
+  private product$ = new BehaviorSubject<Product[]>([]);
+  selectedProduct$ = this.product$.asObservable();
 
-  fectData<product>(): Observable<Product[]> {
+  setProductList(productList: Product[]) {
+    this.product$.next(productList);
+  }
+
+
+  fectData(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl + '/products/')
   }
 

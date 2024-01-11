@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../models/product.model';
 import { NgFor } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProdectService } from '../service/prodect.service';
 import { Dsicount } from '../configuration/discountClac';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -18,7 +18,7 @@ import { CategoryNavComponent } from '../partials/category-nav/category-nav.comp
 export class ProductListComponentComponent {
 
 
-  constructor(private prodect: ProdectService, private router: Router, private builder: FormBuilder) { }
+  constructor(private prodect: ProdectService, private router: Router, private builder: FormBuilder, private route: ActivatedRoute) { }
   data: Product[] = [];
   discount = new Dsicount();
   form !: FormGroup;
@@ -43,6 +43,11 @@ export class ProductListComponentComponent {
       });
       // this.form.setValue({ about: '', price: '' })
     } else {
+      this.prodect.selectedProduct$.subscribe(product => {
+        if (product) {
+          this.data = product;
+        }
+      });
       this.data = products ? products : [];
     }
   }
@@ -54,14 +59,10 @@ export class ProductListComponentComponent {
       category: ['', Validators.required]
     });
 
+
     this.getData();
 
 
   }
-
-
-
-
-
 
 }

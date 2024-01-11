@@ -21,6 +21,7 @@ import { StarRatingComponent } from '../review/star-rating/star-rating.component
 export class ProductDetailsComponentComponent {
 
   data: Product = {
+    productName: '',
     price: 0,
     description: '',
     quantity: 0,

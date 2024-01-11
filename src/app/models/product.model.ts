@@ -1,6 +1,6 @@
 export class Product {
     id?: string;
-    productName?: string;
+    productName!: string;
     price!: number;
     images?: Array<string>;
     thumbnail?: string;

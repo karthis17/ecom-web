@@ -16,15 +16,14 @@
       <input
         class="form-control"
         list="datalistOptions"
-        id="exampleDataList"
         placeholder="Type to search..."
-        aria-label="Recipient's username"
         aria-describedby="button-addon2"
         [(ngModel)]="selected_product"
+        (input)="filterSearchTerm()"
         (change)="nav()"
       />
       <datalist id="datalistOptions">
-        <ng-container *ngFor="let product of product_names">
+        <ng-container *ngFor="let product of filtered_data">
           <option [value]="product.productName"></option>
         </ng-container>
       </datalist>

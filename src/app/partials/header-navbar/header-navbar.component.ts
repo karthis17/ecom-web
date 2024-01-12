@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
-import { NgFor, NgIf } from '@angular/common';
-import { NavigationExtras, RouterLink } from '@angular/router';
+import { NgFor, NgIf, SlicePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProdectService } from '../../service/prodect.service';
 import { Product } from '../../models/product.model';
@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-header-navbar',
   standalone: true,
-  imports: [NgIf, RouterLink, NgFor, FormsModule],
+  imports: [NgIf, RouterLink, NgFor, FormsModule, SlicePipe],
   templateUrl: './header-navbar.component.html',
   styleUrl: './header-navbar.component.css'
 })
@@ -21,6 +21,7 @@ export class HeaderNavbarComponent {
   logState!: boolean;
   product_names: Product[] = [];
   selected_product: any;
+  filtered_data: Product[] = [];
 
   constructor(private auth: AuthService, private router: Router, private product: ProdectService) { }
 
@@ -38,7 +39,16 @@ export class HeaderNavbarComponent {
 
     this.product.fectData().subscribe(data => {
       this.product_names = data;
-    })
+    });
+  }
+
+  filterSearchTerm() {
+
+    let select = this.selected_product.toLowerCase()
+
+    this.filtered_data = this.product_names.filter(product => product.productName.toLowerCase().includes(select) || product.category.toLowerCase().includes(select) || product.description.toLowerCase().includes(select) || product.about?.toString().toLowerCase().includes(select)).slice(0, 10);
+
+
   }
 
   logout() {
@@ -64,7 +74,7 @@ export class HeaderNavbarComponent {
         this.selected_product = '';
         this.router.navigate(['/product', foundedProduct.id]);
       } else {
-        this.product.setProductList(this.product_names.filter(product => product.productName.toLowerCase().includes(select.toLowerCase()) || product.category.toLowerCase().includes(select.toLowerCase()) || product.description.toLowerCase().includes(select.toLowerCase()) || product.about?.toString().toLowerCase().includes(select.toLowerCase())));
+        this.product.setProductList(this.filtered_data);
 
         this.selected_product = '';
         this.router.navigate([`/`])

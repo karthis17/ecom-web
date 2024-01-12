@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { ProdectService } from '../service/prodect.service';
 import { Product } from '../models/product.model';
 import { ActivatedRoute } from '@angular/router';
-import { Dsicount } from '../configuration/discountClac';
-import { NgFor, NgIf } from '@angular/common';
+import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { CartService } from '../service/cart.service';
@@ -14,7 +13,7 @@ import { StarRatingComponent } from '../review/star-rating/star-rating.component
 @Component({
   selector: 'app-product-details-component',
   standalone: true,
-  imports: [NgFor, ReactiveFormsModule, NgIf, ReviewBoxComponent, StarRatingComponent],
+  imports: [NgFor, ReactiveFormsModule, NgIf, ReviewBoxComponent, StarRatingComponent, CurrencyPipe],
   templateUrl: './product-details-component.component.html',
   styleUrl: './product-details-component.component.css'
 })
@@ -27,10 +26,10 @@ export class ProductDetailsComponentComponent {
     quantity: 0,
     discount: 0,
     rating: 0,
-    category: ''
+    category: '',
+    amount: 0
   };
   user: any;
-  discount = new Dsicount();
   qty = new FormControl(1);
   cartItem!: Array<ShoppingCart>;
   success: boolean = false;
@@ -73,7 +72,7 @@ export class ProductDetailsComponentComponent {
 
   add() {
     if (this.data?.id && this.data?.productName && this.data?.price && this.qty.value && !this.checkItemInCartAndUpdateQty(this.data?.productName)) {
-      this.cart.addToCart({ product_id: this.data?.id, productName: this.data?.productName, price: this.data?.price, quantity: this.qty.value, user_id: this.user.id, ordered: false }).subscribe(data => {
+      this.cart.addToCart({ product_id: this.data?.id, productName: this.data?.productName, price: this.data.amount, quantity: this.qty.value, user_id: this.user.id, ordered: false }).subscribe(data => {
         console.log(data);
         this.getUserAddCArt();
       });

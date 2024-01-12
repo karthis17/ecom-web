@@ -1,48 +1,22 @@
 <div class="container-fluid bg-black">
   <app-category-nav (data)="getData($event)"></app-category-nav>
 </div>
-<div class="container-fluid px-5">
-  <div class="row py-5">
+<div class="container-fluid">
+  <div class="row py-3">
     <div class="col-lg-2">
-      <div class="card p-4 sticky-lg-top" style="top: 90px">
+      <div class="card p-4 sticky-lg-top filter" style="top: 90px">
         <p>Filter</p>
-        <form [formGroup]="form">
-          <label for="" class="form-label">Price</label>
-          <select
-            class="form-select my-1"
-            aria-label="Default select example "
-            formControlName="price"
+        <label for="" class="form-label mt-2 px-1 fw-medium">Price :</label>
+        <hr class="m-1" />
+        <ng-container *ngFor="let price of upperLimits; let i = index">
+          <button
+            *ngIf="i !== upperLimits.length - 1"
+            (click)="filterByPrice(upperLimits[i] + ' - ' + upperLimits[i + 1])"
           >
-            <option disabled>Chosse Price range</option>
-            <option>40000 - 50000</option>
-            <option>50000 - 70000</option>
-            <option>70000 - 100000</option>
-          </select>
-          <label for="" class="form-label">Spec</label>
-          <select
-            class="form-select my-1"
-            aria-label="Default select example"
-            formControlName="about"
-          >
-            <option disabled>Chosse Spec</option>
-            <option>256gb SSD and 8Gb RAM</option>
-            <option>512GB SSD and 16GB RAM</option>
-            <option>1TB and 8Gb RAM</option>
-          </select>
-          <label for="" class="form-label">Category</label>
-          <select
-            class="form-select my-1"
-            aria-label="Default select example"
-            formControlName="category"
-          >
-            <option disabled>Chosse category</option>
-            <option>PC & Laptops</option>
-            <option>upcoming..</option>
-          </select>
-          <button class="btn btn-primary mt-2" (click)="getData()">
-            Search
+            {{ upperLimits[i] | currency : "INR" }} -
+            {{ upperLimits[i + 1] | currency : "INR" }}
           </button>
-        </form>
+        </ng-container>
       </div>
     </div>
     <div class="col-lg-10 mx-auto">
@@ -52,10 +26,10 @@
         class="row my-2 product-detail d-flex justify-content-center align-items-center mx-5 px-5"
         style="background-color: #fff"
       >
-        <div class="col-lg-4 p-sm-3">
+        <div class="col-lg-4 p-sm-1">
           <img src="{{ product.thumbnail }}" alt="img" class="image" />
         </div>
-        <div class="card-body col-lg-6 pe-lg-5 p-3 position-relative">
+        <div class="card-body col-lg-6 pe-lg-5 position-relative">
           <h5>{{ product.productName }}</h5>
           <p>
             <span class="text-success fw-medium">Category </span
@@ -64,7 +38,7 @@
           <h3 class="fw-light text-secondary">
             <span class="text-success fw-medium">Price: </span>
             <span class="price pe-2">₹{{ product.price }}</span
-            >{{ discount.discountPrice(product.price, product.discount) }}
+            >{{ product.amount | currency : "INR" }}
           </h3>
           <app-star-rating
             [readonly]="true"

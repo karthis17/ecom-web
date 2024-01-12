@@ -10,4 +10,5 @@ export class Product {
     about?: Array<string>;
     rating!: number | null;
     category!: string;
+    amount!: number;
 }

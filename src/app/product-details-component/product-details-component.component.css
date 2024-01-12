@@ -1,0 +1,9 @@
+.top {
+  top: 88px;
+}
+
+@media (max-width: 720px) {
+  .top {
+    top: 10px;
+  }
+}

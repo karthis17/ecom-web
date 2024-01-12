@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ShoppingCart } from '../models/cart.model';
 import { CartService } from '../service/cart.service';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
+import { ActivatedRoute, NavigationExtras, Router, RouterLink } from '@angular/router';
+import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-cart-table',
   standalone: true,
-  imports: [NgFor, NgIf, ReactiveFormsModule],
+  imports: [NgFor, NgIf, ReactiveFormsModule, CurrencyPipe, RouterLink],
   templateUrl: './cart-table.component.html',
   styleUrl: './cart-table.component.css'
 })

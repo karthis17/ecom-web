@@ -12,6 +12,7 @@ import { Product } from '../../models/product.model';
 export class CategoryNavComponent {
 
   @Output('data') data = new EventEmitter<Product[]>();
+  @Output('category') category = new EventEmitter<string>();
 
   constructor(private prodect: ProdectService) { }
 
@@ -27,10 +28,19 @@ export class CategoryNavComponent {
     this.activeButton = button;
   }
 
+  all(category: string) {
+    this.taggelActiveButton(category);
+    this.prodect.fectData().subscribe(data => {
+      this.category.emit(category);
+      this.data.emit(data);
+    })
+  }
+
   categoryNavigation(category: string) {
     this.taggelActiveButton(category);
     this.prodect.fectDataCategoryWis(category).subscribe((pro: Product[]) => {
       console.log(pro)
+      this.category.emit(category);
       this.data.emit(pro);
     }, (error) => {
       console.log(error);

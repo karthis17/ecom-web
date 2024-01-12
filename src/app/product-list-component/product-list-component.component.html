@@ -1,5 +1,8 @@
 <div class="container-fluid bg-black">
-  <app-category-nav (data)="getData($event)"></app-category-nav>
+  <app-category-nav
+    (data)="getData($event)"
+    (category)="setCategory($event)"
+  ></app-category-nav>
 </div>
 <div class="container-fluid">
   <div class="row py-3">
@@ -11,7 +14,7 @@
         <ng-container *ngFor="let price of upperLimits; let i = index">
           <button
             *ngIf="i !== upperLimits.length - 1"
-            (click)="filterByPrice(upperLimits[i] + ' - ' + upperLimits[i + 1])"
+            (click)="filterByPrice([upperLimits[i], upperLimits[i + 1]])"
           >
             {{ upperLimits[i] | currency : "INR" }} -
             {{ upperLimits[i + 1] | currency : "INR" }}
@@ -29,7 +32,7 @@
         <div class="col-lg-4 p-sm-1">
           <img src="{{ product.thumbnail }}" alt="img" class="image" />
         </div>
-        <div class="card-body col-lg-6 pe-lg-5 position-relative">
+        <div class="card-body col-lg-6 pe-lg-5 p-3 position-relative">
           <h5>{{ product.productName }}</h5>
           <p>
             <span class="text-success fw-medium">Category </span

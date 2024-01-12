@@ -21,10 +21,10 @@ export class ProductListComponentComponent {
   data: Product[] = [];
   form !: FormGroup;
   upperLimits: number[] = [];
+  category: string = '';
 
-  filterByPrice(price: string) {
-    const [startStr, endStr] = price.split('-').map((str: string) => str.trim());
-    this.prodect.filter({ about: '', price: [+startStr, +endStr], category: this.data[0].category }).subscribe((pro: Product[]) => {
+  filterByPrice(price: number[]) {
+    this.prodect.filter({ about: '', price: price, category: this.category !== 'all' ? this.category : '' }).subscribe((pro: Product[]) => {
       this.data = pro;
       // this.form.setValue({ about: '', price: '' });
     }, (error) => {
@@ -48,6 +48,10 @@ export class ProductListComponentComponent {
     }
 
 
+  }
+
+  setCategory(category: string) {
+    this.category = category;
   }
 
   ngOnInit() {

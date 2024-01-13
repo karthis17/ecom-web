@@ -1,0 +1,29 @@
+<div class="container-fluid bg-black">
+  <app-category-nav
+    (data)="getData($event)"
+    (category)="setCategory($event)"
+  ></app-category-nav>
+</div>
+<div class="container-fluid">
+  <div class="row py-lg-3">
+    <div class="col-lg-2 col-12">
+      <div class="card p-4 sticky-lg-top filter">
+        <p>Filter</p>
+        <label for="" class="form-label mt-2 px-1 fw-medium">Price :</label>
+        <hr class="m-1" />
+        <ng-container *ngFor="let price of upperLimits; let i = index">
+          <button
+            *ngIf="i !== upperLimits.length - 1"
+            (click)="filterByPrice([upperLimits[i], upperLimits[i + 1]])"
+          >
+            {{ (upperLimits[i] | currency : "INR")?.slice(0, -3) }} -
+            {{ (upperLimits[i + 1] | currency : "INR")?.slice(0, -3) }}
+          </button>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <app-product-list-component [product]="data"></app-product-list-component>
+    </div>
+  </div>
+</div>

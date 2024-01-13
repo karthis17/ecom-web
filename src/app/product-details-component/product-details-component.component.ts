@@ -10,26 +10,18 @@ import { ShoppingCart } from '../models/cart.model';
 import { ReviewBoxComponent } from '../review/review-box/review-box.component';
 import { StarRatingComponent } from '../review/star-rating/star-rating.component';
 import { ViewPriceComponent } from '../view-price/view-price.component';
+import { ProductListComponentComponent } from '../product-list-component/product-list-component.component';
 
 @Component({
   selector: 'app-product-details-component',
   standalone: true,
-  imports: [NgFor, ReactiveFormsModule, NgIf, ReviewBoxComponent, StarRatingComponent, ViewPriceComponent],
+  imports: [NgFor, ReactiveFormsModule, NgIf, ReviewBoxComponent, StarRatingComponent, ViewPriceComponent, ProductListComponentComponent],
   templateUrl: './product-details-component.component.html',
   styleUrl: './product-details-component.component.css'
 })
 export class ProductDetailsComponentComponent {
 
-  data: Product = {
-    productName: '',
-    price: 0,
-    description: '',
-    quantity: 0,
-    discount: 0,
-    rating: 0,
-    category: '',
-    amount: 0
-  };
+  data!: Product;
   user: any;
   qty = new FormControl(1);
   cartItem!: Array<ShoppingCart>;
@@ -38,7 +30,9 @@ export class ProductDetailsComponentComponent {
 
   isNewReview: boolean = false;
 
-  constructor(private productService: ProdectService, private router: ActivatedRoute, private auth: AuthService, private cart: CartService) { }
+  constructor(private productService: ProdectService, private router: ActivatedRoute, private auth: AuthService, private cart: CartService) {
+
+  }
 
   getUserAddCArt() {
     this.auth.getUser().then((us) => {

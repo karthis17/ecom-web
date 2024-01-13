@@ -2,7 +2,7 @@
   <div class="row mt-sm-0 mt-3 bg-white">
     <div
       id="carouselExampleDark"
-      class="carousel carousel-dark slide col-lg-6 px-5 h-50 sticky-lg-top top"
+      class="carousel carousel-dark slide col-lg-6 px-5 h-50"
       data-bs-ride="carousel"
     >
       <div class="carousel-inner">
@@ -102,20 +102,29 @@
           <li *ngFor="let about of data?.about">{{ about }}</li>
         </ul>
       </div>
-      <div class="review">
-        <h5>Review</h5>
-        <ng-container *ngIf="!isNewReview">
-          <app-review-box
-            [productId]="productId ? productId : ''"
-          ></app-review-box>
-        </ng-container>
-        <ng-container *ngIf="isNewReview">
-          <app-review-box
-            [productId]="data.id ? data.id : ''"
-            [new_review]="user.name"
-          ></app-review-box>
-        </ng-container>
-      </div>
+      <hr />
+    </div>
+    <h5 class="px-lg-5 mt-5">Related Product</h5>
+    <div class="bg-white mt-sm-0 mt-3 bg-white overflow-x-scroll">
+      <app-product-list-component
+        class="d-flex gap-3 bg-light"
+        [category]="data.category"
+        [isHome]="false"
+      ></app-product-list-component>
+    </div>
+    <div class="review my-5 px-lg-5">
+      <h5>Review</h5>
+      <ng-container *ngIf="!isNewReview">
+        <app-review-box
+          [productId]="productId ? productId : ''"
+        ></app-review-box>
+      </ng-container>
+      <ng-container *ngIf="isNewReview">
+        <app-review-box
+          [productId]="data.id ? data.id : ''"
+          [new_review]="user.name"
+        ></app-review-box>
+      </ng-container>
     </div>
   </div>
 </div>

@@ -1,0 +1,23 @@
+.filter button {
+  margin: 5px;
+  padding: 5px;
+  background-color: transparent;
+  border: 0;
+  text-align: start;
+  transition: all 0.2 ease-in-out;
+  border-radius: 5px;
+}
+
+.filter button:hover {
+  background-color: #eee;
+}
+
+.filter {
+  top: 90px;
+}
+
+@media (max-width: 1220px) {
+  .filter {
+    top: 5px;
+  }
+}

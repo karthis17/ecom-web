@@ -1,8 +1,3 @@
-.price {
-  color: #bbb;
-  text-decoration: line-through;
-}
-
 .product-detail {
   transition: box-shadow 0.2s ease-in-out;
 }
@@ -19,26 +14,12 @@
   max-width: 20rem;
 }
 
-.filter button {
-  margin: 5px;
-  padding: 5px;
-  background-color: transparent;
-  border: 0;
-  text-align: start;
-  transition: all 0.2 ease-in-out;
-  border-radius: 5px;
+.description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.filter button:hover {
-  background-color: #eee;
-}
-
-.filter {
-  top: 90px;
-}
-
-@media (max-width: 1220px) {
-  .filter {
-    top: 5px;
-  }
+.description.line {
+  -webkit-line-clamp: 1;
 }

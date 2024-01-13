@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProdectService } from '../service/prodect.service';
 import { Product } from '../models/product.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
@@ -30,7 +30,7 @@ export class ProductDetailsComponentComponent {
 
   isNewReview: boolean = false;
 
-  constructor(private productService: ProdectService, private router: ActivatedRoute, private auth: AuthService, private cart: CartService) {
+  constructor(private productService: ProdectService, private route: Router, private router: ActivatedRoute, private auth: AuthService, private cart: CartService) {
 
   }
 
@@ -44,25 +44,27 @@ export class ProductDetailsComponentComponent {
   }
 
   ngOnInit() {
-    this.productId = this.router.snapshot.paramMap.get('id');
+    this.router.paramMap.subscribe((params) => {
+      this.productId = params.get('id');
+      if (typeof this.productId === 'string') {
+        this.productService.getDataByID(this.router.snapshot.paramMap.get('id')).subscribe(res => {
+          res.images = JSON.parse(typeof res.images === 'string' ? res.images : "[]");
+          res.about = JSON.parse(typeof res.about === 'string' ? res.about : "[]");
+
+          this.data = res;
+          console.log(this.data);
+
+        })
+        this.getUserAddCArt();
+
+      }
+    })
 
     this.router.queryParams.subscribe(params => {
       this.isNewReview = params['review'];
       console.log(params['review'], "hi");
     });
 
-    if (typeof this.productId === 'string') {
-      this.productService.getDataByID(this.router.snapshot.paramMap.get('id')).subscribe(res => {
-        res.images = JSON.parse(typeof res.images === 'string' ? res.images : "[]");
-        res.about = JSON.parse(typeof res.about === 'string' ? res.about : "[]");
-
-        this.data = res;
-        console.log(this.data);
-
-      })
-      this.getUserAddCArt();
-
-    }
   }
 
   add() {
@@ -90,6 +92,14 @@ export class ProductDetailsComponentComponent {
     } else {
       return null;
     }
+  }
+
+  onClickRelatedProd(id: any) {
+    this.route.navigate(['/', 'product', id]);
+  }
+
+  hi() {
+    return "hii";
   }
 
 }

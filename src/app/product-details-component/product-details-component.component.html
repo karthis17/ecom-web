@@ -110,18 +110,17 @@
         class="d-flex gap-3 bg-light"
         [category]="data.category"
         [isHome]="false"
+        (clickedProd)="onClickRelatedProd($event)"
       ></app-product-list-component>
     </div>
     <div class="review my-5 px-lg-5">
       <h5>Review</h5>
       <ng-container *ngIf="!isNewReview">
-        <app-review-box
-          [productId]="productId ? productId : ''"
-        ></app-review-box>
+        <app-review-box [product_id]="data.id"></app-review-box>
       </ng-container>
       <ng-container *ngIf="isNewReview">
         <app-review-box
-          [productId]="data.id ? data.id : ''"
+          [product_id]="productId"
           [new_review]="user.name"
         ></app-review-box>
       </ng-container>

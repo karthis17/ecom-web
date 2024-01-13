@@ -41,9 +41,10 @@ export class ProductAddOREditFormComponent implements OnInit {
       this.addImageLink()
     } else {
       this.product.getDataByID(this.isEdit).subscribe((dataa: Product) => {
-        this.data = { id: dataa.id, productName: dataa.productName, price: dataa.price, description: dataa.description, thumbnail: dataa.thumbnail, quantity: dataa.quantity, discount: dataa.discount };
+        this.data = { id: dataa.id, productName: dataa.productName, price: dataa.price, description: dataa.description, thumbnail: dataa.thumbnail, quantity: dataa.quantity, discount: dataa.discount, category: dataa.category };
         this.images = JSON.parse(typeof dataa.images === 'string' ? dataa.images : "[]");
         this.about = JSON.parse(typeof dataa.about === 'string' ? dataa.about : "[]");
+        console.log(dataa);
       })
     }
 

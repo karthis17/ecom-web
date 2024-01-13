@@ -16,8 +16,8 @@
             *ngIf="i !== upperLimits.length - 1"
             (click)="filterByPrice([upperLimits[i], upperLimits[i + 1]])"
           >
-            {{ upperLimits[i] | currency : "INR" }} -
-            {{ upperLimits[i + 1] | currency : "INR" }}
+            {{ (upperLimits[i] | currency : "INR")?.slice(0, -3) }} -
+            {{ (upperLimits[i + 1] | currency : "INR")?.slice(0, -3) }}
           </button>
         </ng-container>
       </div>
@@ -38,11 +38,11 @@
             <span class="text-success fw-medium">Category </span
             >{{ product.category }}
           </p>
-          <h3 class="fw-light text-secondary">
-            <span class="text-success fw-medium">Price: </span>
-            <span class="price pe-2">₹{{ product.price }}</span
-            >{{ product.amount | currency : "INR" }}
-          </h3>
+          <app-view-price
+            [amount]="product.amount"
+            [discount]="product.discount"
+            [price]="product.price"
+          ></app-view-price>
           <app-star-rating
             [readonly]="true"
             [rating]="product.rating ? product.rating : 0"

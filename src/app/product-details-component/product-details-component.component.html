@@ -47,12 +47,12 @@
 
       <div class="my-4">
         <span class="text-success fw-medium">Special Price </span>
-        <h3 class="fw-medium">
-          {{ data.amount | currency : "INR" }}
-          <sub class="text-decoration-line-through text-secondary fw-light">{{
-            data.price | currency : "INR"
-          }}</sub>
-        </h3>
+        <app-view-price
+          [amount]="data.amount"
+          [price]="data.price"
+          [discount]="data.discount"
+          [list]="false"
+        ></app-view-price>
         <div class="d-flex algin-items-center">
           <button
             class="btn btn-success my-3 {{

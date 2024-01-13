@@ -2,18 +2,19 @@ import { Component } from '@angular/core';
 import { ProdectService } from '../service/prodect.service';
 import { Product } from '../models/product.model';
 import { ActivatedRoute } from '@angular/router';
-import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { CartService } from '../service/cart.service';
 import { ShoppingCart } from '../models/cart.model';
 import { ReviewBoxComponent } from '../review/review-box/review-box.component';
 import { StarRatingComponent } from '../review/star-rating/star-rating.component';
+import { ViewPriceComponent } from '../view-price/view-price.component';
 
 @Component({
   selector: 'app-product-details-component',
   standalone: true,
-  imports: [NgFor, ReactiveFormsModule, NgIf, ReviewBoxComponent, StarRatingComponent, CurrencyPipe],
+  imports: [NgFor, ReactiveFormsModule, NgIf, ReviewBoxComponent, StarRatingComponent, ViewPriceComponent],
   templateUrl: './product-details-component.component.html',
   styleUrl: './product-details-component.component.css'
 })

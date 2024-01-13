@@ -1,0 +1,14 @@
+<h3 class="fw-normal text-dark mt-3">
+  <span *ngIf="!list" class="text-danger me-3">-{{ discount }}%</span>
+  <span class="position-relative mt-0 pt-0">
+    <span class="rupee {{ list ? '' : 'details' }}">₹</span>
+    {{ (amount | currency : "INR" : "")?.slice(0, -3) }}
+  </span>
+  <br *ngIf="!list" class="m-0 p-0" />
+  <sub class="pe-2 text-secondary"
+    >M.R.P :<span class="text-decoration-line-through">{{
+      (price | currency : "INR")?.slice(0, -3)
+    }}</span>
+    <span class="text-dark me-3" *ngIf="list"> ({{ discount }}% off)</span>
+  </sub>
+</h3>

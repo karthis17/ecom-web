@@ -6,11 +6,12 @@ import { ProdectService } from '../service/prodect.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { StarRatingComponent } from '../review/star-rating/star-rating.component';
 import { CategoryNavComponent } from '../partials/category-nav/category-nav.component';
+import { ViewPriceComponent } from '../view-price/view-price.component';
 
 @Component({
   selector: 'app-product-list-component',
   standalone: true,
-  imports: [NgFor, NgIf, RouterLink, ReactiveFormsModule, StarRatingComponent, CategoryNavComponent, CurrencyPipe],
+  imports: [NgFor, NgIf, RouterLink, ReactiveFormsModule, StarRatingComponent, CategoryNavComponent, CurrencyPipe, ViewPriceComponent],
   templateUrl: './product-list-component.component.html',
   styleUrl: './product-list-component.component.css'
 })

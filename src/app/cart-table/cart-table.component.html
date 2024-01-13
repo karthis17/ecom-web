@@ -41,8 +41,8 @@
         </ng-template>
       </td>
 
-      <td>{{ item.price | currency : "INR" }}</td>
-      <td>{{ item.total | currency : "INR" }}</td>
+      <td>{{ (item.price | currency : "INR")?.slice(0, -3) }}</td>
+      <td>{{ (item.total | currency : "INR")?.slice(0, -3) }}</td>
       <td *ngIf="ordered">
         <button class="btn btn-success" (click)="nav(item.product_id)">
           Write Review

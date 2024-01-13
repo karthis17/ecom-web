@@ -32,3 +32,13 @@
 .filter button:hover {
   background-color: #eee;
 }
+
+.filter {
+  top: 90px;
+}
+
+@media (max-width: 1220px) {
+  .filter {
+    top: 5px;
+  }
+}

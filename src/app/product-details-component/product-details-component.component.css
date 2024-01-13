@@ -1,9 +1,16 @@
+.width-80 {
+  width: 80%;
+}
+
 .top {
   top: 88px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 999px) {
   .top {
     top: 10px;
+  }
+  .width-80 {
+    width: 95%;
   }
 }

@@ -50,3 +50,12 @@ ul {
 .z {
   z-index: 10000;
 }
+
+.avatar {
+  border-radius: 50%;
+  padding: 2px 12px 4px 12px;
+  margin: 0px 10px;
+  height: max-content;
+  font-size: 16pt;
+  background-color: burlywood;
+}

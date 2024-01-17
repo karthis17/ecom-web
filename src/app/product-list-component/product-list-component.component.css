@@ -23,3 +23,12 @@
 .description.line {
   -webkit-line-clamp: 1;
 }
+
+.btn-link {
+  text-decoration: none;
+}
+
+.active {
+  text-decoration: underline;
+  color: #01015a;
+}

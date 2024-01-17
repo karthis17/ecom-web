@@ -1,5 +1,5 @@
 <div
-  *ngFor="let product of product.slice(0, showProduct)"
+  *ngFor="let product of product.slice(start, end)"
   class="row my-2 product-detail d-flex justify-content-center align-items-center g-1"
   style="background-color: #fff"
   (click)="nav(product.id)"
@@ -42,7 +42,28 @@
     </p>
   </div>
 </div>
-<div class="d-flex justify-content-center">
-  <button class="btn btn-link" (click)="showLess()">Show Less</button>
-  <button class="btn btn-link" (click)="showMore()">Show More</button>
+<div class="d-flex justify-content-center my-4">
+  <ng-container *ngIf="!category && pageNumbers.length > 1">
+    <button
+      class="btn btn-link"
+      *ngIf="start > 0"
+      (click)="changePage(activePage - 1)"
+    >
+      &#xAB; Previous
+    </button>
+    <button
+      class=" btn {{ activePage === i + 1 ? 'active' : 'btn-link' }}"
+      *ngFor="let _ of pageNumbers; let i = index"
+      (click)="changePage(i + 1)"
+    >
+      {{ i + 1 }}
+    </button>
+    <button
+      *ngIf="end < pageNumbers.length * 10 - 1"
+      class="btn btn-link"
+      (click)="changePage(activePage + 1)"
+    >
+      Next &#xBB;
+    </button>
+  </ng-container>
 </div>

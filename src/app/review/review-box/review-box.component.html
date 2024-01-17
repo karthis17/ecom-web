@@ -22,7 +22,7 @@
 </ng-container>
 
 <ng-container *ngFor="let review of reviews">
-  <div class="d-flex align-items-top">
+  <div class="d-flex align-items-top my-4">
     <span class="avatar">{{ review.name.charAt(0).toUpperCase() }}</span>
     <div class="content pt-2">
       <p class="m-0 p-0 fw-medium">{{ review.name }}</p>
@@ -35,5 +35,5 @@
       </p>
     </div>
   </div>
-  <hr *ngIf="reviews.length > 1" />
+  <!-- <hr *ngIf="reviews.length > 1" /> -->
 </ng-container>

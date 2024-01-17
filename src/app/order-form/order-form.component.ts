@@ -83,7 +83,7 @@ export class OrderFormComponent {
           alert("Transaction completed successfully transaction id: " + details.id + " your products will deliver soon");
           if (details.status === "COMPLETED") {
 
-            this.submit();
+            this.submit(JSON.stringify(details.payer));
 
           }
         } catch (error) {
@@ -99,7 +99,7 @@ export class OrderFormComponent {
   address(address: string) {
     return JSON.parse(address).join(', ')
   }
-  submit() {
+  submit(payer: any) {
     // throw new Error('Method not implemented.');
     this.cartTable.items.forEach(item => {
       console.log(item);
@@ -109,7 +109,7 @@ export class OrderFormComponent {
     });
     this.cart.placeOrder(this.user_id).subscribe((response: any) => {
       console.log(response);
-      this.order.addToOrder({ user_id: this.user_id, phone: this.deliveryAddress.phone, address: this.deliveryAddress.address, payment: this.paymentOption?.value }).subscribe((res) => {
+      this.order.addToOrder({ user_id: this.user_id, phone: this.deliveryAddress.phone, address: this.deliveryAddress.address, payment: payer }).subscribe((res) => {
         console.log(res)
         this.router.navigateByUrl('')
       })

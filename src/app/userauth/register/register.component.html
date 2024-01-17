@@ -36,6 +36,9 @@
           [formControl]="password"
         />
       </div>
+      <p *ngIf="err" class="text-danger">
+        {{ err }} <a class="btn-link" routerLink="/login">Login here</a>
+      </p>
       <button (click)="submit()" type="submit" class="btn btn-primary">
         Submit
       </button>

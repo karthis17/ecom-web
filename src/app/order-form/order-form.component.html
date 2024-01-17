@@ -14,42 +14,6 @@
       <div *ngIf="!deliveryAddress">
         <a routerLink="/dtl/{{ user_id }}" class="btn btn-link">Add address</a>
       </div>
-      <div class="col-12">
-        <label for="inputState" class="form-label">Chosse Payment Option</label>
-        <select
-          id="inputState"
-          class="form-select"
-          [value]=""
-          [formControl]="paymentOption"
-        >
-          <option selected>Choose...</option>
-          <option selected>Cashb On Delivary</option>
-          <option selected>Credit card</option>
-          <option selected>debit card</option>
-          <option selected>UPI Payment</option>
-        </select>
-      </div>
-
-      <div *ngIf="paymentOption?.value === 'Credit card'" class="col-12">
-        <label for="inputCardNo" class="form-label">Enter Card No</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inputCardNo"
-          placeholder="Enter card number"
-          required
-        />
-      </div>
-      <div *ngIf="paymentOption?.value === 'UPI Payment'" class="col-12">
-        <label for="inputUPIID" class="form-label">Enter UPI ID</label>
-        <input
-          type="text"
-          class="form-control"
-          id="inputUPIID"
-          placeholder="Enter UPI ID"
-          required
-        />
-      </div>
       <app-cart-table></app-cart-table>
       <div class="col-12">
         <!-- <button

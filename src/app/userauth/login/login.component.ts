@@ -15,7 +15,7 @@ import { NgIf } from '@angular/common';
 })
 export class LoginComponent {
   isAdmin!: boolean;
-
+  err: string | null = null;
 
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router, private adminAuth: AdminAuthService) { }
@@ -36,6 +36,8 @@ export class LoginComponent {
         console.log('User registration', res);
         if (res.success) {
           this.router.navigateByUrl('');
+        } else {
+          this.err = res.message;
         }
       });
     }

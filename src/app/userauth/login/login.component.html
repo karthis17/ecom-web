@@ -28,6 +28,8 @@
           [formControl]="password"
         />
       </div>
+
+      <p *ngIf="err" class="text-danger">{{ err }}</p>
       <button
         type="submit"
         (click)="isAdmin ? adminSumbmit() : submit()"

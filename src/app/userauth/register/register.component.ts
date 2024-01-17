@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -18,6 +19,7 @@ export class RegisterComponent {
   name = new FormControl("", Validators.required);
   email = new FormControl("", [Validators.required, Validators.email]);
   password = new FormControl("", Validators.required);
+  err: string | null = null;
 
   submit() {
     if (this.name.valid && this.email.valid && this.password.valid) {
@@ -25,6 +27,8 @@ export class RegisterComponent {
         console.log('User registration', res);
         if (res.success) {
           this.router.navigateByUrl('');
+        } else {
+          this.err = res.message;
         }
       });
     }

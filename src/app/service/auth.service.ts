@@ -26,6 +26,9 @@ export class AuthService {
             console.log(response);
             this.addUserLocally(response); // Add user information to localStorage
             resolve(response);
+          } else {
+            console.log(response);
+            resolve(response);
           }
         },
         (error: any) => {
@@ -66,8 +69,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('loggedIn');
-    localStorage.removeItem('user');
+
+    localStorage.clear();
     this.loggedIn.next(false);
   }
 

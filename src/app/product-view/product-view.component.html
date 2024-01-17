@@ -1,0 +1,103 @@
+<div class="row mt-sm-0 mt-3 bg-white">
+  <div
+    id="carouselExampleDark"
+    class="carousel carousel-dark slide col-lg-6 px-5 h-50 sticky-lg-top top z"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      <div
+        *ngFor="let img of data?.images; let i = index"
+        class="carousel-item {{ i === 0 ? 'active' : '' }}  "
+        data-bs-interval="4000"
+      >
+        <img src="{{ img }}" class="d-block w-100" alt="..." />
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleDark"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="col-lg-6 mx-auto mt-3 pt-3 pt-lg-0 pe-5">
+    <h3>{{ data.productName ? data.productName : "" }}</h3>
+    <p>
+      <span class="text-success fw-medium">Category </span>{{ data.category }}
+    </p>
+    <p class="pb-0 mb-0">{{ data.description }}</p>
+
+    <app-star-rating
+      [rating]="data.rating ? data.rating : 0"
+      [readonly]="true"
+    ></app-star-rating>
+
+    <div class="my-4">
+      <span class="text-success fw-medium">Special Price </span>
+      <app-view-price
+        [amount]="data.amount"
+        [price]="data.price"
+        [discount]="data.discount"
+        [list]="false"
+      ></app-view-price>
+      <div class="d-flex algin-items-center">
+        <button
+          class="btn btn-success my-3 {{
+            qty.value
+              ? qty.value < 1 || data.quantity < qty.value
+                ? 'disabled '
+                : ''
+              : qty.value === 0
+              ? 'disabled'
+              : ''
+          }} {{ data.quantity < 1 ? 'disabled' : '' }}"
+          (click)="add()"
+        >
+          Add to cart
+        </button>
+        <input
+          type="number"
+          [formControl]="qty"
+          style="width: 50px"
+          class="fs-6 form-control m-3 p-2"
+        />
+        <div *ngIf="success" class="alert alert-success" role="alert">
+          Successfully added to cart
+        </div>
+      </div>
+      <p *ngIf="data.quantity < 1" class="text-danger">Out of stock</p>
+      <p *ngIf="data.quantity > 1">Speed delivery</p>
+    </div>
+    <hr />
+    <div>
+      <h5>Available offers</h5>
+      <ul>
+        <li>Bank Offer5% Cashback on Flipkart Axis Bank CardT&C</li>
+        <li>
+          Special PriceGet extra 17% off (price inclusive of cashback/coupon)T&C
+        </li>
+        <li>No cost EMI ₹1,109/month. Standard EMI also availableView Plans</li>
+      </ul>
+    </div>
+    <hr />
+    <div class="about my-5">
+      <h5>About</h5>
+      <ul>
+        <li *ngFor="let about of data?.about">{{ about }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

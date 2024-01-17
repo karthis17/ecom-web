@@ -31,13 +31,9 @@ export class ProductListComponentComponent {
   ngOnInit() {
 
     console.log(this.product, "hi")
-    if (this.category) {
-      this.prodect.fectDataCategoryWis(this.category).subscribe(data => {
-        this.product = data;
-        this.start = 0;
-        this.end = 10;
-      });
-    }
+
+    this.getProduct();
+
 
   }
 
@@ -48,6 +44,21 @@ export class ProductListComponentComponent {
       this.pageNumbers = Array.from({ length: Math.ceil(this.product.length / 10) });
     }
 
+    if (changes['category']) {
+      this.getProduct();
+    }
+
+  }
+
+  getProduct() {
+    if (this.category) {
+
+      this.prodect.fectDataCategoryWis(this.category).subscribe(data => {
+        this.product = data;
+        this.start = 0;
+        this.end = 10;
+      });
+    }
   }
 
   nav(id: any) {

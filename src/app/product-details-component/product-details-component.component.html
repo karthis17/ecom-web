@@ -4,8 +4,8 @@
     [userId]="user ? user.id : null"
   ></app-product-view>
 </div>
-<div class="z bg-white width-80 px-lg-5 mx-auto">
-  <h5 class="pt-5">Related Product</h5>
+<div class="z bg-white width-80 px-lg-5 py-5 mx-auto">
+  <h5 class="">Related Product</h5>
   <div class="bg-white mt-sm-0 mt-3 bg-white overflow-x-scroll">
     <app-product-list-component
       *ngIf="data"
@@ -14,17 +14,16 @@
       [isHome]="false"
     ></app-product-list-component>
   </div>
-  <hr />
-  <div class="review my-5 px-lg-5 bg-white pb-5">
-    <h5>Review</h5>
-    <ng-container *ngIf="!user && data.id">
-      <app-review-box [product_id]="data.id"></app-review-box>
-    </ng-container>
-    <ng-container *ngIf="user && productId">
-      <app-review-box
-        [product_id]="productId"
-        [new_review]="user.name"
-      ></app-review-box>
-    </ng-container>
-  </div>
+</div>
+<div class="width-80 mx-auto my-1 px-lg-5 py-5 bg-white pb-5">
+  <h5>Review</h5>
+  <ng-container *ngIf="!user && data.id">
+    <app-review-box [product_id]="data.id"></app-review-box>
+  </ng-container>
+  <ng-container *ngIf="user && productId">
+    <app-review-box
+      [product_id]="productId"
+      [new_review]="user.name"
+    ></app-review-box>
+  </ng-container>
 </div>

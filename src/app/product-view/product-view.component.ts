@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input, SimpleChanges } from '@angular/core';
 import { Product } from '../models/product.model';
 import { NgFor, NgIf } from '@angular/common';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
@@ -18,10 +18,20 @@ export class ProductViewComponent {
   @Input() data!: Product;
   @Input() userId!: number | null;
 
+  screenWidth!: number;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
+    // console.log(this.screenWidth)
+  }
+
 
   qty = new FormControl(1);
   cartItem!: Array<ShoppingCart>;
   success: boolean = false;
+  activeImage!: number;
+  image!: string;
 
 
   constructor(private cart: CartService) {
@@ -38,10 +48,17 @@ export class ProductViewComponent {
 
   ngOnInit() {
 
-    console.log(this.data)
+    this.screenWidth = window.innerWidth;
 
+    console.log(this.screenWidth)
     this.getUserAddCArt();
+  }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['data']) {
+      this.data.images ? this.image = this.data.images[0] : '';
+      this.activeImage = 0;
+    }
   }
 
   add() {
@@ -70,6 +87,16 @@ export class ProductViewComponent {
       return null;
     }
   }
+
+  changeImage(src: string, index: number) {
+
+    this.activeImage = index;
+
+    this.image = src;
+
+  }
+
+
 
 
 }

@@ -67,6 +67,7 @@ export class ReviewBoxComponent {
       this.reviewService.addReview({ name: this.new_review, rating: this.rating, comment: this.comment.value, product_id: this.product_id } as Review).subscribe((review: any) => {
         if (review.success) {
           console.log(review);
+
           this.getReviews(true);
           this.router.navigate([`/product/${this.product_id}`]);
         }

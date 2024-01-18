@@ -8,7 +8,11 @@
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input
           type="email"
-          class="form-control"
+          class="form-control {{
+            requiredErr[0] === 'both' || requiredErr[0] === 'email'
+              ? 'is-invalid '
+              : ''
+          }}"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           required
@@ -17,19 +21,24 @@
         <div id="emailHelp" class="form-text">
           We'll never share your email with anyone else.
         </div>
+        <div class="invalid-feedback">{{ requiredErr[1] }}</div>
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input
           type="password"
-          class="form-control"
+          class="form-control {{
+            requiredErr[0] === 'both' || requiredErr[0] === 'password'
+              ? 'is-invalid '
+              : ''
+          }}"
           id="exampleInputPassword1"
           required
           [formControl]="password"
         />
+        <div class="invalid-feedback">{{ requiredErr[1] }}</div>
       </div>
 
-      <p *ngIf="err" class="text-danger">{{ err }}</p>
       <button
         type="submit"
         (click)="isAdmin ? adminSumbmit() : submit()"

@@ -15,8 +15,7 @@ import { NgIf } from '@angular/common';
 })
 export class LoginComponent {
   isAdmin!: boolean;
-  err: string | null = null;
-
+  requiredErr: string[] = [];
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router, private adminAuth: AdminAuthService) { }
   ngOnInit(): void {
@@ -27,7 +26,7 @@ export class LoginComponent {
   }
 
 
-  email = new FormControl("", Validators.required);
+  email = new FormControl("", [Validators.required, Validators.email]);
   password = new FormControl("", Validators.required);
 
   submit() {
@@ -37,10 +36,23 @@ export class LoginComponent {
         if (res.success) {
           this.router.navigateByUrl('');
         } else {
-          this.err = res.message;
+          this.requiredErr[0] = res.err;
+          this.requiredErr[1] = res.message;
         }
       });
     }
+    else if (!this.email.valid && !this.password.valid) {
+      this.requiredErr[0] = 'both';
+      this.requiredErr[1] = 'Please fill all required fields'
+    } else if (!this.email.valid) {
+      this.requiredErr[0] = 'email';
+      this.requiredErr[1] = 'Enter valid email format';
+
+    } else {
+      this.requiredErr[0] = 'password';
+      this.requiredErr[1] = 'Enter Your Password, it is required';
+    }
+
   }
 
   adminSumbmit() {

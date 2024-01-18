@@ -6,6 +6,26 @@
   z-index: 100;
 }
 
+.img-conatiner img {
+  width: 5rem;
+  padding: 2px 5px;
+}
+
+.img-conatiner {
+  border: 4px solid #eee;
+  border-radius: 10px;
+  height: 6rem;
+}
+
+.grid {
+  display: grid;
+  place-content: center;
+}
+
+.img-conatiner.active {
+  border: 4px solid #333;
+}
+
 @media (max-width: 999px) {
   .top {
     top: 10px;

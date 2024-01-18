@@ -1,36 +1,31 @@
-<div class="row mt-sm-0 mt-3 bg-white">
-  <div
-    id="carouselExampleDark"
-    class="carousel carousel-dark slide col-lg-6 px-5 h-50 sticky-lg-top top z"
-    data-bs-ride="carousel"
-  >
-    <div class="carousel-inner">
+<div class="row mt-sm-0 mt-3 py-4 bg-white">
+  <div class="col-lg-6">
+    <div
+      class="d-flex {{
+        screenWidth < 1200 ? 'flex-column-reverse ' : ''
+      }} gap-5 sticky-lg-top top"
+    >
       <div
-        *ngFor="let img of data?.images; let i = index"
-        class="carousel-item {{ i === 0 ? 'active' : '' }}  "
-        data-bs-interval="4000"
+        class="ms-3 d-flex  {{
+          screenWidth < 1200
+            ? 'justify-content-center  align-items-center '
+            : 'flex-column'
+        }}"
       >
-        <img src="{{ img }}" class="d-block w-100" alt="..." />
+        <div
+          class="img-conatiner grid  {{ activeImage === i ? 'active' : '' }} {{
+            screenWidth < 1200 ? 'mx-2' : 'my-2'
+          }} "
+          *ngFor="let img of data.images; let i = index"
+          (click)="changeImage(img, i)"
+        >
+          <img src="{{ img }}" alt="" srcset="" />
+        </div>
+      </div>
+      <div class="me-4 w-100">
+        <img src="{{ image }}" alt="" srcset="" class="w-100" />
       </div>
     </div>
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#carouselExampleDark"
-      data-bs-slide="prev"
-    >
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#carouselExampleDark"
-      data-bs-slide="next"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
 
   <div class="col-lg-6 mx-auto mt-3 pt-3 pt-lg-0 pe-5">

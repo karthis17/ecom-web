@@ -18,7 +18,6 @@ export class ProductListComponentComponent {
   @Input('product') product!: Product[];
   @Input('isHome') isHome: boolean = true;
 
-  @Output('clickedProd') clickedProd: EventEmitter<any> = new EventEmitter();
   constructor(private prodect: ProdectService, private router: Router) { }
 
   start!: number;
@@ -63,7 +62,7 @@ export class ProductListComponentComponent {
 
   nav(id: any) {
 
-    this.isHome ? this.router.navigate(['/', 'product', id]) : this.clickedProd.emit(id);
+    this.router.navigateByUrl(`/product?id=${id}`)
   }
 
   changePage(page_number: number) {

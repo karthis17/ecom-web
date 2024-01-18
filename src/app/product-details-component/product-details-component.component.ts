@@ -6,6 +6,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { ReviewBoxComponent } from '../review/review-box/review-box.component';
 import { ProductListComponentComponent } from '../product-list-component/product-list-component.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-product-details-component',
@@ -20,18 +21,22 @@ export class ProductDetailsComponentComponent {
   user: any;
   productId !: string | null;
 
-  isNewReview: boolean = false;
-
-  constructor(private productService: ProdectService, private route: Router, private router: ActivatedRoute) {
+  constructor(private productService: ProdectService, private router: ActivatedRoute, private auth: AuthService) {
 
   }
 
 
   ngOnInit() {
-    this.router.paramMap.subscribe((params) => {
-      this.productId = params.get('id');
-      if (typeof this.productId === 'string') {
-        this.productService.getDataByID(this.router.snapshot.paramMap.get('id')).subscribe(res => {
+
+    this.auth.getUser().then((us) => {
+      this.user = us;
+    });
+
+    this.router.queryParams.subscribe(params => {
+      this.productId = params['id'];
+      console.log(this.productId)
+      if (this.productId) {
+        this.productService.getDataByID(params['id']).subscribe(res => {
           res.images = JSON.parse(typeof res.images === 'string' ? res.images : "[]");
           res.about = JSON.parse(typeof res.about === 'string' ? res.about : "[]");
 
@@ -41,19 +46,11 @@ export class ProductDetailsComponentComponent {
         })
 
       }
-    })
-
-    this.router.queryParams.subscribe(params => {
-      this.isNewReview = params['review'];
-      console.log(params['review'], "hi");
     });
 
   }
 
 
-  onClickRelatedProd(id: any) {
-    this.route.navigate(['/', 'product', id]);
-  }
 
 
 }

@@ -1,0 +1,13 @@
+.top {
+  top: 88px;
+}
+
+.z {
+  z-index: 100;
+}
+
+@media (max-width: 999px) {
+  .top {
+    top: 10px;
+  }
+}

@@ -16,9 +16,9 @@ import { ProdectService } from '../../service/prodect.service';
 })
 export class ReviewBoxComponent {
 
-  @Input() product_id!: any;
+  @Input() product_id!: string;
 
-  @Input('new_review') new_review: string = '';
+  @Input() new_review!: string;
 
   rating!: number;
   reviews: Review[] = [];
@@ -31,6 +31,11 @@ export class ReviewBoxComponent {
     if (changes['product_id']) {
       // Handle changes in product_id
       this.product_id ? this.getReviews() : '';
+    }
+
+    if (changes['new_review']) {
+      console.log(this.new_review);
+      this.new_review = this.new_review;
     }
   }
 

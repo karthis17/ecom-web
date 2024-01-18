@@ -63,7 +63,7 @@
               : qty.value === 0
               ? 'disabled'
               : ''
-          }} {{ data.quantity < 1 ? 'disabled' : '' }}"
+          }} {{ data.quantity < 1 || !userId ? 'disabled' : '' }}"
           (click)="add()"
         >
           Add to cart
@@ -76,6 +76,9 @@
         />
         <div *ngIf="success" class="alert alert-success" role="alert">
           Successfully added to cart
+        </div>
+        <div *ngIf="!userId" class="alert alert-danger" role="alert">
+          Please login to order this product
         </div>
       </div>
       <p *ngIf="data.quantity < 1" class="text-danger">Out of stock</p>

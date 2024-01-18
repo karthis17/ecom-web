@@ -1,23 +1,26 @@
-<div class="container-fluid width-80 mt-3 mb-1">
-  <app-product-view [data]="data"></app-product-view>
+<div class="container-fluid width-80 mt-3 mb-1" *ngIf="data">
+  <app-product-view
+    [data]="data"
+    [userId]="user ? user.id : null"
+  ></app-product-view>
 </div>
 <div class="z bg-white width-80 px-lg-5 mx-auto">
   <h5 class="pt-5">Related Product</h5>
   <div class="bg-white mt-sm-0 mt-3 bg-white overflow-x-scroll">
     <app-product-list-component
+      *ngIf="data"
       class="d-flex gap-3 w-100 mx-0"
       [category]="data.category"
       [isHome]="false"
-      (clickedProd)="onClickRelatedProd($event)"
     ></app-product-list-component>
   </div>
   <hr />
   <div class="review my-5 px-lg-5 bg-white pb-5">
     <h5>Review</h5>
-    <ng-container *ngIf="!isNewReview">
+    <ng-container *ngIf="!user && data.id">
       <app-review-box [product_id]="data.id"></app-review-box>
     </ng-container>
-    <ng-container *ngIf="isNewReview">
+    <ng-container *ngIf="user && productId">
       <app-review-box
         [product_id]="productId"
         [new_review]="user.name"

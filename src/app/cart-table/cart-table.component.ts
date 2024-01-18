@@ -100,13 +100,8 @@ export class CartTableComponent {
   }
 
   nav(product_id: string) {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        review: true
-      }
-    };
 
-    this.router.navigate([`/product/${product_id}`], navigationExtras)
+    this.router.navigateByUrl(`/product?id=${product_id}&review=true`);
   }
 
 }

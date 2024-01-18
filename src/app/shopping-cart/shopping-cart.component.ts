@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartTableComponent } from '../cart-table/cart-table.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DeliverDetailsService } from '../service/deliver-details.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,12 +12,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ShoppingCartComponent {
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private addressService: DeliverDetailsService) { }
 
   id = this.route.snapshot.paramMap.get('id');
 
   next() {
-    this.router.navigateByUrl('place-order/' + this.id);
+    let address = this.addressService.getAddress();
+    if (address) {
+      this.router.navigateByUrl('place-order/' + this.id);
+      return;
+    }
+    this.router.navigate(['/', 'dtl', this.id]);
   }
 
 }

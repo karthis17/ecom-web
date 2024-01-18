@@ -5,7 +5,7 @@
     <th class="text-start">quantity</th>
     <th>Price</th>
     <th>Total</th>
-    <th>Action</th>
+    <th *ngIf="!ordered">Action</th>
   </thead>
   <tbody>
     <tr *ngFor="let item of items; let i = index">
@@ -43,11 +43,6 @@
 
       <td>{{ (item.price | currency : "INR")?.slice(0, -3) }}</td>
       <td>{{ (item.total | currency : "INR")?.slice(0, -3) }}</td>
-      <td *ngIf="ordered">
-        <button class="btn btn-success" (click)="nav(item.product_id)">
-          Write Review
-        </button>
-      </td>
       <td *ngIf="!ordered">
         <button (click)="remove(item.id ? item.id : 0)" class="btn">
           <i class="bi bi-trash-fill text-danger fw-bold"></i>

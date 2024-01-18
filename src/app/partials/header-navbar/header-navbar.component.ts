@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { NgFor, NgIf, SlicePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -19,13 +19,21 @@ export class HeaderNavbarComponent {
 
   user: any;
   logState!: boolean;
-  product_names: Product[] = [];
+  product_names!: Product[];
   selected_product: any;
-  filtered_data: Product[] = [];
+  filtered_data!: Product[];
+
+  screenWidth!: number;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
+  }
 
   constructor(private auth: AuthService, private router: Router, private product: ProdectService) { }
 
   ngOnInit() {
+    this.screenWidth = window.innerWidth;
     this.auth.loggedIn.subscribe(async (state: boolean) => {
       if (state) {
         setTimeout(async () => {
@@ -72,7 +80,7 @@ export class HeaderNavbarComponent {
       if (foundedProduct) {
 
         this.selected_product = '';
-        this.router.navigate(['/product', foundedProduct.id]);
+        this.router.navigateByUrl(`/product?id=${foundedProduct.id}`);
       } else {
         this.product.setProductList(this.filtered_data);
 

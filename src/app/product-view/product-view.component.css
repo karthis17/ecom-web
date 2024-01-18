@@ -7,14 +7,14 @@
 }
 
 .img-conatiner img {
-  width: 5rem;
-  padding: 2px 5px;
+  width: 4rem;
 }
 
 .img-conatiner {
+  overflow: hidden;
   border: 4px solid #eee;
   border-radius: 10px;
-  height: 6rem;
+  width: 4rem;
 }
 
 .grid {

@@ -14,7 +14,7 @@
       <div *ngIf="!deliveryAddress">
         <a routerLink="/dtl/{{ user_id }}" class="btn btn-link">Add address</a>
       </div>
-      <app-cart-table></app-cart-table>
+      <app-cart-table [ordered]="true"></app-cart-table>
       <div class="col-12">
         <!-- <button
           type="submit"

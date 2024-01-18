@@ -60,6 +60,11 @@ ul {
   background-color: burlywood;
 }
 
+.active {
+  color: #fff;
+  font-weight: 500;
+}
+
 @media (max-width: 999px) {
   .profile-links {
     position: static;

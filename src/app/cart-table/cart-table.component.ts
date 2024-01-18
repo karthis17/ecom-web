@@ -18,7 +18,7 @@ export class CartTableComponent {
   ordered: boolean = false;
 
   @Input('order_id')
-  order_id: any = 0;
+  order_id: any;
 
   constructor(private cart: CartService, private route: ActivatedRoute, private router: Router) { }
 
@@ -52,7 +52,7 @@ export class CartTableComponent {
   ngOnInit() {
 
 
-    if (!this.ordered && !this.order_id) this.getCartItems();
+    if (!this.order_id) this.getCartItems();
     else this.getOrderedItems()
   }
 

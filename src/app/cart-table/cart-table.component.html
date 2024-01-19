@@ -10,35 +10,18 @@
   <tbody>
     <tr *ngFor="let item of items; let i = index">
       <th scope="row">{{ i + 1 }}</th>
-      <td routerLink="/product/{{ item.product_id }}" class="btn-link">
+      <td (click)="nav(item.product_id)" class="btn-link">
         {{ item.productName }}
       </td>
       <td class="text-start d-flex align-items-center" id="qty-edit ">
-        <ng-container *ngIf="editModeIndex !== i; else editMode">
-          {{ item.quantity }}
-          <button
-            *ngIf="!editModeIndex && !ordered"
-            (click)="enterEditMode(i)"
-            class="btn text-success"
-          >
-            <i class="bi bi-pencil-square"></i>
-          </button>
-        </ng-container>
-        <ng-template #editMode>
-          <input
-            type="number"
-            style="width: 75px"
-            class="fs-6 form-control"
-            [value]="item.quantity"
-            [formControl]="getFormControl(i)"
-          />
-          <button
-            (click)="editQty(i, item.id, item.price)"
-            class="btn text-success h-100 fw-bold"
-          >
-            <i class="bi bi-check-circle-fill"></i>
-          </button>
-        </ng-template>
+        <input
+          type="number"
+          style="width: 65px"
+          class="fs-6 form-control"
+          [value]="item.quantity"
+          [formControl]="getFormControl(i)"
+          (input)="editQty(i, item.id, item.price)"
+        />
       </td>
 
       <td>{{ (item.price | currency : "INR")?.slice(0, -3) }}</td>

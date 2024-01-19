@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ShoppingCart } from '../models/cart.model';
 import { CartService } from '../service/cart.service';
-import { ActivatedRoute, NavigationExtras, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 
 @Component({
@@ -95,13 +95,10 @@ export class CartTableComponent {
     }, 500);
   }
 
-  enterEditMode(index: number) {
-    this.editModeIndex = index;
-  }
 
   nav(product_id: string) {
 
-    this.router.navigateByUrl(`/product?id=${product_id}&review=true`);
+    this.router.navigateByUrl(`/product?id=${product_id}`);
   }
 
 }

@@ -66,6 +66,17 @@
         <option>TVs & Appliances</option>
       </select>
     </div>
+    <app-specification
+      *ngIf="data.category && isEdit"
+      [data]="data.specification"
+      [category]="data.category"
+      (spec)="getSpec($event)"
+    ></app-specification>
+    <app-specification
+      *ngIf="data.category && !isEdit"
+      [category]="data.category"
+      (spec)="getSpec($event)"
+    ></app-specification>
     <div class="col-12">
       <label for="thumbnail" class="form-label">Thumbnail Link</label>
       <input

@@ -65,17 +65,37 @@ ul {
   font-weight: 500;
 }
 
-@media (max-width: 999px) {
-  .profile-links {
-    position: static;
-    background-color: #555;
-    color: #fff;
-    padding-left: 5px;
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  .avatar {
-    display: none;
-  }
+.max-w-50 {
+  max-width: 50rem;
+}
+
+.tansition {
+  transition: all 0.3s ease-in-out;
+}
+
+.absolute {
+  position: absolute;
+  bottom: -50px;
+  z-index: 100000;
+  transform: translate3d(0, -10px, 0);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.absolute.search-active {
+  visibility: visible;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.menu {
+  opacity: 0;
+  transform: translate3d(0, -20px, 0);
+  transition: all 0.4s ease-in-out;
+}
+
+.menu-active {
+  visibility: visible;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }

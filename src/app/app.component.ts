@@ -4,11 +4,12 @@ import { Router, RouterOutlet } from '@angular/router';
 import { HeaderNavbarComponent } from './partials/header-navbar/header-navbar.component';
 import { FooterComponent } from './partials/footer/footer.component';
 import { ReviewBoxComponent } from './review/review-box/review-box.component';
+import { SpecificationComponent } from './admin/specification/specification.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderNavbarComponent, FooterComponent, NgIf, ReviewBoxComponent],
+  imports: [CommonModule, RouterOutlet, HeaderNavbarComponent, FooterComponent, NgIf, ReviewBoxComponent, SpecificationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

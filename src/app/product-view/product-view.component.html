@@ -2,19 +2,19 @@
   <div class="col-lg-6">
     <div
       class="d-flex {{
-        screenWidth < 1200 ? 'flex-column-reverse ' : ''
+        screenWidth < 1422 ? 'flex-column-reverse ' : ''
       }} gap-5 sticky-lg-top top"
     >
       <div
         class="ms-3 d-flex  {{
-          screenWidth < 1200
+          screenWidth < 1422
             ? 'justify-content-center  align-items-center '
             : 'flex-column'
         }}"
       >
         <div
           class="img-conatiner grid  {{ activeImage === i ? 'active' : '' }} {{
-            screenWidth < 1200 ? 'mx-2' : 'my-2'
+            screenWidth < 1422 ? 'mx-2' : 'my-2'
           }} "
           *ngFor="let img of data.images; let i = index"
           (click)="changeImage(img, i)"
@@ -89,6 +89,23 @@
         </li>
         <li>No cost EMI ₹1,109/month. Standard EMI also availableView Plans</li>
       </ul>
+    </div>
+    <hr />
+    <div class="spec">
+      <h5>Specification</h5>
+      <table class="mt-4">
+        <tbody>
+          <tr
+            class="d-justify-content-between"
+            *ngFor="let entry of getObjectEntries(spec)"
+          >
+            <td class="pe-5 ps-2 fw-semibold">
+              {{ entry[0].replace("_", " ") }}
+            </td>
+            <td>{{ entry[1] }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <hr />
     <div class="about my-5">

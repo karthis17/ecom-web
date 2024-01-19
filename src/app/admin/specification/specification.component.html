@@ -1,0 +1,112 @@
+<div class="">
+  <label class="form-label">Brand </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="brand"
+    [(ngModel)]="data.Brand"
+  />
+</div>
+<div class="">
+  <label class="form-label">Model Name </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="model"
+    [(ngModel)]="data.Model_Name"
+  />
+</div>
+<div *ngIf="category === 'PC & Laptops' || category === 'Mobiles'" class="">
+  <label class="form-label">CPU Model </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="cpu"
+    [(ngModel)]="data.CPU_Model"
+  />
+</div>
+<div *ngIf="category === 'PC & Laptops' || category === 'Mobiles'" class="">
+  <label class="form-label">RAM </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="ram"
+    [(ngModel)]="data.RAM"
+  />
+</div>
+<div *ngIf="category === 'PC & Laptops' || category === 'Mobiles'" class="">
+  <label class="form-label">Storage </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="rom"
+    [(ngModel)]="data.Storage"
+  />
+</div>
+<div *ngIf="category === 'Mobiles'" class="">
+  <label class="form-label">Network Service </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="net"
+    [(ngModel)]="data.Network_Service"
+  />
+</div>
+<div *ngIf="category === 'PC & Laptops' || category === 'Mobiles'" class="">
+  <label class="form-label">OS </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="os"
+    [(ngModel)]="data.OS"
+  />
+</div>
+<div *ngIf="category === 'Mobiles'" class="">
+  <label class="form-label">Cellular Tech </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="brand"
+    [(ngModel)]="data.Cellular_Technology"
+  />
+</div>
+<div class="">
+  <label class="form-label">Colour </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="Colour"
+    [(ngModel)]="data.Colour"
+    (input)="submit()"
+  />
+</div>
+<div *ngIf="category === 'Headphones & Speakers'" class="">
+  <label class="form-label">Form Factor </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="factor"
+    [(ngModel)]="data.Form_Factor"
+  />
+</div>
+<div *ngIf="category === 'Headphones & Speakers'" class="">
+  <label class="form-label">Connectivity Tech </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="con"
+    [(ngModel)]="data.Connectivity_Technology"
+  />
+</div>
+<div class="">
+  <label class="form-label">Special Feature </label>
+  <input
+    type="text"
+    class="form-control mb-3"
+    name="feature"
+    [(ngModel)]="data.Special_Feature"
+    (input)="submit()"
+  />
+</div>
+
+<!-- <button (click)="submit()">click</button> -->

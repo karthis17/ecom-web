@@ -1,15 +1,24 @@
 <nav
-  class="container-fluid d-flex justify-content-between align-content-center bg-dark text-white py-4 px-lg-5"
+  class="container-fluid d-flex justify-content-between align-content-center bg-dark text-white py-4 px-lg-5 position-relative"
 >
   <div class="mx-lg-5">
     <a class="navbar-brand fs-3 fw-bold" href="#">FastKart</a>
   </div>
+
   <div *ngIf="screenWidth < 1000" class="fs-1 my-0">
-    <i class="bi bi-list"></i>
+    <i
+      class="bi  {{ seachActive ? 'bi-x' : 'bi-search' }} mx-3 fs-2"
+      (click)="activate()"
+    ></i>
+    <i
+      (click)="activate(true)"
+      class="bi {{ menuActive ? 'bi-x' : 'bi-list' }}"
+    ></i>
   </div>
   <div
-    class="input-group {{ screenWidth < 1000 ? 'visually-hidden' : '' }}"
-    style="max-width: 50rem"
+    class="input-group ps-1 pe-4 tansition {{
+      screenWidth < 1000 ? 'absolute ' : 'max-w-50'
+    }} {{ seachActive ? 'search-active' : '' }}"
   >
     <input
       class="form-control"
@@ -26,14 +35,7 @@
       </ng-container>
     </datalist>
 
-    <button
-      class="btn btn-outline-secondary"
-      type="button"
-      id="button-addon2"
-      (click)="nav()"
-    >
-      Button
-    </button>
+    <i class="bi bi-search fs-5 btn btn-secondary" (click)="nav()"></i>
   </div>
   <ul
     class="d-flex my-0 mx-5 gap-3 align-items-center justify-content-center {{
@@ -81,3 +83,44 @@
     </li>
   </ul>
 </nav>
+
+<ul
+  *ngIf="screenWidth < 1000"
+  class="d-flex flex-column gap-3 bg-dark text-light py-4 menu {{
+    menuActive ? 'menu-active' : 'visually-hidden'
+  }}"
+>
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Home</a>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link" (click)="alt()">Cart</button>
+  </li>
+
+  <li *ngIf="!logState" class="nav-item">
+    <a class="nav-link" routerLink="login">Login</a>
+  </li>
+  <li *ngIf="!logState" class="nav-item">
+    <a class="nav-link" routerLink="register">Register</a>
+  </li>
+
+  <li>
+    <a
+      *ngIf="logState"
+      class="nav-link"
+      routerLink="order-history/{{ user.id }}"
+    >
+      Order History
+    </a>
+  </li>
+  <li>
+    <a *ngIf="logState" class="nav-link" routerLink="dtl/{{ user.id }}">
+      Delivery Address
+    </a>
+  </li>
+  <li class="">
+    <button *ngIf="logState" class="btn btn-outline-danger" (click)="logout()">
+      Logout
+    </button>
+  </li>
+</ul>

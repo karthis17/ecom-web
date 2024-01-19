@@ -1,15 +1,18 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProdectService } from '../../service/prodect.service';
 import { Product } from '../../models/product.model';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-category-nav',
   standalone: true,
-  imports: [],
+  imports: [NgIf],
   templateUrl: './category-nav.component.html',
   styleUrl: './category-nav.component.css'
 })
 export class CategoryNavComponent {
+
+  @Input() mobile: boolean = false;
 
   @Output('data') data = new EventEmitter<Product[]>();
   @Output('category') category = new EventEmitter<string>();

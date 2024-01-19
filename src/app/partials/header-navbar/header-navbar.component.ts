@@ -23,6 +23,9 @@ export class HeaderNavbarComponent {
   selected_product: any;
   filtered_data!: Product[];
 
+  seachActive!: boolean;
+  menuActive!: boolean;
+
   screenWidth!: number;
 
   @HostListener('window:resize', ['$event'])
@@ -33,6 +36,8 @@ export class HeaderNavbarComponent {
   constructor(private auth: AuthService, private router: Router, private product: ProdectService) { }
 
   ngOnInit() {
+    this.seachActive = false;
+    this.menuActive = false;
     this.screenWidth = window.innerWidth;
     this.auth.loggedIn.subscribe(async (state: boolean) => {
       if (state) {
@@ -89,5 +94,11 @@ export class HeaderNavbarComponent {
       }
 
     }
+  }
+
+  activate(menu = false) {
+
+
+    menu ? this.menuActive = this.menuActive ? false : true : this.seachActive = this.seachActive ? false : true;
   }
 }

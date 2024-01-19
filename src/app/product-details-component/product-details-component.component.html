@@ -4,7 +4,7 @@
     [userId]="user ? user.id : null"
   ></app-product-view>
 </div>
-<div class="z bg-white width-80 px-lg-5 py-5 mx-auto">
+<div class="z bg-white width-80 px-lg-5 px-3 py-5 mx-auto">
   <h5 class="">Related Product</h5>
   <div class="bg-white mt-sm-0 mt-3 bg-white overflow-x-scroll">
     <app-product-list-component
@@ -15,7 +15,7 @@
     ></app-product-list-component>
   </div>
 </div>
-<div class="width-80 mx-auto my-1 px-lg-5 py-5 bg-white pb-5">
+<div class="width-80 mx-auto my-1 px-3 px-lg-5 py-5 bg-white pb-5">
   <h5>Review</h5>
   <ng-container *ngIf="!user && data.id">
     <app-review-box [product_id]="data.id"></app-review-box>

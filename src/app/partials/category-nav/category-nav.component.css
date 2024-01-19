@@ -8,3 +8,28 @@
   color: #fff;
   text-shadow: 0px 0px 2px #fff;
 }
+
+.mob {
+  list-style: none;
+}
+
+.mob button {
+  margin: 5px;
+  padding: 5px;
+  background-color: transparent;
+  border: 0;
+  text-align: start;
+  transition: all 0.2 ease-in-out;
+  border-radius: 5px;
+}
+
+.mob li button:hover {
+  background-color: #eee;
+}
+
+.mob li button,
+.mob li {
+  width: 99%;
+  margin-top: 0;
+  color: black;
+}

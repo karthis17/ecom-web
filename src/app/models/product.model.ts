@@ -11,4 +11,5 @@ export class Product {
     rating!: number | null;
     category!: string;
     amount!: number;
+    specifiction?: string;
 }

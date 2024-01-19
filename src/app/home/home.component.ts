@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ProductListComponentComponent } from '../product-list-component/product-list-component.component';
 import { Product } from '../models/product.model';
 import { ProdectService } from '../service/prodect.service';
@@ -18,6 +18,13 @@ export class HomeComponent {
   data: Product[] = [];
   upperLimits: number[] = [];
   category: string = '';
+
+  screenWidth!: number;
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
+  }
 
   filterByPrice(price: number[]) {
     this.prodect.filter({ about: '', price: price, category: this.category !== 'all' ? this.category : '' }).subscribe((pro: Product[]) => {
@@ -50,7 +57,7 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-
+    this.screenWidth = window.innerWidth;
     this.getData()
 
 

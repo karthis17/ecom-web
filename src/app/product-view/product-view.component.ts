@@ -32,6 +32,7 @@ export class ProductViewComponent {
   success: boolean = false;
   activeImage!: number;
   image!: string;
+  spec: any;
 
 
   constructor(private cart: CartService) {
@@ -49,6 +50,8 @@ export class ProductViewComponent {
   ngOnInit() {
 
     this.screenWidth = window.innerWidth;
+
+    if (this.data.specifiction) this.spec = JSON.parse(this.data.specifiction)
 
     console.log(this.screenWidth)
     this.getUserAddCArt();
@@ -96,7 +99,9 @@ export class ProductViewComponent {
 
   }
 
-
+  getObjectEntries(obj: any): [string, any][] {
+    return Object.entries(obj);
+  }
 
 
 }

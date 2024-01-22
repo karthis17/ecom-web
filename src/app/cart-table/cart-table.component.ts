@@ -62,13 +62,10 @@ export class CartTableComponent {
 
 
   getOrderedItems() {
-    if (this.id) this.cart.getOrderedItems(this.order_id, Number.parseInt(this.id)).subscribe(item => {
+    this.cart.getOrderedItems(this.order_id).subscribe(item => {
       this.items = item;
 
-      this.items.forEach((item: ShoppingCart, index: number) => {
-        this.formGroup.addControl(`quantity${index}`, new FormControl(item.quantity, Validators.required));
-        if (item.total) this.Total_price += item.total;
-      });
+
     });
   }
 

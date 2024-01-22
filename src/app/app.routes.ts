@@ -12,6 +12,7 @@ import { ProductAddOREditFormComponent } from './admin/product-add-oredit-form/p
 import { ProductViewComponent } from './admin/product-view/product-view.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './partials/profile/profile.component';
+import { OrderedComponent } from './admin/ordered/ordered.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -28,7 +29,8 @@ export const routes: Routes = [
             { path: 'login', component: LoginComponent },
             { path: '', component: DashboardComponent },
             { path: 'product-manipulate', component: ProductAddOREditFormComponent },
-            { path: 'product-view', component: ProductViewComponent }
+            { path: 'product-view', component: ProductViewComponent },
+            { path: 'ordered-products', component: OrderedComponent }
         ]
     },
 ];

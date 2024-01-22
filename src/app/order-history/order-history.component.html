@@ -11,6 +11,11 @@
       </div>
       <div>
         <h4>Contact deatils</h4>
+        <ng-container *ngIf="id">
+          Name: {{ name }} <br />
+          Email: {{ email }} <br />
+        </ng-container>
+
         Phone : {{ order.phone }} <br />
         Address : {{ address(order.address) }} <br />
       </div>

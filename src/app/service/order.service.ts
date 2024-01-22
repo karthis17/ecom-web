@@ -21,4 +21,8 @@ export class OrderService {
     return this.http.get<any[]>(this.baseUrl + "/getOrders/" + user_id);
   }
 
+  getAllOrders(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + "/get-all-orders");
+  }
+
 }

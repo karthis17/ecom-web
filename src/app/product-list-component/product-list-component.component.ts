@@ -41,10 +41,12 @@ export class ProductListComponentComponent {
       this.start = 0;
       this.end = 10;
       this.pageNumbers = Array.from({ length: Math.ceil(this.product.length / 10) });
+      window.scrollTo({ top: 0, behavior: "instant" })
     }
 
     if (changes['category']) {
       this.getProduct();
+      window.scrollTo({ top: 0, behavior: "instant" })
     }
 
   }
@@ -56,6 +58,7 @@ export class ProductListComponentComponent {
         this.product = data;
         this.start = 0;
         this.end = 10;
+        window.scrollTo({ top: 0, behavior: "instant" })
       });
     }
   }

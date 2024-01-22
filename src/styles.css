@@ -5,3 +5,16 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
+
+.width-80 {
+  width: 80%;
+}
+
+@media (max-width: 999px) {
+  .top {
+    top: 10px;
+  }
+  .width-80 {
+    width: 95%;
+  }
+}

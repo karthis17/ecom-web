@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgFor } from '@angular/common';
@@ -13,13 +13,17 @@ import { CartTableComponent } from '../cart-table/cart-table.component';
 })
 export class OrderHistoryComponent {
 
+  @Input() id: any = null;
+
   constructor(private order: OrderService, private route: ActivatedRoute) { }
 
   orders: any[] = []
-  id = this.route.snapshot.paramMap.get('id');
+
 
   ngOnInit() {
-
+    if (!this.id) {
+      this.id = this.route.snapshot.paramMap.get('id');
+    }
     this.order.getOrder(this.id).subscribe((data: any[]) => {
       this.orders = data;
     })

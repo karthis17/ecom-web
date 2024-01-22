@@ -56,30 +56,13 @@
       <a class="nav-link" routerLink="register">Register</a>
     </li>
 
-    <li *ngIf="logState" class="nav-item">
-      <div class="prfile">
-        <span class="avatar">{{ user.name.charAt(0).toUpperCase() }}</span>
-        <ul class="profile-links z">
-          <li>
-            <p class="text-center p-0 m-0">{{ user.name }}</p>
-          </li>
-          <li>
-            <a class="nav-link py-2" routerLink="order-history/{{ user.id }}">
-              Order History
-            </a>
-          </li>
-          <li>
-            <a class="nav-link py-2" routerLink="dtl/{{ user.id }}">
-              Delivery Address
-            </a>
-          </li>
-          <li>
-            <button class="btn btn-danger w-100" (click)="logout()">
-              Logout
-            </button>
-          </li>
-        </ul>
-      </div>
+    <li
+      *ngIf="logState"
+      class="nav-item"
+      routerLink="/profile"
+      style="cursor: pointer"
+    >
+      <span class="avatar">{{ user.name.charAt(0).toUpperCase() }}</span>
     </li>
   </ul>
 </nav>

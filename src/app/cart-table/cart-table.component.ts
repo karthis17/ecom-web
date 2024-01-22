@@ -20,12 +20,14 @@ export class CartTableComponent {
   @Input('order_id')
   order_id: any;
 
+  @Input() id: any;
+
   constructor(private cart: CartService, private route: ActivatedRoute, private router: Router) { }
 
   items: Array<ShoppingCart> = [];
   editModeIndex: number | null = null;
   Total_price: number = 0;
-  id = this.route.snapshot.paramMap.get('id');
+
 
   formGroup: FormGroup = new FormGroup({});
 
@@ -50,6 +52,8 @@ export class CartTableComponent {
   }
 
   ngOnInit() {
+
+    if (this.route.snapshot.paramMap.get('id')) this.id = this.route.snapshot.paramMap.get('id');
 
 
     if (!this.order_id) this.getCartItems();

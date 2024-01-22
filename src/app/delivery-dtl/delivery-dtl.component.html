@@ -1,7 +1,13 @@
-<div class="conatiner">
-  <h4 class="text-center my-4">Choose Delivery Address</h4>
+<div class="{{ isParmsId ? 'container ' : '' }}">
+  <h4 *ngIf="isParmsId" class="text-center my-4">Choose Delivery Address</h4>
   <div class="row g-3 my-3">
-    <div *ngFor="let dtl of dtls" class="col-lg-8 mx-auto rounded-3 address">
+    <h2 *ngIf="!isParmsId" class="text-center">Address</h2>
+    <div
+      *ngFor="let dtl of dtls"
+      class="col-lg-8 mx-auto rounded-3 address {{
+        isParmsId ? '' : 'address-bg'
+      }}"
+    >
       <div class="px-5 py-3" (click)="set(dtl)">
         <h4>{{ dtl.email }}</h4>
         <p>{{ address(dtl.address) }}</p>

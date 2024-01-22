@@ -11,6 +11,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ProductAddOREditFormComponent } from './admin/product-add-oredit-form/product-add-oredit-form.component';
 import { ProductViewComponent } from './admin/product-view/product-view.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './partials/profile/profile.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
     { path: 'place-order/:id', component: OrderFormComponent },
     { path: 'order-history/:id', component: OrderHistoryComponent },
     { path: 'dtl/:id', component: DeliveryDtlComponent },
+    { path: 'profile', component: ProfileComponent },
     {
         path: 'admin', component: AdminDashbordComponent, children: [
             { path: 'login', component: LoginComponent },

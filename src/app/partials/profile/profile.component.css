@@ -1,0 +1,26 @@
+.avatar {
+  font-size: 16rem;
+  background-color: antiquewhite;
+  /* color:; */
+  text-align: center;
+  border-radius: 100%;
+  padding: 8px 8rem;
+  margin: 2rem;
+}
+.top {
+  top: 98px;
+}
+@media (max-width: 999px) {
+  .top {
+    top: 10px;
+  }
+}
+
+@media (max-width: 992px) {
+  .avatar {
+    font-size: 5rem;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 10px 50px;
+  }
+}

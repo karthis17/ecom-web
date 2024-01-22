@@ -17,7 +17,7 @@
             screenWidth < 1422 ? 'mx-2' : 'my-2'
           }} "
           *ngFor="let img of data.images; let i = index"
-          (click)="changeImage(img, i)"
+          (mouseenter)="changeImage(img, i)"
         >
           <img src="{{ img }}" alt="" srcset="" />
         </div>

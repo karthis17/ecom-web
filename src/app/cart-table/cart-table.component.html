@@ -13,7 +13,12 @@
       <td (click)="nav(item.product_id)" class="btn-link">
         {{ item.productName }}
       </td>
-      <td class="text-start d-flex align-items-center" id="qty-edit">
+      <td *ngIf="ordered" class="text-start">{{ item.quantity }}</td>
+      <td
+        *ngIf="!ordered"
+        class="text-start d-flex align-items-center"
+        id="qty-edit"
+      >
         <input
           type="number"
           style="width: 65px"

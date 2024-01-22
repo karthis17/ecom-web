@@ -47,6 +47,8 @@ export class HeaderNavbarComponent {
           this.logState = state;
           console.log(this.logState);
         }, 100);
+      } else {
+        this.logState = false;
       }
     });
 

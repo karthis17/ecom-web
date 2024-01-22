@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DeliverDetailsService } from '../service/deliver-details.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-delivery-dtl',
   standalone: true,
-  imports: [NgFor, ReactiveFormsModule],
+  imports: [NgFor, NgIf, ReactiveFormsModule],
   templateUrl: './delivery-dtl.component.html',
   styleUrl: './delivery-dtl.component.css'
 })
 export class DeliveryDtlComponent {
 
-  dtls: any[] = [];
-  id: string | null = this.route.snapshot.paramMap.get('id');
+  @Input() id: string | null = null;
+
+  dtls!: any[];
   orderForm!: FormGroup;
+  isParmsId: boolean = false;
 
   constructor(private dtlService: DeliverDetailsService, private route: ActivatedRoute, private loc: Location, private formBuilder: FormBuilder) { }
 
@@ -52,6 +54,10 @@ export class DeliveryDtlComponent {
   ];
 
   ngOnInit() {
+    if (this.route.snapshot.paramMap.get('id')) {
+      this.id = this.route.snapshot.paramMap.get('id');
+      this.isParmsId = true;
+    }
     this.getDtl();
 
     this.orderForm = this.formBuilder.group({

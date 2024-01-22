@@ -51,7 +51,7 @@ export class ProductViewComponent {
 
     this.screenWidth = window.innerWidth;
 
-    if (this.data.specifiction) this.spec = JSON.parse(this.data.specifiction)
+
 
     console.log(this.screenWidth)
     this.getUserAddCArt();
@@ -59,8 +59,12 @@ export class ProductViewComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {
+
+
       this.data.images ? this.image = this.data.images[0] : '';
       this.activeImage = 0;
+      if (this.data.specifiction) this.spec = JSON.parse(this.data.specifiction)
+      window.scrollTo({ top: 0, behavior: "instant" })
     }
   }
 

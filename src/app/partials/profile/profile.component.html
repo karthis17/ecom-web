@@ -1,0 +1,19 @@
+<div class="container-fluid width-80 bg-white pt-5">
+  <div class="row">
+    <div class="col-lg-4 text-center">
+      <div
+        class="sticky-lg-top top d-flex justify-content-center flex-column align-items-center"
+      >
+        <div class="avatar">{{ user.name.charAt(0).toUpperCase() }}</div>
+        <h2>{{ user.name }}</h2>
+        <p>{{ user.email }}</p>
+        <button class="btn btn-danger w-75" (click)="logout()">Log out</button>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <app-delivery-dtl [id]="user.id"></app-delivery-dtl>
+      <app-order-history [id]="user.id"></app-order-history>
+    </div>
+  </div>
+</div>

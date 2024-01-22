@@ -8,3 +8,7 @@
   background-color: #fff;
   transition: 0.3s ease-in-out all;
 }
+
+.address-bg {
+  background-color: #eee;
+}

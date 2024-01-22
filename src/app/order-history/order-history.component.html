@@ -1,7 +1,10 @@
 <div class="container">
   <div class="row">
     <h1 class="text-center my-4">Order History</h1>
-    <div *ngFor="let order of orders" class="col-lg-10 mx-auto cont">
+    <div
+      *ngFor="let order of orders"
+      class="col-lg-10 mx-auto bg-white rounded-4 border my-2 p-4"
+    >
       <div class="pb-2 d-flex justify-content-between">
         <code>{{ order.date }}</code>
         <p>Delivery</p>
@@ -12,7 +15,11 @@
         Address : {{ address(order.address) }} <br />
       </div>
       <div class="pt-3">
-        <app-cart-table [ordered]="true" [order_id]="order.id"></app-cart-table>
+        <app-cart-table
+          [ordered]="true"
+          [order_id]="order.id"
+          [id]="id"
+        ></app-cart-table>
       </div>
     </div>
   </div>

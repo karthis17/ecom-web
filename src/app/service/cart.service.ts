@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ShoppingCart } from '../models/cart.model';
 
 @Injectable({
@@ -10,6 +10,9 @@ export class CartService {
 
   baseUrl: string = 'http://localhost:3000/api/cart';
   _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+
+  NoOFCartItem = new BehaviorSubject<number>(0);
+
   constructor(private http: HttpClient) { }
 
   addToCart(data: ShoppingCart): Observable<any> {
@@ -39,6 +42,12 @@ export class CartService {
 
   getOrderedItems(order_id: number): Observable<ShoppingCart[]> {
     return this.http.post<ShoppingCart[]>(this.baseUrl + '/get-ordered-items', { order_id: order_id }, this._options);
+  }
+
+  CheckItems(user_id: number) {
+    this.getCart(user_id).subscribe(data => {
+      this.NoOFCartItem.next(data.length);
+    });
   }
 
 }

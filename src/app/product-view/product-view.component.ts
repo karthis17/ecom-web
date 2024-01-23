@@ -41,6 +41,7 @@ export class ProductViewComponent {
 
   getUserAddCArt() {
     if (this.userId) {
+      this.cart.CheckItems(this.userId);
       this.cart.getCart(this.userId).subscribe(data => {
         this.cartItem = data;
       });
@@ -70,7 +71,7 @@ export class ProductViewComponent {
 
   add() {
     if (this.data?.id && this.data?.productName && this.data?.price && this.qty.value && !this.checkItemInCartAndUpdateQty(this.data?.productName) && this.userId) {
-      this.cart.addToCart({ product_id: this.data?.id, productName: this.data?.productName, price: this.data.amount, quantity: this.qty.value, user_id: this.userId, ordered: false }).subscribe(data => {
+      this.cart.addToCart({ product_id: this.data?.id, productName: this.data?.productName, price: this.data.amount, quantity: this.qty.value, user_id: this.userId, ordered: false, product_qty: this.data.quantity }).subscribe(data => {
         console.log(data);
         this.getUserAddCArt();
       });

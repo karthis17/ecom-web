@@ -38,15 +38,26 @@
     <i class="bi bi-search fs-5 btn btn-secondary" (click)="nav()"></i>
   </div>
   <ul
-    class="d-flex my-0 mx-5 gap-3 align-items-center justify-content-center {{
+    class="d-flex my-0 mx-5 gap-4 align-items-center justify-content-center {{
       screenWidth < 1000 ? 'visually-hidden' : ''
     }}"
   >
-    <li class="nav-item">
+    <li
+      class="nav-itemd d-flex justify-content-between align-items-baseline gap-1"
+    >
+      <i class="bi bi-house-fill"></i>
       <a class="nav-link active" aria-current="page" href="#">Home</a>
     </li>
     <li class="nav-item">
-      <button class="nav-link" (click)="alt()">Cart</button>
+      <button
+        class="nav-link d-flex justify-content-between align-items-baseline gap-1"
+        (click)="alt()"
+      >
+        <i class="bi bi-cart-fill position-relative">
+          <p *ngIf="cartItems > 0" class="absolute-b">{{ cartItems }}</p>
+        </i>
+        Cart
+      </button>
     </li>
 
     <li *ngIf="!logState" class="nav-item">

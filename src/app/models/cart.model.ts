@@ -7,4 +7,5 @@ export class ShoppingCart {
     total?: number;
     ordered!: boolean | number;
     product_id!: string;
+    product_qty!: number;
 }

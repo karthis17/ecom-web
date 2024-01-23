@@ -25,7 +25,9 @@
           class="fs-6 form-control"
           [value]="item.quantity"
           [formControl]="getFormControl(i)"
-          (input)="editQty(i, item.id, item.price)"
+          (input)="editQty(i, item.id, item.price, item.product_qty)"
+          [max]="item.product_qty"
+          min="1"
         />
       </td>
 
@@ -39,6 +41,7 @@
     </tr>
   </tbody>
 </table>
+<p *ngIf="err" class="my-3 text-danger">{{ err }}</p>
 <div class="d-flex my-4 justify-content-end align-items-center">
   <h5 class="mx-4">Total Price :</h5>
   <input

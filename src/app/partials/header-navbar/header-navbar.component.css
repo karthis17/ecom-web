@@ -100,3 +100,20 @@ ul {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
+
+li {
+  font-size: 14pt;
+}
+
+.absolute-b {
+  position: absolute;
+  font-size: 12pt;
+  font-style: normal;
+  top: -12px;
+  right: -10px;
+  color: #000;
+  border-radius: 50%;
+  width: 22px;
+  height: 25px;
+  background-color: yellow;
+}

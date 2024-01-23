@@ -1,7 +1,7 @@
 <div
   *ngFor="let product of product.slice(start, end)"
-  class="row my-2 product-detail d-flex justify-content-center align-items-center g-1"
-  style="background-color: #fff"
+  class="row my-2 product-detail bg-white d-flex justify-content-center align-items-center g-1 rounded-3"
+  style="border: 2px solid #ddd"
   (click)="nav(product.id)"
 >
   <div

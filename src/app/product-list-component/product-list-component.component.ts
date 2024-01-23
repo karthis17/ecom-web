@@ -38,15 +38,14 @@ export class ProductListComponentComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['product'] && !this.category) {
+      window.scrollTo({ top: 0, behavior: "instant" })
       this.start = 0;
       this.end = 10;
       this.pageNumbers = Array.from({ length: Math.ceil(this.product.length / 10) });
-      window.scrollTo({ top: 0, behavior: "instant" })
     }
 
     if (changes['category']) {
       this.getProduct();
-      window.scrollTo({ top: 0, behavior: "instant" })
     }
 
   }
@@ -55,10 +54,10 @@ export class ProductListComponentComponent {
     if (this.category) {
 
       this.prodect.fectDataCategoryWis(this.category).subscribe(data => {
+        window.scrollTo({ top: 0, behavior: "instant" })
         this.product = data;
         this.start = 0;
         this.end = 10;
-        window.scrollTo({ top: 0, behavior: "instant" })
       });
     }
   }
@@ -71,6 +70,7 @@ export class ProductListComponentComponent {
   changePage(page_number: number) {
     this.start = (page_number - 1) * 10;
     this.end = page_number * 10;
+    window.scrollTo({ top: 0, behavior: "instant" })
 
     this.activePage = page_number;
 

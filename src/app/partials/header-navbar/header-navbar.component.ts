@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { NgFor, NgIf, SlicePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ProdectService } from '../../service/prodect.service';
 import { Product } from '../../models/product.model';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../service/cart.service';
 
 @Component({
   selector: 'app-header-navbar',
@@ -26,6 +27,8 @@ export class HeaderNavbarComponent {
   seachActive!: boolean;
   menuActive!: boolean;
 
+  cartItems!: number;
+
   screenWidth!: number;
 
   @HostListener('window:resize', ['$event'])
@@ -33,9 +36,10 @@ export class HeaderNavbarComponent {
     this.screenWidth = window.innerWidth;
   }
 
-  constructor(private auth: AuthService, private router: Router, private product: ProdectService) { }
+  constructor(private auth: AuthService, private router: Router, private product: ProdectService, private cart: CartService) { }
 
   ngOnInit() {
+    this.cart.NoOFCartItem.subscribe(value => this.cartItems = value);
     this.seachActive = false;
     this.menuActive = false;
     this.screenWidth = window.innerWidth;
@@ -43,9 +47,11 @@ export class HeaderNavbarComponent {
       if (state) {
         setTimeout(async () => {
           this.user = await this.auth.getUser();
+          this.cart.CheckItems(this.user.id);
           console.log(state, this.user);
           this.logState = state;
           console.log(this.logState);
+
         }, 100);
       } else {
         this.logState = false;
@@ -55,6 +61,13 @@ export class HeaderNavbarComponent {
     this.product.fectData().subscribe(data => {
       this.product_names = data;
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['user']) {
+      this.cart.CheckItems(this.user.id);
+      // this.cart.NoOFCartItem.subscribe(value => this.cartItems = value);
+    }
   }
 
   filterSearchTerm() {

@@ -17,6 +17,7 @@ export class SpecificationComponent {
 
   ngOnInit() {
     if (this.data) {
+      this.submit(true);
       this.data = JSON.parse(this.data);
     }
 
@@ -26,13 +27,16 @@ export class SpecificationComponent {
 
   }
 
-  onChanges(changes: SimpleChanges) {
 
-  }
+  submit(isString = false) {
+    if (isString) {
+      console.log(JSON.parse(this.data));
 
-  submit() {
-    console.log(this.data);
-    this.spec.emit(this.data);
+      this.spec.emit(JSON.parse(this.data));
+    } else {
+
+      this.spec.emit(this.data);
+    }
   }
 
 }

@@ -5,6 +5,7 @@
     class="form-control mb-3"
     name="brand"
     [(ngModel)]="data.Brand"
+    (input)="submit()"
   />
 </div>
 <div class="">
@@ -13,6 +14,7 @@
     type="text"
     class="form-control mb-3"
     name="model"
+    (input)="submit()"
     [(ngModel)]="data.Model_Name"
   />
 </div>
@@ -22,6 +24,7 @@
     type="text"
     class="form-control mb-3"
     name="cpu"
+    (input)="submit()"
     [(ngModel)]="data.CPU_Model"
   />
 </div>
@@ -31,6 +34,7 @@
     type="text"
     class="form-control mb-3"
     name="ram"
+    (input)="submit()"
     [(ngModel)]="data.RAM"
   />
 </div>
@@ -41,6 +45,7 @@
     class="form-control mb-3"
     name="rom"
     [(ngModel)]="data.Storage"
+    (input)="submit()"
   />
 </div>
 <div *ngIf="category === 'Mobiles'" class="">
@@ -50,6 +55,7 @@
     class="form-control mb-3"
     name="net"
     [(ngModel)]="data.Network_Service"
+    (input)="submit()"
   />
 </div>
 <div *ngIf="category === 'PC & Laptops' || category === 'Mobiles'" class="">
@@ -59,6 +65,7 @@
     class="form-control mb-3"
     name="os"
     [(ngModel)]="data.OS"
+    (input)="submit()"
   />
 </div>
 <div *ngIf="category === 'Mobiles'" class="">
@@ -68,6 +75,7 @@
     class="form-control mb-3"
     name="brand"
     [(ngModel)]="data.Cellular_Technology"
+    (input)="submit()"
   />
 </div>
 <div class="">
@@ -87,6 +95,7 @@
     class="form-control mb-3"
     name="factor"
     [(ngModel)]="data.Form_Factor"
+    (input)="submit()"
   />
 </div>
 <div *ngIf="category === 'Headphones & Speakers'" class="">
@@ -96,6 +105,7 @@
     class="form-control mb-3"
     name="con"
     [(ngModel)]="data.Connectivity_Technology"
+    (input)="submit()"
   />
 </div>
 <div class="">

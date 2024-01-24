@@ -21,7 +21,6 @@ export class ProdectService {
     this.product$.next(productList);
   }
 
-
   fectData(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl + '/products/')
   }
@@ -57,6 +56,10 @@ export class ProdectService {
 
   updateRating(data: any) {
     return this.http.post(this.baseUrl + '/update-rating', data, this._options);
+  }
+
+  getAmounts(category: any): Observable<number[]> {
+    return this.http.get<number[]>(this.baseUrl + '/amountList/' + category);
   }
 
 }

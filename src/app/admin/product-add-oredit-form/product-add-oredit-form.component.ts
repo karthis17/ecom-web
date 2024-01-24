@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProdectService } from '../../service/prodect.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import uniqid from 'uniqid';
 import { Product } from '../../models/product.model';
 import { SpecificationComponent } from '../specification/specification.component';
 
@@ -75,8 +74,8 @@ export class ProductAddOREditFormComponent implements OnInit {
 
   addNew() {
     if (this.images.length > 1 && this.about.length > 1 && this.data.price > 0 && this.data.quantity > 0) {
-      console.log({ id: uniqid(), ...this.data, spec: this.spec, images: JSON.stringify(this.images), about: JSON.stringify(this.about) })
-      this.product.addProduct({ ...this.data, spec: this.spec, id: uniqid(), images: JSON.stringify(this.images), about: JSON.stringify(this.about) }).subscribe(data => {
+      console.log({ ...this.data, spec: this.spec, images: JSON.stringify(this.images), about: JSON.stringify(this.about) })
+      this.product.addProduct({ ...this.data, spec: this.spec, images: JSON.stringify(this.images), about: JSON.stringify(this.about) }).subscribe(data => {
         console.log(data);
         this.router.navigate(['/admin']);
       });

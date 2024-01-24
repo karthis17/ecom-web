@@ -6,6 +6,7 @@ import { CartService } from '../service/cart.service';
 import { ShoppingCart } from '../models/cart.model';
 import { StarRatingComponent } from '../review/star-rating/star-rating.component';
 import { ViewPriceComponent } from '../view-price/view-price.component';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-view',
@@ -75,7 +76,7 @@ export class ProductViewComponent {
         console.log(data);
         this.getUserAddCArt();
       });
-      alert("Product added successfully");
+      swal.fire('Thank you...', 'Product added to cart', 'success')
     } else {
       this.success = true;
       console.log("errr");

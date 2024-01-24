@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, SimpleChanges } from '@angular/core';
 import { ProductListComponentComponent } from '../product-list-component/product-list-component.component';
 import { Product } from '../models/product.model';
 import { ProdectService } from '../service/prodect.service';
@@ -17,7 +17,7 @@ export class HomeComponent {
   constructor(private prodect: ProdectService) { }
   data: Product[] = [];
   upperLimits: number[] = [];
-  category: string = '';
+  category!: string;
 
   screenWidth!: number;
 
@@ -43,13 +43,12 @@ export class HomeComponent {
       }
     });
     this.data = products ? products : [];
-
     if (this.data.length > 0) {
-      this.calculateUpperLimit(this.data.map((product) => product.amount));
+      this.prodect.getAmounts(this.category).subscribe((amount: number[]) => {
+        this.calculateUpperLimit(amount);
+      })
 
     }
-
-
   }
 
   setCategory(category: string) {
@@ -77,7 +76,6 @@ export class HomeComponent {
     }
 
     this.upperLimits = Array.from(uniquePricesSet);
-    console.log(this.upperLimits)
   }
 
 

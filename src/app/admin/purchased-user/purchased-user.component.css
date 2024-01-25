@@ -1,0 +1,21 @@
+.dialog {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  padding-top: 15rem;
+}
+
+.pointer {
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pointer:hover {
+  color: #000;
+}

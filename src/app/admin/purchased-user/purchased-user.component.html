@@ -1,0 +1,52 @@
+<div class="container-fluid p-5 bg-white vh-100">
+  <h2 class="text-center my-5">Purchased User</h2>
+  <div class="container p-5 rounded shadow">
+    <table class="table">
+      <thead class="">
+        <tr>
+          <th>S.NO</th>
+          <th>User ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Purched Date</th>
+          <th>Product</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of data; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ order.user_id }}</td>
+          <td>{{ order.name }}</td>
+          <td>
+            <a target="_blank" href="mailto:{{ order.email }}">{{
+              order.email
+            }}</a>
+          </td>
+          <td>{{ order.phone }}</td>
+          <td>{{ order.date }}</td>
+          <td>
+            <a class="btn btn-link" (click)="show(order.id)">Show product</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div (click)="setFalse()" *ngIf="showCart" class="dialog">
+  <div
+    class="bg-white px-5 pb-5 pt-3 w-50 rounded-4 shadow"
+    style="height: fit-content; z-index: 100"
+  >
+    <h3 class="text-center pt-3 pb-5 position-relative">
+      Product
+      <i
+        (click)="setFalse()"
+        class="bi bi-x-lg pointer position-absolute end-0"
+      ></i>
+    </h3>
+    <app-cart-table [order_id]="showCart" [ordered]="true"></app-cart-table>
+    <!-- <button class="btn btn-danger w-25">Close</button> -->
+  </div>
+</div>

@@ -67,6 +67,11 @@ export class CartTableComponent {
     this.cart.getOrderedItems(this.order_id).subscribe(item => {
       this.items = item;
 
+      item.forEach(element => {
+
+        this.Total_price += element.total ? element.total : 0;
+      });
+
 
     });
   }

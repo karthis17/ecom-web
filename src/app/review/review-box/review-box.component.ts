@@ -21,7 +21,7 @@ export class ReviewBoxComponent {
   @Input() new_review!: string;
 
   rating!: number;
-  reviews: Review[] = [];
+  reviews!: Review[];
   comment = new FormControl('', Validators.required)
 
   constructor(private reviewService: ReviewService, private router: Router, private product: ProdectService) { }
@@ -53,7 +53,6 @@ export class ReviewBoxComponent {
       if (add) {
         this.product.updateRating({ id: this.product_id, rating: this.calculateAverageRating(reviews) }).subscribe(rating => { console.log(rating) })
       }
-      // this.product.updateRating({ id: this.product_id, rating: this.calculateAverageRating(reviews) }).subscribe(rating => { console.log(rating) })
     });
   }
 

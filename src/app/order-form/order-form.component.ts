@@ -109,7 +109,7 @@ export class OrderFormComponent {
     });
     this.cart.placeOrder(this.user_id).subscribe((response: any) => {
       console.log(response);
-      this.order.addToOrder({ user_id: this.user_id, phone: this.deliveryAddress.phone, address: this.deliveryAddress.address, payment: payer }).subscribe((res) => {
+      this.order.addToOrder({ user_id: this.user_id, phone: this.deliveryAddress.phone, address: this.deliveryAddress.address, payment: payer, name: this.user.name, email: this.user.email }).subscribe((res) => {
         console.log(res)
         this.router.navigateByUrl('')
       })

@@ -13,6 +13,7 @@ import { ProductViewComponent } from './admin/product-view/product-view.componen
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './partials/profile/profile.component';
 import { OrderedComponent } from './admin/ordered/ordered.component';
+import { PurchasedUserComponent } from './admin/purchased-user/purchased-user.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -30,7 +31,8 @@ export const routes: Routes = [
             { path: '', component: DashboardComponent },
             { path: 'product-manipulate', component: ProductAddOREditFormComponent },
             { path: 'product-view', component: ProductViewComponent },
-            { path: 'ordered-products', component: OrderedComponent }
+            { path: 'ordered-products', component: OrderedComponent },
+            { path: 'purchased-user', component: PurchasedUserComponent }
         ]
     },
 ];

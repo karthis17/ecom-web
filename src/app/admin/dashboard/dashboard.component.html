@@ -2,26 +2,14 @@
   <h1 class="text-center">Admin Dashboard</h1>
 
   <div class="row gap-4 my-5">
-    <div
-      class="col-lg-3 d-flex flex-column justify-content-center align-items-center bg-white rounded-2 border-1 py-4"
-      (click)="nav()"
-    >
-      <h1><i class="bi bi-pencil-square"></i></h1>
-      <h3>Edit Product</h3>
-    </div>
-    <div
-      [routerLink]="['/admin', 'product-manipulate']"
-      class="col-lg-3 d-flex flex-column justify-content-center align-items-center bg-white rounded-2 border-1 py-4"
-    >
-      <h1><i class="bi bi-plus-square"></i></h1>
-      <h3>Add Product</h3>
-    </div>
-    <div
-      [routerLink]="['/admin', 'ordered-products']"
-      class="col-lg-3 d-flex flex-column justify-content-center align-items-center bg-white rounded-2 border-1 py-4"
-    >
-      <h1><i class="bi bi-cart-plus"></i></h1>
-      <h3>Ordered Product</h3>
-    </div>
+    <ng-container *ngFor="let option of dashboardOptions">
+      <div
+        class="col-lg-3 d-flex flex-column justify-content-center align-items-center bg-white rounded-2 border-1 py-4"
+        [routerLink]="option.link"
+      >
+        <h1><i class="bi {{ option.icon }}"></i></h1>
+        <h3>{{ option.name }}</h3>
+      </div>
+    </ng-container>
   </div>
 </div>

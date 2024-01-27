@@ -1,9 +1,9 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CartTableComponent } from '../cart-table/cart-table.component';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartService } from '../service/cart.service';
-import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProdectService } from '../service/prodect.service';
 import { OrderService } from '../service/order.service';
 import { DeliverDetailsService } from '../service/deliver-details.service';
@@ -21,14 +21,13 @@ export class OrderFormComponent {
 
   @ViewChild("body", { static: true }) body!: ElementRef;
 
-  user_id = this.route.snapshot.paramMap.get('id');
   user: any;
-  constructor(private dtlService: DeliverDetailsService, private cart: CartService, private route: ActivatedRoute, private product: ProdectService, private order: OrderService, private router: Router, private auth: AuthService) {
-    this.auth.getUser().then((user) => { this.user = user; })
+  constructor(private dtlService: DeliverDetailsService, private cart: CartService, private product: ProdectService, private order: OrderService, private router: Router, private auth: AuthService) {
+    this.auth.getUser().subscribe((user) => { this.user = user; })
   }
 
   paymentOption = new FormControl('', Validators.required);
-  deliveryAddress: any = {};
+  deliveryAddress: any;
 
   paymentHandler: any = null;
 
@@ -41,9 +40,10 @@ export class OrderFormComponent {
     return Math.round(dollars * 100) / 100;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
-    console.log(window.paypal)
+
+    // console.log(window.paypal)
     this.deliveryAddress = this.dtlService.getAddress();
     console.log(this.deliveryAddress, "hi");
 
@@ -107,9 +107,9 @@ export class OrderFormComponent {
         console.log(result);
       })
     });
-    this.cart.placeOrder(this.user_id).subscribe((response: any) => {
+    this.cart.placeOrder(this.user.id).subscribe((response: any) => {
       console.log(response);
-      this.order.addToOrder({ user_id: this.user_id, phone: this.deliveryAddress.phone, address: this.deliveryAddress.address, payment: payer, name: this.user.name, email: this.user.email }).subscribe((res) => {
+      this.order.addToOrder({ user_id: this.user.id, phone: this.deliveryAddress.phone, address: this.deliveryAddress.address, payment: payer, name: this.user.name, email: this.user.email }).subscribe((res) => {
         console.log(res)
         this.router.navigateByUrl('')
       })

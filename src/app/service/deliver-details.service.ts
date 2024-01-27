@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class DeliverDetailsService {
 
   baseUrl: string = 'http://localhost:3000/api/deliver-details';
-  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +17,7 @@ export class DeliverDetailsService {
   getAddress() {
     let address = localStorage.getItem('address')
     if (address) {
+
       return JSON.parse(address);
     }
     return null;
@@ -27,7 +28,7 @@ export class DeliverDetailsService {
   }
 
   getDtl(userId: number): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + '/get-dtl/' + userId);
+    return this.http.get<any[]>(this.baseUrl + '/get-dtl/' + userId, { withCredentials: true });
   }
 
   addDtl(dtl: any) {

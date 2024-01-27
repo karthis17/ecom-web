@@ -46,11 +46,14 @@ export class HeaderNavbarComponent {
     this.auth.loggedIn.subscribe(async (state: boolean) => {
       if (state) {
         setTimeout(async () => {
-          this.user = await this.auth.getUser();
-          this.cart.CheckItems(this.user.id);
-          console.log(state, this.user);
-          this.logState = state;
-          console.log(this.logState);
+          this.auth.getUser().subscribe(user => {
+            this.user = user
+            this.cart.CheckItems(this.user.id);
+            console.log(state, this.user);
+            this.logState = state;
+            console.log(this.logState);
+          });
+
 
         }, 100);
       } else {

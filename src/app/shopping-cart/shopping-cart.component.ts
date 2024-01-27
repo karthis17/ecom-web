@@ -1,28 +1,39 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { CartTableComponent } from '../cart-table/cart-table.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DeliverDetailsService } from '../service/deliver-details.service';
+import { NgIf } from '@angular/common';
+import { ProductListComponentComponent } from '../product-list-component/product-list-component.component';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CartTableComponent],
+  imports: [CartTableComponent, NgIf, ProductListComponentComponent, RouterLink],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.css'
 })
 export class ShoppingCartComponent {
 
+
   constructor(private route: ActivatedRoute, private router: Router, private addressService: DeliverDetailsService) { }
+
+  isEmpty: boolean = false;
 
   id = this.route.snapshot.paramMap.get('id');
 
-  next() {
-    let address = this.addressService.getAddress();
+  async next() {
+    let address = this.addressService.getAddress()
     if (address) {
-      this.router.navigateByUrl('place-order/' + this.id);
-      return;
-    }
-    this.router.navigate(['/', 'dtl', this.id]);
+      this.router.navigate(['/', 'place-order']);
+
+    } else
+      this.router.navigate(['/', 'dtl', this.id]);
+  }
+
+  checkCartEmty(cart: boolean) {
+
+    this.isEmpty = cart;
+
   }
 
 }

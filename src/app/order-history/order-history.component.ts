@@ -30,7 +30,7 @@ export class OrderHistoryComponent {
     if (this.id) {
       this.order.getOrder(this.id).subscribe((data: any[]) => {
         this.orders = data;
-        this.auth.getUser().then((user) => {
+        this.auth.getUser().subscribe((user: any) => {
           this.email = user.email;
           this.name = user.name;
         });

@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ShoppingCart } from '../models/cart.model';
 import { CartService } from '../service/cart.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
-import { ProdectService } from '../service/prodect.service';
+
 
 @Component({
   selector: 'app-cart-table',
@@ -23,10 +23,11 @@ export class CartTableComponent {
 
   @Input() id: any;
 
-  constructor(private cart: CartService, private route: ActivatedRoute, private router: Router, private productService: ProdectService) { }
+  @Output() emtyCart = new EventEmitter<boolean>(false);
 
-  items: Array<ShoppingCart> = [];
-  editModeIndex: number | null = null;
+  constructor(private cart: CartService, private route: ActivatedRoute, private router: Router) { }
+
+  items!: Array<ShoppingCart>;
   Total_price: number = 0;
   err: string | null = null;
 
@@ -35,17 +36,21 @@ export class CartTableComponent {
 
 
   getCartItems() {
-    this.Total_price = 0;
-    if (this.id) {
-      this.cart.getCart(Number.parseInt(this.id)).subscribe((cart) => {
-        console.log(cart);
-        this.items = cart;
 
-        this.items.forEach((item: ShoppingCart, index: number) => {
-          this.formGroup.addControl(`quantity${index}`, new FormControl(item.quantity, Validators.required));
-          if (item.total) this.Total_price += item.total;
-        });
-      });
+    if (this.id) {
+      try {
+        this.cart.getCart(Number.parseInt(this.id)).subscribe((cart) => {
+          console.log(cart);
+          this.items = cart;
+          this.emtyCart.emit(cart.length < 1);
+          this.items.forEach((item: ShoppingCart, index: number) => {
+            this.formGroup.addControl(`quantity${index}`, new FormControl(item.quantity, Validators.required));
+            if (item.total) this.Total_price += item.total;
+          });
+        }, (err: Error) => { console.log(err); this.router.navigate(['/', 'login']) });
+      } catch (err) {
+        console.log(err);
+      }
     } else {
 
       this.router.navigateByUrl("");
@@ -55,7 +60,7 @@ export class CartTableComponent {
 
   ngOnInit() {
 
-    if (this.route.snapshot.paramMap.get('id')) this.id = this.route.snapshot.paramMap.get('id');
+    // if (this.route.snapshot.paramMap.get('id')) this.id = this.route.snapshot.paramMap.get('id');
 
 
     if (!this.order_id) this.getCartItems();
@@ -91,7 +96,6 @@ export class CartTableComponent {
         this.getCartItems();
         console.log(this.getFormControl(index).value);
         // this.edit = false;
-        this.editModeIndex = null;
       })
     }
   }

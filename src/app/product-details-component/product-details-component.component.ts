@@ -28,7 +28,8 @@ export class ProductDetailsComponentComponent {
 
   ngOnInit() {
 
-    this.auth.getUser().then((us) => {
+    this.auth.getUser().subscribe((us) => {
+      console.log(us, "ksjdkj")
       this.user = us;
     });
 

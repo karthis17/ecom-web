@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   baseUrl: string = 'http://localhost:3000/api/order';
-  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
   constructor(private http: HttpClient) { }
 
 
@@ -18,11 +18,11 @@ export class OrderService {
   }
 
   getOrder(user_id: any): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + "/getOrders/" + user_id);
+    return this.http.get<any[]>(this.baseUrl + "/getOrders/" + user_id, { withCredentials: true });
   }
 
   getAllOrders(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + "/get-all-orders");
+    return this.http.get<any[]>(this.baseUrl + "/get-all-orders", { withCredentials: true });
   }
 
 }

@@ -18,7 +18,7 @@ export class ProfileComponent {
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.auth.getUser().then(user => {
+    this.auth.getUser().subscribe(user => {
       this.user = user;
     });
 

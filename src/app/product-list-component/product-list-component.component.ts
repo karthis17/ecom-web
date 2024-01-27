@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class ProductListComponentComponent {
   @Input('category') category: string | null = null;
-  @Input('product') product!: Product[];
+  @Input('product') product: Product[] = [];
   @Input('isHome') isHome: boolean = true;
 
   constructor(private prodect: ProdectService, private router: Router) { }

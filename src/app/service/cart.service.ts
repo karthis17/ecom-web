@@ -9,7 +9,7 @@ import { ShoppingCart } from '../models/cart.model';
 export class CartService {
 
   baseUrl: string = 'http://localhost:3000/api/cart';
-  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
 
   NoOFCartItem = new BehaviorSubject<number>(0);
 
@@ -20,7 +20,7 @@ export class CartService {
   }
 
   getCart(user_id: number): Observable<ShoppingCart[]> {
-    return this.http.get<ShoppingCart[]>(this.baseUrl + '/get-cart/' + user_id);
+    return this.http.get<ShoppingCart[]>(this.baseUrl + '/get-cart/' + user_id, { withCredentials: true });
   }
 
   updateQty(id: number, quantity: number, total: number): Observable<any> {
@@ -28,7 +28,7 @@ export class CartService {
   }
 
   removeCartItem(id: number): boolean {
-    this.http.delete(this.baseUrl + '/remove-cart/' + id).subscribe((res) => {
+    this.http.delete(this.baseUrl + '/remove-cart/' + id, { withCredentials: true }).subscribe((res) => {
       return true;
     }, (err) => {
       return false;
@@ -37,7 +37,7 @@ export class CartService {
   }
 
   placeOrder(user_id: any) {
-    return this.http.get(this.baseUrl + '/ordered/' + user_id);
+    return this.http.get(this.baseUrl + '/ordered/' + user_id, { withCredentials: true });
   }
 
   getOrderedItems(order_id: number): Observable<ShoppingCart[]> {

@@ -11,7 +11,7 @@ export class AuthService {
   loggedIn = new BehaviorSubject<boolean>(false);
   logState: Observable<boolean> = this.loggedIn.asObservable();
   endpoint = 'http://localhost:3000/api/user';
-  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
 
   constructor(private http: HttpClient) {
     this.checkUserLogState();
@@ -23,8 +23,7 @@ export class AuthService {
         (response: any) => {
           if (response.success) {
             this.loggedIn.next(true);
-            console.log(response);
-            this.addUserLocally(response); // Add user information to localStorage
+            localStorage.setItem('loggedIn', 'true');
             resolve(response);
           } else {
             console.log(response);
@@ -47,8 +46,7 @@ export class AuthService {
         (response: any) => {
           if (response.success) {
             this.loggedIn.next(true);
-            console.log(response);
-            this.addUserLocally(response); // Add user information to localStorage
+            localStorage.setItem('loggedIn', 'true');
             resolve(response);
           } else {
             console.log(response);
@@ -76,16 +74,14 @@ export class AuthService {
 
   checkUserLogState(): void {
     const loggedIn = localStorage.getItem('loggedIn');
-    const user = localStorage.getItem('user');
 
-    if (loggedIn === 'true' && user) {
+    if (loggedIn === 'true') {
       this.loggedIn.next(true);
     }
   }
 
-  async getUser() {
-    const user = localStorage.getItem('user');
-    return user ? await JSON.parse(user) : null;
+  getUser() {
+    return this.http.get(this.endpoint + '/get-user', { withCredentials: true })
   }
 
 

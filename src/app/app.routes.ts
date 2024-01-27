@@ -21,8 +21,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'cart/:id', component: ShoppingCartComponent },
-    { path: 'place-order/:id', component: OrderFormComponent },
-    { path: 'order-history/:id', component: OrderHistoryComponent },
+    { path: 'place-order', component: OrderFormComponent },
     { path: 'dtl/:id', component: DeliveryDtlComponent },
     { path: 'profile', component: ProfileComponent },
     {

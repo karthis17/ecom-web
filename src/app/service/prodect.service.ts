@@ -62,11 +62,7 @@ export class ProdectService {
     return this.http.get<number[]>(this.baseUrl + '/amountList/' + category);
   }
 
-  getBrandName(category: any): Observable<string[]> {
-    return this.http.get<string[]>(this.baseUrl + '/getBrandList/' + category);
-  }
-
-  fetchDataBYBrand(brand: string, category: string): Observable<Product[]> {
+  fetchDataBYBrand(brand: any, category: string): Observable<Product[]> {
     return this.http.post<Product[]>(this.baseUrl + `/get-brand-products`, { brand: brand, category: category });
   }
 

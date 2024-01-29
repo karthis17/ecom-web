@@ -29,8 +29,6 @@ export class ProductListComponentComponent {
 
   ngOnInit() {
 
-    console.log(this.product, "hi")
-
     this.getProduct();
 
 

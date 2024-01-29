@@ -58,7 +58,10 @@
           </div>
         </div>
       </div>
-      <div *ngIf="screenWidth > 1000" class="card p-4 sticky-lg-top filter">
+      <div
+        *ngIf="screenWidth > 1000"
+        class="sticky-lg-top card p-4 filter overflow-y-scroll"
+      >
         <p>Filter</p>
         <label for="" class="form-label mt-2 px-1 fw-medium">Price :</label>
         <hr class="m-1" />
@@ -80,6 +83,52 @@
             (click)="filterByBrandName(brand)"
           >
             {{ brand }}
+          </button>
+        </ng-container>
+        <label for="" class="form-label mt-2 px-1 fw-medium"
+          >Specification :</label
+        >
+        <hr class="m-1" />
+        <ng-container *ngIf="pc_mob[0].length > 0 && pc_mob[1].length > 0">
+          <ng-container *ngFor="let pc of pc_mob; let i = index">
+            <sub class="text-black text-decoration-underline m-2">{{
+              i == 0 ? "RAM & ROM" : i == 1 ? "OS" : "CPU Model"
+            }}</sub>
+            <button
+              class="fs-6"
+              *ngFor="let ramRom_ of pc_mob[i]"
+              (click)="filterByBrandName(ramRom_.trim())"
+            >
+              {{ ramRom_ }}
+            </button>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="headPhone[0].length > 0">
+          <sub class="text-black text-decoration-underline m-2"
+            >Form Factor</sub
+          >
+          <ng-container *ngFor="let formFactor of headPhone[0]">
+            <button class="fs-6" (click)="filterByBrandName(formFactor)">
+              {{ formFactor }}
+            </button>
+          </ng-container>
+          <sub class="text-black text-decoration-underline m-2"
+            >Connectivity</sub
+          >
+          <ng-container *ngFor="let ct of headPhone[1]">
+            <button class="fs-6" (click)="filterByBrandName(ct)">
+              {{ ct }}
+            </button>
+          </ng-container>
+        </ng-container>
+        <ng-container>
+          <sub class="text-black text-decoration-underline m-2">Colour</sub>
+          <button
+            class="fs-6"
+            *ngFor="let color of colors"
+            (click)="filterByBrandName(color)"
+          >
+            {{ color }}
           </button>
         </ng-container>
       </div>

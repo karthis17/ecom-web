@@ -20,6 +20,9 @@ export class HomeComponent {
   category!: string;
 
   brand_name!: string[];
+  pc_mob: any;
+  colors!: any[];
+  headPhone!: any;
 
   screenWidth!: number;
 
@@ -42,9 +45,11 @@ export class HomeComponent {
     this.prodect.selectedProduct$.subscribe(product => {
       if (product) {
         this.data = product;
+        this.getBrandName()
       }
     });
     this.data = products ? products : [];
+    this.getBrandName()
     if (this.data.length > 0) {
       this.prodect.getAmounts(this.category).subscribe((amount: number[]) => {
         this.calculateUpperLimit(amount);
@@ -55,8 +60,7 @@ export class HomeComponent {
 
   setCategory(category: string) {
     this.category = category;
-    if (category !== 'All')
-      this.getBrandName();
+
   }
 
   ngOnInit() {
@@ -83,15 +87,44 @@ export class HomeComponent {
   }
 
   getBrandName() {
-    this.prodect.getBrandName(this.category).subscribe(data => {
-      this.brand_name = data;
-    })
+    const brands = new Set<string>();
+    const RR = new Set<string>();
+    const os = new Set<string>();
+    const cpu = new Set<string>();
+    const S = new Set<string>();
+    const CT = new Set<string>();
+    const color = new Set<string>();
+    if (this.data) {
+      this.data.forEach(prod => {
+        if (prod.specifiction) {
+          const spec = JSON.parse(prod.specifiction)
+          brands.add(spec.Brand.trim());
+          if (spec.RAM && spec.Storage && spec.CPU_Model && spec.OS) {
+            RR.add(`${spec.RAM.trim()} - ${spec.Storage.trim()}`);
+            cpu.add(spec.CPU_Model.trim());
+            os.add(spec.OS.trim());
+          }
+          if (spec.Form_Factor) {
+            S.add(spec.Form_Factor.trim())
+            CT.add(spec.Connectivity_Technology.trim())
+          }
+          color.add(spec.Colour);
+        }
+      })
+      this.brand_name = Array.from(brands);
+      this.pc_mob = [Array.from(RR), Array.from(os), Array.from(cpu)];
+      this.headPhone = [(Array.from(S)), (Array.from(CT))];
+      this.colors = Array.from(color);
+    }
   }
 
-  filterByBrandName(brand: string) {
-    this.prodect.fetchDataBYBrand(brand, this.category).subscribe((data: Product[]) => {
+  filterByBrandName(filter: string, name = false) {
+
+
+    this.prodect.fetchDataBYBrand(filter, this.category).subscribe((data: Product[]) => {
       this.data = data;
     });
   }
+
 
 }

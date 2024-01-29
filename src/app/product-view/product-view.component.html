@@ -68,6 +68,8 @@
           [formControl]="qty"
           style="width: 50px"
           class="fs-6 form-control m-3 p-2"
+          max="{{ data.quantity }}"
+          min="1"
         />
         <div *ngIf="success" class="alert alert-success" role="alert">
           Successfully added to cart

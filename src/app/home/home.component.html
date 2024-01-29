@@ -71,6 +71,17 @@
             {{ (upperLimits[i + 1] | currency : "INR")?.slice(0, -3) }}
           </button>
         </ng-container>
+        <ng-container *ngIf="brand_name.length > 0">
+          <label for="" class="form-label mt-2 px-1 fw-medium">Brand :</label>
+          <hr class="m-1" />
+          <button
+            class="fs-6"
+            *ngFor="let brand of brand_name"
+            (click)="filterByBrandName(brand)"
+          >
+            {{ brand }}
+          </button>
+        </ng-container>
       </div>
     </div>
     <div class="col-lg-8 col-md-10 col-sm-12">

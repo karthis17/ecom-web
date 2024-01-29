@@ -19,6 +19,8 @@ export class HomeComponent {
   upperLimits: number[] = [];
   category!: string;
 
+  brand_name!: string[];
+
   screenWidth!: number;
 
   @HostListener('window:resize', ['$event'])
@@ -53,6 +55,8 @@ export class HomeComponent {
 
   setCategory(category: string) {
     this.category = category;
+    if (category !== 'All')
+      this.getBrandName();
   }
 
   ngOnInit() {
@@ -78,6 +82,16 @@ export class HomeComponent {
     this.upperLimits = Array.from(uniquePricesSet);
   }
 
+  getBrandName() {
+    this.prodect.getBrandName(this.category).subscribe(data => {
+      this.brand_name = data;
+    })
+  }
 
+  filterByBrandName(brand: string) {
+    this.prodect.fetchDataBYBrand(brand, this.category).subscribe((data: Product[]) => {
+      this.data = data;
+    });
+  }
 
 }

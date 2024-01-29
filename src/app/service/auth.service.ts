@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   endpoint = 'http://localhost:3000/api/user';
   _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cart: CartService) {
     this.checkUserLogState();
   }
 
@@ -68,8 +69,13 @@ export class AuthService {
 
   logout(): void {
 
-    localStorage.clear();
-    this.loggedIn.next(false);
+
+    this.http.get(this.endpoint + '/logout', { withCredentials: true }).subscribe((response) => {
+      console.log(response);
+      localStorage.clear();
+      this.cart.NoOFCartItem.next(0);
+      this.loggedIn.next(false);
+    })
   }
 
   checkUserLogState(): void {

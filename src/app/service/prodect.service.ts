@@ -12,7 +12,7 @@ export class ProdectService {
   constructor(private http: HttpClient) { }
 
   baseUrl: string = 'http://localhost:3000/api/product';
-  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), withCredentials: true };
 
   private product$ = new BehaviorSubject<Product[]>([]);
   selectedProduct$ = this.product$.asObservable();
@@ -60,6 +60,14 @@ export class ProdectService {
 
   getAmounts(category: any): Observable<number[]> {
     return this.http.get<number[]>(this.baseUrl + '/amountList/' + category);
+  }
+
+  getBrandName(category: any): Observable<string[]> {
+    return this.http.get<string[]>(this.baseUrl + '/getBrandList/' + category);
+  }
+
+  fetchDataBYBrand(brand: string, category: string): Observable<Product[]> {
+    return this.http.post<Product[]>(this.baseUrl + `/get-brand-products`, { brand: brand, category: category });
   }
 
 }

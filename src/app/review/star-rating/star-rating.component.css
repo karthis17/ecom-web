@@ -3,8 +3,11 @@
 }
 
 .star {
-  cursor: pointer;
   color: #ccc;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .star.filled {

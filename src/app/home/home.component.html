@@ -85,10 +85,25 @@
             {{ brand }}
           </button>
         </ng-container>
+        <ng-container>
+          <label for="" class="form-label mt-2 px-1 fw-medium">Rating :</label>
+          <hr class="m-1" />
+          <button
+            class="m-0 p-0"
+            *ngFor="let rating of [5, 4, 3, 2, 1]"
+            (click)="filterByRating(rating)"
+          >
+            <app-star-rating
+              [readonly]="true"
+              [rating]="rating"
+            ></app-star-rating>
+          </button>
+        </ng-container>
         <label for="" class="form-label mt-2 px-1 fw-medium"
           >Specification :</label
         >
         <hr class="m-1" />
+
         <ng-container *ngIf="pc_mob[0].length > 0 && pc_mob[1].length > 0">
           <ng-container *ngFor="let pc of pc_mob; let i = index">
             <sub class="text-black text-decoration-underline m-2">{{

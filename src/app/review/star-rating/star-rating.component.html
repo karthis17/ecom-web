@@ -1,7 +1,9 @@
 <div class="star-rating">
   <ng-container *ngFor="let star of stars">
     <span
-      class="star {{ star <= rating ? 'filled' : '' }}"
+      class="star {{ !readonly ? 'pointer' : '' }} {{
+        star <= rating ? 'filled' : ''
+      }}"
       (click)="setRating(star)"
       >&#9733;</span
     >

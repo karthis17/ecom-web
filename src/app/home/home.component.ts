@@ -4,11 +4,12 @@ import { Product } from '../models/product.model';
 import { ProdectService } from '../service/prodect.service';
 import { CategoryNavComponent } from '../partials/category-nav/category-nav.component';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { StarRatingComponent } from '../review/star-rating/star-rating.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ProductListComponentComponent, CategoryNavComponent, CurrencyPipe, NgFor, NgIf],
+  imports: [ProductListComponentComponent, CategoryNavComponent, CurrencyPipe, NgFor, NgIf, StarRatingComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -118,10 +119,17 @@ export class HomeComponent {
     }
   }
 
-  filterByBrandName(filter: string, name = false) {
+  filterByBrandName(filter: string) {
 
 
     this.prodect.fetchDataBYBrand(filter, this.category).subscribe((data: Product[]) => {
+      this.data = data;
+    });
+  }
+
+  filterByRating(rating: number) {
+
+    this.prodect.filterBYrating(rating, this.category).subscribe((data: Product[]) => {
       this.data = data;
     });
   }

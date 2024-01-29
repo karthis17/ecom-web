@@ -66,4 +66,8 @@ export class ProdectService {
     return this.http.post<Product[]>(this.baseUrl + `/get-brand-products`, { brand: brand, category: category });
   }
 
+  filterBYrating(rating: any, category: any): Observable<Product[]> {
+    return this.http.post<Product[]>(this.baseUrl + '/get-products-by-rating', { rating: rating, category: category });
+  }
+
 }

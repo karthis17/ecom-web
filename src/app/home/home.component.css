@@ -1,5 +1,4 @@
 .filter button {
-  margin: 5px;
   padding: 5px;
   background-color: transparent;
   border: 0;
@@ -14,9 +13,16 @@
 
 .filter {
   top: 100px;
-  height: 80vh;
+
+  padding-bottom: 50rem;
+}
+.min-w-50 {
+  min-width: 50%;
 }
 
+.h {
+  height: 85vh;
+}
 @media (max-width: 1220px) {
   .filter {
     top: 5px;

@@ -22,8 +22,16 @@
           <img src="{{ img }}" alt="" srcset="" />
         </div>
       </div>
-      <div class="me-4 w-100">
-        <img src="{{ image }}" alt="" srcset="" class="w-100" />
+      <div class="me-4 w-100 img">
+        <img
+          src="{{ image }}"
+          alt=""
+          srcset=""
+          class="w-100 zoom-image {{ isZoomed ? 'zoomed' : '' }}"
+          (mousemove)="handleMouseMove($event)"
+          (mouseleave)="handleMouseOut()"
+          [style.transform-origin]="isZoomed ? getTransformOrigin() : ''"
+        />
       </div>
     </div>
   </div>

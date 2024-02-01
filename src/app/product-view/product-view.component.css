@@ -17,6 +17,23 @@
   width: 4rem;
 }
 
+.img {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.zoom-image {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.zoomed {
+  transform-origin: var(--zoomX) px var(--zoomY) px;
+  transform: scale(2);
+}
+
 .grid {
   display: grid;
   place-content: center;

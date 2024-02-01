@@ -1,4 +1,4 @@
-<div *ngIf="screenWidth > 1000" class="container-fluid bg-black">
+<div *ngIf="screenWidth > 1200" class="container-fluid bg-black">
   <app-category-nav
     (data)="getData($event)"
     (category)="setCategory($event)"
@@ -7,9 +7,9 @@
 
 <div class="container-fluid">
   <div class="row py-lg-3">
-    <div class="col-lg-2 col-12">
+    <div class="col-xxl-2 col-xl-3 col-12">
       <div
-        *ngIf="screenWidth < 1000"
+        *ngIf="screenWidth < 1200"
         class="accordion"
         id="accordionPanelsStayOpenExample"
       >
@@ -59,8 +59,8 @@
         </div>
       </div>
       <div
-        *ngIf="screenWidth > 1000"
-        class="sticky-lg-top card p-4 filter overflow-y-scroll"
+        *ngIf="screenWidth > 1200"
+        class="sticky-lg-top card p-4 filter h overflow-y-scroll"
       >
         <p>Filter</p>
         <label for="" class="form-label mt-2 px-1 fw-medium">Price :</label>
@@ -89,14 +89,15 @@
           <label for="" class="form-label mt-2 px-1 fw-medium">Rating :</label>
           <hr class="m-1" />
           <button
-            class="m-0 p-0"
-            *ngFor="let rating of [5, 4, 3, 2, 1]"
+            class="m-0 p-0 d-flex align-items-baseline gap-1"
+            *ngFor="let rating of [4, 3, 2, 1]"
             (click)="filterByRating(rating)"
           >
             <app-star-rating
               [readonly]="true"
               [rating]="rating"
             ></app-star-rating>
+            & Up
           </button>
         </ng-container>
         <label for="" class="form-label mt-2 px-1 fw-medium"
@@ -106,49 +107,78 @@
 
         <ng-container *ngIf="pc_mob[0].length > 0 && pc_mob[1].length > 0">
           <ng-container *ngFor="let pc of pc_mob; let i = index">
-            <sub class="text-black text-decoration-underline m-2">{{
-              i == 0 ? "RAM & ROM" : i == 1 ? "OS" : "CPU Model"
-            }}</sub>
             <button
-              class="fs-6"
-              *ngFor="let ramRom_ of pc_mob[i]"
-              (click)="filterByBrandName(ramRom_.trim())"
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#exPcMb' + i"
+              aria-expanded="false"
+              [attr.aria-controls]="'#exPcMb' + i"
             >
-              {{ ramRom_ }}
+              - {{ i == 0 ? "RAM & ROM" : i == 1 ? "OS" : "CPU Model" }}
             </button>
+            <!-- <sub class="text-black text-decoration-underline "></sub> -->
+            <div class="collapse" id="exPcMb{{ i }}">
+              <button
+                class="min-w-50 mx-3"
+                *ngFor="let ramRom_ of pc_mob[i]"
+                (click)="filterByBrandName(ramRom_.trim())"
+              >
+                {{ ramRom_ }}
+              </button>
+            </div>
           </ng-container>
         </ng-container>
+
         <ng-container *ngIf="headPhone[0].length > 0">
-          <sub class="text-black text-decoration-underline m-2"
-            >Form Factor</sub
-          >
-          <ng-container *ngFor="let formFactor of headPhone[0]">
-            <button class="fs-6" (click)="filterByBrandName(formFactor)">
-              {{ formFactor }}
+          <ng-container *ngFor="let sepc_hp of headPhone; let i = index">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#ex' + i"
+              aria-expanded="false"
+              [attr.aria-controls]="'#ex' + i"
+            >
+              - {{ i == 0 ? "Form Factor" : "Connectivity" }}
             </button>
-          </ng-container>
-          <sub class="text-black text-decoration-underline m-2"
-            >Connectivity</sub
-          >
-          <ng-container *ngFor="let ct of headPhone[1]">
-            <button class="fs-6" (click)="filterByBrandName(ct)">
-              {{ ct }}
-            </button>
+            <!-- <sub class="text-black text-decoration-underline "></sub> -->
+            <div class="collapse" id="ex{{ i }}">
+              <button
+                class="min-w-50 mx-3"
+                *ngFor="let formFactor of headPhone[i]"
+                (click)="filterByBrandName(formFactor)"
+              >
+                {{ formFactor }}
+              </button>
+            </div>
           </ng-container>
         </ng-container>
+
         <ng-container>
-          <sub class="text-black text-decoration-underline m-2">Colour</sub>
           <button
-            class="fs-6"
-            *ngFor="let color of colors"
-            (click)="filterByBrandName(color)"
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#exColor"
+            aria-expanded="false"
+            aria-controls="#exColor"
           >
-            {{ color }}
+            - Colour
           </button>
+          <div class="collapse" id="exColor">
+            <button
+              class="min-w-50 mx-3"
+              *ngFor="let color of colors"
+              (click)="filterByBrandName(color)"
+            >
+              {{ color }}
+            </button>
+          </div>
         </ng-container>
       </div>
     </div>
-    <div class="col-lg-8 col-md-10 col-sm-12">
+    <div class="col-xxl-8 col-xl-9 col-md-12 col-sm-12">
       <app-product-list-component [product]="data"></app-product-list-component>
     </div>
   </div>

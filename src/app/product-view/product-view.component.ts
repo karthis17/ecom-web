@@ -34,6 +34,9 @@ export class ProductViewComponent {
   activeImage!: number;
   image!: string;
   spec: any;
+  isZoomed = false;
+  zoomX = 0;
+  zoomY = 0;
 
 
   constructor(private cart: CartService) {
@@ -61,8 +64,6 @@ export class ProductViewComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data']) {
-
-
       this.data.images ? this.image = this.data.images[0] : '';
       this.activeImage = 0;
       if (this.data.specifiction) this.spec = JSON.parse(this.data.specifiction)
@@ -110,4 +111,25 @@ export class ProductViewComponent {
   }
 
 
+
+  handleMouseMove(event: MouseEvent): void {
+    const container = event.currentTarget as HTMLElement;
+    const rect = container.getBoundingClientRect();
+
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    this.zoomX = x / rect.width;
+    this.zoomY = y / rect.height;
+
+    this.isZoomed = true;
+  }
+
+  handleMouseOut(): void {
+    this.isZoomed = false;
+  }
+
+  getTransformOrigin(): string {
+    return `${this.zoomX * 100}% ${this.zoomY * 100}%`;
+  }
 }

@@ -1,7 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CartTableComponent } from '../cart-table/cart-table.component';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartService } from '../service/cart.service';
 import { Router, RouterLink } from '@angular/router';
 import { ProdectService } from '../service/prodect.service';
@@ -12,7 +11,7 @@ import { AuthService } from '../service/auth.service';
 @Component({
   selector: 'app-order-form',
   standalone: true,
-  imports: [NgFor, NgIf, CartTableComponent, ReactiveFormsModule, RouterLink],
+  imports: [NgFor, NgIf, CartTableComponent, RouterLink],
   templateUrl: './order-form.component.html',
   styleUrl: './order-form.component.css'
 })
@@ -21,16 +20,13 @@ export class OrderFormComponent {
 
   @ViewChild("body", { static: true }) body!: ElementRef;
 
-  user: any;
   constructor(private dtlService: DeliverDetailsService, private cart: CartService, private product: ProdectService, private order: OrderService, private router: Router, private auth: AuthService) {
-    this.auth.getUser().subscribe((user) => { this.user = user; })
+
   }
 
-  paymentOption = new FormControl('', Validators.required);
+  user: any;
   deliveryAddress: any;
-
   paymentHandler: any = null;
-
 
 
   convertRupeesToDollars(rupees: number): number {
@@ -42,8 +38,7 @@ export class OrderFormComponent {
 
   ngOnInit() {
 
-
-    // console.log(window.paypal)
+    this.auth.getUser().subscribe((user) => { this.user = user; })
     this.deliveryAddress = this.dtlService.getAddress();
     console.log(this.deliveryAddress, "hi");
 

@@ -8,6 +8,22 @@
       [(ngModel)]="filter"
       (input)="filterProduct()"
     />
+    <div class="d-flex gap-3 mb-4">
+      <input
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="getData()"
+        value="All"
+      />
+      <ng-container *ngFor="let cate of category">
+        <input
+          type="button"
+          class="btn btn-outline-dark"
+          value="{{ cate }}"
+          (click)="filterByCategory(cate)"
+        />
+      </ng-container>
+    </div>
     <table class="table text-center">
       <thead class="">
         <th>S.NO</th>

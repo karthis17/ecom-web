@@ -18,6 +18,7 @@ export class ProductViewComponent {
   products: Product[] = [];
   filter = ""
   filteredProducts: Product[] = [];
+  category = ["PC & Laptops", "Mobiles", "Headphones & Speakers", "Cameras", "TVs & Appliances"]
 
   constructor(private productService: ProdectService, private router: Router, private route: ActivatedRoute) { }
 
@@ -66,6 +67,12 @@ export class ProductViewComponent {
       this.filteredProducts = this.products;
     }
     this.filteredProducts = this.products.filter(p => p.productName.toLowerCase().includes(this.filter.toLowerCase()) || p.specifiction?.toLowerCase().includes(this.filter.toLowerCase()));
+
+  }
+
+  filterByCategory(category: any) {
+
+    this.filteredProducts = this.products.filter(p => p.category.toLowerCase().includes(category.toLowerCase())) || [];
 
   }
 

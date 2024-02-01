@@ -70,4 +70,7 @@ export class ProdectService {
     return this.http.post<Product[]>(this.baseUrl + '/get-products-by-rating', { rating: rating, category: category });
   }
 
+  fetchOutOfStock(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseUrl + `/outofstock-products`, { withCredentials: true });
+  }
 }

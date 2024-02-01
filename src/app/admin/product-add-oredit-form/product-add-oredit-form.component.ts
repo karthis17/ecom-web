@@ -86,7 +86,7 @@ export class ProductAddOREditFormComponent implements OnInit {
   }
 
   edit() {
-    if (this.images.length > 1 && this.about.length > 1 && this.data.price > 0 && this.data.quantity > 0) {
+    if (this.images.length > 1 && this.about.length > 1 && this.data.price > 0 && this.data.quantity >= 0) {
       console.log({ ...this.data, spec: this.spec, images: JSON.stringify(this.images), about: JSON.stringify(this.about) })
       this.product.editProduct({ ...this.data, spec: this.spec, images: JSON.stringify(this.images), about: JSON.stringify(this.about) }).subscribe(data => {
         console.log(data);

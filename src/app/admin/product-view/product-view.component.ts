@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ProdectService } from '../../service/prodect.service';
 import { Product } from '../../models/product.model';
-import { NavigationExtras, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-view',
@@ -13,18 +13,28 @@ import { NavigationExtras, Router, RouterLink } from '@angular/router';
 })
 export class ProductViewComponent {
 
-
+  showOutOfStock = false;
   products: Product[] = [];
 
-  constructor(private productService: ProdectService, private router: Router) { }
+  constructor(private productService: ProdectService, private router: Router, private route: ActivatedRoute) { }
 
   getData() {
-    this.productService.fectData().subscribe((data: Product[]) => {
-      this.products = data;
-    });
+    if (this.showOutOfStock) {
+      this.productService.fetchOutOfStock().subscribe(data => {
+        this.products = data;
+      });
+    } else {
+      this.productService.fectData().subscribe((data: Product[]) => {
+        this.products = data;
+      });
+    }
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.showOutOfStock = params['outOfStock'] === 'true';
+      console.log(params['outOfStock']);
+    });
 
     this.getData();
 

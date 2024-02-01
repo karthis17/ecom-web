@@ -10,6 +10,10 @@ body {
   width: 80%;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 @media (max-width: 999px) {
   .top {
     top: 10px;

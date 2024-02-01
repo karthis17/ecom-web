@@ -32,10 +32,13 @@
       [price]="product.price"
       [list]="false"
     ></app-view-price>
-    <app-star-rating
-      [readonly]="true"
-      [rating]="product.rating ? product.rating : 0"
-    ></app-star-rating>
+    <div class="d-flex align-items-center gap-2 fs-6">
+      <app-star-rating
+        [readonly]="true"
+        [rating]="product.rating ? product.rating : 0"
+      ></app-star-rating
+      >({{ product.noOfRatings }} reviwes)
+    </div>
 
     <p class="description {{ isHome ? '' : 'line' }}">
       {{ product.description }}

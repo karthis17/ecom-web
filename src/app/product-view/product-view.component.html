@@ -43,10 +43,13 @@
     </p>
     <p class="pb-0 mb-0">{{ data.description }}</p>
 
-    <app-star-rating
-      [rating]="data.rating ? data.rating : 0"
-      [readonly]="true"
-    ></app-star-rating>
+    <div class="d-flex align-items-center fs-6 gap-2">
+      <app-star-rating
+        [rating]="data.rating ? data.rating : 0"
+        [readonly]="true"
+      ></app-star-rating>
+      ({{ data.noOfRatings }} reviwes)
+    </div>
 
     <div class="my-4">
       <span class="text-success fw-medium">Special Price </span>

@@ -1,11 +1,8 @@
 <div class="container-fluid">
-  <div class="row m-lg-5">
-    <div class="col-lg-9">
-      <div
-        class="bg-white rounded-4 d-flex flex-column justify-content-center align-items-center p-5 mb-4"
-        style="height: fit-content"
-      >
-        <ng-container *ngIf="!isEmpty">
+  <div class="row my-5">
+    <div class="col-lg-10 mx-auto">
+      <div class="bg-white rounded-3 p-5" style="height: fit-content">
+        <div class="mx-lg-5" *ngIf="!isEmpty">
           <h3 class="text-center mb-5">Shopping Cart</h3>
           <app-cart-table
             (emtyCart)="checkCartEmty($event)"
@@ -17,8 +14,12 @@
               Place Order
             </button>
           </div>
-        </ng-container>
-        <ng-container *ngIf="isEmpty">
+        </div>
+
+        <div
+          *ngIf="isEmpty"
+          class="d-flex flex-column justify-content-center align-items-center"
+        >
           <img
             src="https://m.media-amazon.com/images/G/31/cart/empty/kettle-desaturated._CB424694257_.svg"
             alt=""
@@ -28,21 +29,19 @@
           <h1 class="text-start">Your cart is emty</h1>
           <p class="text-success">Special deal's</p>
           <a class="btn btn-success" [routerLink]="['/']">Shop</a>
-        </ng-container>
+        </div>
       </div>
-      <div class="bg-white mt-sm-0 mt-3 bg-white overflow-x-scroll rounded-4">
+      <div class="bg-white overflow-x-scroll rounded-3 my-3">
         <app-product-list-component
           class="d-flex gap-3 w-100 mx-0 p-5"
-          [category]="'Mobiles'"
+          [category]="'PC & Laptops'"
           [isHome]="false"
         ></app-product-list-component>
       </div>
-    </div>
-    <div class="col-lg-3">
-      <div class="bg-white mt-sm-0 bg-white overflow-y-scroll vh-100 rounded-4">
+      <div class="bg-white overflow-x-scroll rounded-3">
         <app-product-list-component
-          class="d-flex gap-3 w-100 mx-0 flex-column px-5"
-          [category]="'PC & Laptops'"
+          class="d-flex gap-3 w-100 mx-0 p-5"
+          [category]="'Mobiles'"
           [isHome]="false"
         ></app-product-list-component>
       </div>

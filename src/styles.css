@@ -13,7 +13,10 @@ body {
 .pointer {
   cursor: pointer;
 }
-
+.ht {
+  min-height: 100vh;
+  max-height: max-content;
+}
 @media (max-width: 999px) {
   .top {
     top: 10px;

@@ -51,7 +51,7 @@ export class ReviewBoxComponent {
       this.reviews = reviews;
 
       if (add) {
-        this.product.updateRating({ id: this.product_id, rating: this.calculateAverageRating(reviews) }).subscribe(rating => { console.log(rating) })
+        this.product.updateRating({ id: this.product_id, nofrating: reviews.length, rating: this.calculateAverageRating(reviews) }).subscribe(rating => { console.log(rating) })
       }
     });
   }

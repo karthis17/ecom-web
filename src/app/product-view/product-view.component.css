@@ -30,6 +30,7 @@
 }
 
 .zoomed {
+  cursor: zoom-in;
   transform-origin: var(--zoomX) px var(--zoomY) px;
   transform: scale(2);
 }

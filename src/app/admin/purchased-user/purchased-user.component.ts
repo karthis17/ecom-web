@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OrderService } from '../../service/order.service';
 import { NgFor, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CartTableComponent } from '../../cart-table/cart-table.component';
 
 @Component({
@@ -15,12 +15,24 @@ export class PurchasedUserComponent {
 
   data!: any[];
   showCart: boolean | number = false;
-  constructor(private orderService: OrderService) { }
+  isReturned: boolean = false;
+  constructor(private orderService: OrderService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.orderService.getAllOrders().subscribe(orders => {
-      this.data = orders;
-    });
+    this.route.queryParams.subscribe(params => {
+      console.log(params)
+      if (params['returned'] === 'true') {
+        this.isReturned = true;
+        this.orderService.getAllreturn().subscribe(orders => {
+          this.data = orders;
+        });
+      } else {
+        this.orderService.getAllOrders().subscribe(returned => {
+          this.data = returned;
+        });
+      }
+    })
+
   }
 
   show(order_id: number) {

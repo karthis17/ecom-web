@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ShoppingCart } from '../models/cart.model';
 import { CartService } from '../service/cart.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
-
+import { OrderService } from '../service/order.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart-table',
   standalone: true,
-  imports: [NgFor, NgIf, ReactiveFormsModule, CurrencyPipe, RouterLink],
+  imports: [NgFor, NgIf, ReactiveFormsModule, CurrencyPipe, RouterLink, FormsModule],
   templateUrl: './cart-table.component.html',
   styleUrl: './cart-table.component.css'
 })
@@ -17,7 +18,7 @@ export class CartTableComponent {
 
   @Input('ordered')
   ordered: boolean = false;
-
+  @Input() admin: boolean = false;
   @Input('order_id')
   order_id: any;
 
@@ -25,13 +26,16 @@ export class CartTableComponent {
 
   @Output() emtyCart = new EventEmitter<boolean>(false);
 
-  constructor(private cart: CartService, private route: ActivatedRoute, private router: Router) { }
+  showTab = false;
+  resone: string = '';
+  other_resone!: string;
+  constructor(private cart: CartService, private route: ActivatedRoute, private router: Router, private order: OrderService) { }
 
   items!: Array<ShoppingCart>;
   Total_price: number = 0;
   err: string | null = null;
 
-
+  returnItem !: ShoppingCart;
   formGroup: FormGroup = new FormGroup({});
 
 
@@ -57,13 +61,17 @@ export class CartTableComponent {
 
     }
   }
-
+  setreturnItem(item: ShoppingCart) {
+    this.returnItem = item;
+    this.show_tab();
+  }
   ngOnInit() {
 
     // if (this.route.snapshot.paramMap.get('id')) this.id = this.route.snapshot.paramMap.get('id');
 
 
     if (!this.order_id) this.getCartItems();
+    else if (this.admin) this.getReturnedOrder()
     else this.getOrderedItems()
   }
 
@@ -78,6 +86,16 @@ export class CartTableComponent {
       });
 
 
+    });
+  }
+
+  getReturnedOrder() {
+    this.cart.getReturnedProduct(this.order_id).subscribe(response => {
+      this.items = response;
+      response.forEach(element => {
+
+        this.Total_price += element.total ? element.total : 0;
+      });
     });
   }
 
@@ -113,5 +131,38 @@ export class CartTableComponent {
 
     this.router.navigateByUrl(`/product?id=${product_id}`);
   }
+
+  show_tab() {
+    this.showTab = true;
+  }
+
+  close_tab() {
+    this.showTab = false;
+  }
+
+  return() {
+    console.log(this.returnItem, this.resone);
+
+    if (this.resone) {
+      this.close_tab()
+      if (this.resone === 'other') {
+        this.order.returnProduct({ ...this.returnItem, resone: this.other_resone }).subscribe(result => {
+          console.log(result);
+          this.getOrderedItems()
+        })
+
+      } else {
+        this.order.returnProduct({ ...this.returnItem, resone: this.resone }).subscribe(result => {
+          console.log(result);
+          this.getOrderedItems()
+        })
+      }
+    }
+
+    // // Handle the selected value after the user clicks "Submit"
+
+
+  }
+
 
 }

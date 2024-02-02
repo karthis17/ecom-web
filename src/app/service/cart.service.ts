@@ -50,4 +50,8 @@ export class CartService {
     });
   }
 
+  getReturnedProduct(order_id: number): Observable<ShoppingCart[]> {
+    return this.http.get<ShoppingCart[]>(this.baseUrl + '/get-returned-products/' + order_id, { withCredentials: true });
+  }
+
 }

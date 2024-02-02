@@ -5,7 +5,8 @@
     <th class="text-start">quantity</th>
     <th>Price</th>
     <th>Total</th>
-    <th *ngIf="!ordered">Action</th>
+    <th *ngIf="!admin">Action</th>
+    <th *ngIf="admin">Resone</th>
   </thead>
   <tbody>
     <tr *ngFor="let item of items; let i = index">
@@ -33,11 +34,17 @@
 
       <td>{{ (item.price | currency : "INR")?.slice(0, -3) }}</td>
       <td>{{ (item.total | currency : "INR")?.slice(0, -3) }}</td>
-      <td *ngIf="!ordered">
+      <td *ngIf="!ordered && !admin">
         <button (click)="remove(item.id ? item.id : 0)" class="btn">
           <i class="bi bi-trash-fill text-danger fw-bold"></i>
         </button>
       </td>
+      <td *ngIf="ordered && !admin">
+        <button (click)="setreturnItem(item)" class="btn btn-primary">
+          Return
+        </button>
+      </td>
+      <td *ngIf="admin">{{ item.resone_for_return }}</td>
     </tr>
   </tbody>
 </table>
@@ -51,4 +58,42 @@
     style="width: fit-content"
     [value]="Total_price | currency : 'INR'"
   />
+</div>
+
+<div
+  *ngIf="showTab"
+  class="position-fixed bottom-0 end-0 top-0 start-0"
+  style="background-color: rgba(0, 0, 0, 0.1); z-index: 100000"
+>
+  <div class="d-flex justify-content-center align-items-center w-100 h-100">
+    <div class="bg-white p-5 rounded-4">
+      <select
+        name="resonse"
+        id=""
+        title="Select resone"
+        [(ngModel)]="resone"
+        class="form-select-lg w-100"
+      >
+        <option value="not satisfied with product">
+          not satisfied with product
+        </option>
+        <option value="defected product">Defected product</option>
+        <option value="I resived wrong product">I resived wrong product</option>
+        <option value="Change in colour">Change in colour</option>
+        <option value="other">other</option>
+      </select>
+      <input
+        type="text"
+        class="form-control-lg  {{
+          resone === 'other' ? 'opacity-100 ' : 'opacity-0 '
+        }} w-100 mt-3"
+        placeholder="Enter Your Resone."
+        [(ngModel)]="other_resone"
+      />
+      <button class="btn btn-primary mt-3" (click)="return()">Submit</button>
+      <button class="btn btn-danger mt-3 ms-3" (click)="close_tab()">
+        Cancel
+      </button>
+    </div>
+  </div>
 </div>

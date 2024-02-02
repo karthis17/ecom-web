@@ -8,4 +8,5 @@ export class ShoppingCart {
     ordered!: boolean | number;
     product_id!: string;
     product_qty!: number;
+    resone_for_return?: string;
 }

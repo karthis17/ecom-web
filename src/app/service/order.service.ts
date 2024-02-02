@@ -25,4 +25,12 @@ export class OrderService {
     return this.http.get<any[]>(this.baseUrl + "/get-all-orders", { withCredentials: true });
   }
 
+  returnProduct(data: any) {
+    return this.http.post(this.baseUrl + '/return-product', data, this._options)
+  }
+
+  getAllreturn(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + '/get-all-returned', { withCredentials: true });
+  }
+
 }

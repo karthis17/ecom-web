@@ -1,11 +1,17 @@
 <div class="container my-5">
   <h1 class="text-center">Admin Dashboard</h1>
 
-  <div class="row gap-4 my-5">
+  <div class="row gap-4 mx-auto my-5">
     <ng-container *ngFor="let option of dashboardOptions; let i = index">
       <div
         class="col-lg-3 d-flex flex-column justify-content-center align-items-center bg-white rounded-2 border-1 py-4 pointer"
-        (click)="i !== 4 ? nav(option.link) : nav(option.link, true)"
+        (click)="
+          i === 4
+            ? nav(option.link, true)
+            : i === 5
+            ? nav(option.link, false, true)
+            : nav(option.link)
+        "
       >
         <h1><i class="bi {{ option.icon }}"></i></h1>
         <h3>{{ option.name }}</h3>

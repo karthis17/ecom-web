@@ -25,6 +25,7 @@ export class DashboardComponent {
       { link: ['/admin', 'ordered-products'], name: 'Ordered Product', icon: 'bi-cart-plus' },
       { link: ['/admin', 'purchased-user'], name: 'Purchased User', icon: 'bi-person-check-fill' },
       { link: ['/admin', 'product-view'], name: 'Out Of Stack Product', icon: 'bi-cart-dash' },
+      { link: ['/admin', 'purchased-user'], name: 'Returned Orders', icon: 'bi-arrow-return-left' },
     ]
 
     this.adminService.checkLogin().then((ress) => {
@@ -37,7 +38,7 @@ export class DashboardComponent {
     });
   }
 
-  nav(link: [], outOfStock = false) {
+  nav(link: [], outOfStock = false, resturn = false) {
     if (outOfStock) {
       const navigationExtras: NavigationExtras = {
         queryParams: {
@@ -46,7 +47,16 @@ export class DashboardComponent {
       };
       this.router.navigate(link, navigationExtras);
 
-    } else
+    } else if (resturn) {
+      const navigationExtra: NavigationExtras = {
+        queryParams: {
+          returned: true
+        }
+      };
+      this.router.navigate(link, navigationExtra);
+
+    }
+    else
       this.router.navigate(link);
   }
 

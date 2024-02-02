@@ -1,5 +1,7 @@
 <div class="container-fluid p-5 bg-white ht">
-  <h2 class="text-center my-5">Purchased User</h2>
+  <h2 class="text-center my-5">
+    {{ isReturned ? "Returned Orders" : "Purchased User" }}
+  </h2>
   <div class="container p-5 rounded shadow">
     <table class="table">
       <thead class="">
@@ -9,7 +11,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Phone</th>
-          <th>Purched Date</th>
+          <th *ngIf="!isReturned">Purched Date</th>
           <th>Product</th>
         </tr>
       </thead>
@@ -24,7 +26,7 @@
             }}</a>
           </td>
           <td>{{ order.phone }}</td>
-          <td>{{ order.date }}</td>
+          <td *ngIf="!isReturned">{{ order.date }}</td>
           <td>
             <a class="btn btn-link" (click)="show(order.id)">Show product</a>
           </td>
@@ -46,7 +48,17 @@
         class="bi bi-x-lg pointer position-absolute end-0"
       ></i>
     </h3>
-    <app-cart-table [order_id]="showCart" [ordered]="true"></app-cart-table>
+    <ng-container *ngIf="isReturned">
+      <app-cart-table
+        [order_id]="showCart"
+        [ordered]="true"
+        [admin]="true"
+      ></app-cart-table>
+    </ng-container>
+
+    <ng-container *ngIf="!isReturned">
+      <app-cart-table [order_id]="showCart" [ordered]="true"></app-cart-table>
+    </ng-container>
     <!-- <button class="btn btn-danger w-25">Close</button> -->
   </div>
 </div>

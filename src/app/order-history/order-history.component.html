@@ -6,7 +6,11 @@
       class="col-lg-10 mx-auto bg-white rounded-4 border my-2 p-4"
     >
       <div class="pb-2 d-flex justify-content-between">
-        <code>{{ order.date }}</code>
+        <code
+          >{{ order.date | date : "fullDate" }}
+          {{ order.date | date : "shortTime" }}</code
+        >
+
         <p>Delivery</p>
       </div>
       <div>
@@ -22,6 +26,7 @@
       <div class="pt-3">
         <app-cart-table
           [ordered]="true"
+          [admin]="admin"
           [order_id]="order.id"
           [id]="id"
         ></app-cart-table>

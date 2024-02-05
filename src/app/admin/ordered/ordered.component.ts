@@ -7,7 +7,7 @@ import { OrderService } from '../../service/order.service';
   standalone: true,
   imports: [OrderHistoryComponent],
   template: `
-  <app-order-history [orders]="data"></app-order-history>
+  <app-order-history [orders]="data" [admin]="true"></app-order-history>
 
   `
 })

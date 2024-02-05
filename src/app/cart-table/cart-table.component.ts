@@ -3,14 +3,14 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ShoppingCart } from '../models/cart.model';
 import { CartService } from '../service/cart.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
 import { OrderService } from '../service/order.service';
-import Swal from 'sweetalert2';
+import emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-cart-table',
   standalone: true,
-  imports: [NgFor, NgIf, ReactiveFormsModule, CurrencyPipe, RouterLink, FormsModule],
+  imports: [NgFor, NgIf, ReactiveFormsModule, CurrencyPipe, RouterLink, FormsModule, DatePipe],
   templateUrl: './cart-table.component.html',
   styleUrl: './cart-table.component.css'
 })
@@ -19,6 +19,7 @@ export class CartTableComponent {
   @Input('ordered')
   ordered: boolean = false;
   @Input() admin: boolean = false;
+  @Input() isreturn: boolean = false;
   @Input('order_id')
   order_id: any;
 
@@ -71,7 +72,7 @@ export class CartTableComponent {
 
 
     if (!this.order_id) this.getCartItems();
-    else if (this.admin) this.getReturnedOrder()
+    else if (this.isreturn) this.getReturnedOrder()
     else this.getOrderedItems()
   }
 

@@ -26,7 +26,11 @@
             }}</a>
           </td>
           <td>{{ order.phone }}</td>
-          <td *ngIf="!isReturned">{{ order.date }}</td>
+          <td *ngIf="!isReturned">
+            {{ order.date | date : "dd-MM-YYYY" }}/{{
+              order.date | date : "shortTime"
+            }}
+          </td>
           <td>
             <a class="btn btn-link" (click)="show(order.id)">Show product</a>
           </td>
@@ -53,11 +57,16 @@
         [order_id]="showCart"
         [ordered]="true"
         [admin]="true"
+        [isreturn]="true"
       ></app-cart-table>
     </ng-container>
 
     <ng-container *ngIf="!isReturned">
-      <app-cart-table [order_id]="showCart" [ordered]="true"></app-cart-table>
+      <app-cart-table
+        [order_id]="showCart"
+        [ordered]="true"
+        [admin]="true"
+      ></app-cart-table>
     </ng-container>
     <!-- <button class="btn btn-danger w-25">Close</button> -->
   </div>

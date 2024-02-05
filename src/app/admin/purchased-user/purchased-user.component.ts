@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { OrderService } from '../../service/order.service';
-import { NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CartTableComponent } from '../../cart-table/cart-table.component';
 
 @Component({
   selector: 'app-purchased-user',
   standalone: true,
-  imports: [NgFor, RouterLink, NgIf, CartTableComponent],
+  imports: [NgFor, RouterLink, NgIf, CartTableComponent, DatePipe],
   templateUrl: './purchased-user.component.html',
   styleUrl: './purchased-user.component.css'
 })

@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { OrderService } from '../service/order.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { CartTableComponent } from '../cart-table/cart-table.component';
 import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-order-history',
   standalone: true,
-  imports: [NgFor, CartTableComponent, NgIf],
+  imports: [NgFor, CartTableComponent, NgIf, DatePipe],
   templateUrl: './order-history.component.html',
   styleUrl: './order-history.component.css'
 })
@@ -16,11 +16,12 @@ export class OrderHistoryComponent {
 
   @Input() id: any = null;
   @Input() orders!: any[];
+  @Input() admin: boolean = false;
 
   email!: string;
   name!: string;
   constructor(private order: OrderService, private route: ActivatedRoute, private auth: AuthService) { }
-
+  converToDate = (date: string) => { new Date(date) }
 
 
   ngOnInit() {

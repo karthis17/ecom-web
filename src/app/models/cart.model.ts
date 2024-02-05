@@ -9,4 +9,5 @@ export class ShoppingCart {
     product_id!: string;
     product_qty!: number;
     resone_for_return?: string;
+    return_date?: string;
 }

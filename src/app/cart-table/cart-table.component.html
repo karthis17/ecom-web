@@ -6,12 +6,13 @@
     <th>Price</th>
     <th>Total</th>
     <th *ngIf="!admin">Action</th>
-    <th *ngIf="admin">Resone</th>
+    <th *ngIf="isreturn">Return Date</th>
+    <th *ngIf="isreturn">Resone</th>
   </thead>
   <tbody>
     <tr *ngFor="let item of items; let i = index">
       <th scope="row">{{ i + 1 }}</th>
-      <td (click)="nav(item.product_id)" class="btn-link">
+      <td (click)="nav(item.product_id)" class="btn-link pointer">
         {{ item.productName }}
       </td>
       <td *ngIf="ordered" class="text-start">{{ item.quantity }}</td>
@@ -44,7 +45,12 @@
           Return
         </button>
       </td>
-      <td *ngIf="admin">{{ item.resone_for_return }}</td>
+      <td *ngIf="isreturn">
+        {{ item.return_date | date : "dd-MM-YYYY" }}/{{
+          item.return_date | date : "shortTime"
+        }}
+      </td>
+      <td *ngIf="isreturn">{{ item.resone_for_return }}</td>
     </tr>
   </tbody>
 </table>
